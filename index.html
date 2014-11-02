@@ -211,15 +211,29 @@
 	</head>
 	
 	<body>
-		<section role="region">
+		<section role="region" data-position="current">
 			<header class="fixed">
 				<h1>Hello Building Blocks</h1>
 			</header>
-			<article class="content scrollable header">
-				<button class="recommend" id="firstButton">Click</button>
-				<div id="firstDiv"><div>
-				<a href="index2.html">ページ遷移</a>
+			<article class="scrollable header">
+				<h1>１番目のページ</h1>
+				<a id="firstDiv" href="#">
+					<button class="recommend" id="firstButton">Click</button>
+				</a>
 			</article>
 		</section>
+
+		<section role="region" id="newSection" data-position="right">
+			<header class="fixed">
+				<a id="backButton" href="#">
+					<span class="icon icon-back">back</span>
+				</a>
+				<h1>Next Page</h1>
+			</header>
+			<article class="content scrollable header">
+				<h1>2番めのページ</h1>
+			</article>
+		</section>
+
 	</body>
 </html>
