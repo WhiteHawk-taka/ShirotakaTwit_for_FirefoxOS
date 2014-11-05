@@ -1,8 +1,14 @@
 {
-    "name": "HelloFirefox",
-    "description": "My Firest app",
+    "name": "ShirotakaTwit for FirefoxOS",
+    "description": "Comfortable Twitter client for FirefoxOS",
     "launch_path": "/index.html",
     "icons": {
         "128": "/img/icons/icon_128.png"
+    },
+    "type": "privileged",
+    "permissions": {
+    	"systemXHR": {
+    		"description": "for OAuth"
+    	}
     }
 }
