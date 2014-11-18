@@ -9,14 +9,7 @@ window.onload = function () {
 	});
 
 	$("#secondButton").click(function() {
-		var myUrl = "https://twitter.com/"
-		var activity = new MozActivity({
-			name:"view",
-			data:{
-				type:"url",
-				url:myUrl
-			}
-		});
+		window.open("https://twitter.com/");
 	});
 };
  
@@ -53,15 +46,9 @@ var successFetchRequestToken = function (authUrl) {
 
 // 2. リクエストトークンを使い、ユーザにアクセス許可を求めるURLを生成して ブラウザを起動
 // 3. ブラウザで認証を行い、ユーザーにPINが表示される
-var activity = new MozActivity({
-	name:"view",
-	data:{
-		type:"url",
-		url:authUrl2
-	}
-});
+window.open(authUrl2);
 
-setTimeout("",5000);
+setTimeout("",60000);
 
 // 4. アプリで用意したダイアログにPIN を入力してもらう
 var pin = prompt("Please enter your PIN", "");
@@ -89,28 +76,3 @@ var failureHandler = function (data) {
 
 
 
- /*window.onload = function(){
-	//clickボタン遷移
-	$("#firstButton").click(function() {
-		document.querySelector('#newSection').className = 'current';
-		document.querySelector('[data-position="current"]').className = 'left';
-	});
-
-	$("#backButton").click(function() {
-		document.querySelector('#newSection').className = 'right';
-		document.querySelector('[data-position="current"]').className = 'current';
-	});
-
-	//webボタン遷移
-	$("#secondButton").click(function() {
-		var myUrl = "http://pronama.azurewebsites.net/"
-		var activity = new MozActivity({
-			name:"view",
-			data:{
-				type:"url",
-				url:myUrl
-			}
-		});
-	});
-
-}; */
