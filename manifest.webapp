@@ -10,5 +10,11 @@
     	"systemXHR": {
     		"description": "for OAuth"
     	}
-    }
+    },
+    "developer": { 
+    "name": "Shirotaka_Pro", 
+    "url": "https://twitter.com/Shirotaka_Pro" 
+    }, 
+    "default_locale": "ja",
+    "version": "1.0.0"
 }

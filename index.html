@@ -212,18 +212,61 @@
 	</head>
 	
 	<body>
-		<section role="region" data-position="current">
+		<section role="region" id="Home" data-position="current">
 			<header class="fixed">
-				<h1>Welcome to ShitotakaTwit</h1>
+				<menu type="toolbar">
+					<a href="#" id="newPostButton">
+						<span class="icon icon-compose">edit</span>
+					</a>
+				</menu>
+				<button id="updateButton"><h1>  Home  </h1></button>
 			</header>
+			<div role="toolbar">
+				<ul>
+					<li>
+						<button id="getButton" class="action-icon download">getmore</button>
+					</li>
+				</ul>
+				<ul>
+					<li>
+						<button id="updateButton" class="action-icon email-sync">update</button>
+					</li>
+				</ul>
+			</div>
 			<article class="scrollable header">
-				<h1>ボタンを選択して認証</h1>
-				<a href="#">
-					<button class="recommend" id="firstButton">認証</button>
+				<div>
+					<ul id="tweetBox">
+					</ul>
+				</div>
+			</article>
+		</section>
+		<section role="region" id="newTweetSection" data-position="right">
+			<header class="fixed">
+				<a id="backButton" href="#">
+					<span class="icon icon-back">back</span>
 				</a>
-
-				<button class="recommend" id="secondButton">web</button>
-
+				<menu type="toolbar">
+					<a href="#" id="statusUpdateButton"><span class="icon icon-send">send</span></a>
+				</menu>
+				<h1>New Tweet</h1>
+			</header>
+			<article class="content scrollable header">
+				<div>
+					<form>
+						<p>
+							<textarea id="newTweetText" placeholder="input tweet text" required>
+							</textarea>
+						</p>
+					</form>
+				</div>
+				<form id="postTweetImage" action="#" enctype="multipart/form-data" method="post">
+					<div class="fileArea">
+						<div class="chooseFile">
+							画像を添付する
+							<input type="file" id="file" name="my_file">
+						</div>
+					</div>
+				</form>
 			</article>
 		</section>
 
