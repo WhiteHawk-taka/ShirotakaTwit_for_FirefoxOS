@@ -78,30 +78,45 @@ var successHandler = function(){
 /**
 * OAuth関連で最初に行う処理
 */
-var firstOAuthFunc = function () {
+var firstOAuthFunc = function(){
+	var firstoauth = localStorage.getItem("firstoauth");
 
-	// 最初にOAuthオブジェクトに喰わせる値たち
-	var config = {
-		consumerKey:"コンシューマーキー",
-		consumerSecret:"シークレットキー",
-		requestTokenUrl:"https://api.twitter.com/oauth/request_token",
-		authorizationUrl:"https://api.twitter.com/oauth/authorize",
-		accessTokenUrl:"https://api.twitter.com/oauth/access_token"
-	};
+	if(firstoauth == 1){
+		localStorage.setItem("firstoauth",0);
+		// 最初にOAuthオブジェクトに喰わせる値たち
+		var config = {
+			consumerKey:"コンシューマーキー",
+			consumerSecret:"シークレットキー",
+			requestTokenUrl:"https://api.twitter.com/oauth/request_token",
+			authorizationUrl:"https://api.twitter.com/oauth/authorize",
+			accessTokenUrl:"https://api.twitter.com/oauth/access_token"
+		};
 
-	// OAuthのオブジェクトを作成
-	oauth = new OAuth(config);
+		// OAuthのオブジェクトを作成
+		oauth = new OAuth(config);
 
-	//保存してあるアクセストークンがあればロードする
+		//保存してあるアクセストークンがあればロードする
 
-	var accessTokenKey = localStorage.getItem("accessTokenKey");
-	var accessTokenSecret = localStorage.getItem("accessTokenSecret");
+		var accessTokenKey = localStorage.getItem("accessTokenKey");
+		var accessTokenSecret = localStorage.getItem("accessTokenSecret");
 
-	if(accessTokenKey){
-		oauth.setAccessToken(accessTokenKey, accessTokenSecret);
+		if(accessTokenKey){
+			oauth.setAccessToken(accessTokenKey, accessTokenSecret);
+		}else{
+			// 1. consumer key と consumer secret を使って、リクエストトークンを取得する
+			oauth.fetchRequestToken(successFetchRequestToken, failureHandler);
+		}
+
 	}else{
-		// 1. consumer key と consumer secret を使って、リクエストトークンを取得する
-		oauth.fetchRequestToken(successFetchRequestToken, failureHandler);
+
+		if(window.confirm('Twitterで認証を行ってください')){
+			localStorage.setItem("firstoauth", 1);
+
+			firstOAuthFunc();
+		}else{
+			window.alert('中止されました');
+			return;
+		}
 	}
 
 };
@@ -138,6 +153,7 @@ oauth.fetchAccessToken(successFetchAccessToken, failureHandler);
 var successFetchAccessToken = function () {
 	localStorage.setItem("accessTokenKey", oauth.getAccessTokenKey());
 	localStorage.setItem("accessTokenSecret", oauth.getAccessTokenSecret());
+	localStorage.setItem("firstoauth",1);
 	alert("success oauth");
 	getHomeTimeline();
 
