@@ -16,6 +16,10 @@ window.onload = function () {
 	});
 	$("#statusUpdateButton").click(function(){
 		newTweetPost();
+		document.form1.postform.value = "";
+		document.querySelector('#newTweetSection').className = 'right';
+		document.querySelector('[data-position="current"]').className = 'current';
+
 	});
 
 
@@ -66,10 +70,23 @@ var addTweetToDom = function(tweet){
 var newTweetPost = function(){
 	var data;
 	var statusText = document.getElementById("newTweetText").value;
-	data={
-		status:statusText
-	};
-	oauth.post('https://api.twitter.com/1.1/statuses/update.json', data, successHandler, failureHandler);
+	var file = document.querySelector("#file").files[0];
+	if(typeof file === "undefined"){
+		data={
+			status:statusText
+		};
+		oauth.post('https://api.twitter.com/1.1/statuses/update.json', data, successHandler, failureHandler);
+	}else{
+		data={
+			"status":statusText,
+			"media[]":file
+		};
+		oauth.request({
+			method:"POST",
+			url:"https://api.twitter.com/1.1/statuses/update_with_media.json",
+			data:data
+		});
+	}
 };
 var successHandler = function(){
 	console.log("success");
@@ -99,9 +116,10 @@ var firstOAuthFunc = function(){
 
 		var accessTokenKey = localStorage.getItem("accessTokenKey");
 		var accessTokenSecret = localStorage.getItem("accessTokenSecret");
-
+		localStorage.setItem("firstoauth", 1);
 		if(accessTokenKey){
 			oauth.setAccessToken(accessTokenKey, accessTokenSecret);
+			getHomeTimeline();
 		}else{
 			// 1. consumer key と consumer secret を使って、リクエストトークンを取得する
 			oauth.fetchRequestToken(successFetchRequestToken, failureHandler);

@@ -252,15 +252,16 @@
 			</header>
 			<article class="content scrollable header">
 				<div>
-					<form>
+					<form name="form1">
 						<p>
-							<textarea id="newTweetText" placeholder="input tweet text" required>
+							<textarea id="newTweetText" placeholder="input tweet text" required name="postform">
 							</textarea>
 						</p>
 					</form>
 				</div>
 				<form id="postTweetImage" action="#" enctype="multipart/form-data" method="post">
 					<div class="fileArea">
+						<div class="fileName"></div>
 						<div class="chooseFile">
 							画像を添付する
 							<input type="file" id="file" name="my_file">

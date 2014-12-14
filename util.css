@@ -7,7 +7,7 @@
 
 html {
   height: 100%;
-  font-size: 62.5%; /* Setting base font to 10px and define all your units in rem. 1rem = 10px */
+  font-size: 100%; /* Setting base font to 10px and define all your units in rem. 1rem = 10px */
 }
 
 body {
