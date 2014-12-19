@@ -25,6 +25,7 @@
 	<link rel="stylesheet" href="style/seekbars.css">
 	<link rel="stylesheet" href="style/tabs.css">
 	<link rel="stylesheet" href="style/toolbars.css">
+	<link rel="stylesheet" href="style/icons.css">
 
 	<!-- Icons -->
 	<link rel="stylesheet" href="icons/styles/action_icons.css">
@@ -216,20 +217,20 @@
 			<header class="fixed">
 				<menu type="toolbar">
 					<a href="#" id="newPostButton">
-						<span class="icon icon-compose">edit</span>
+						<span class="icon icon-compose"></span>
 					</a>
 				</menu>
-				<button id="updateButton"><h1>  Home  </h1></button>
+				<h1>  Home  </h1>
 			</header>
 			<div role="toolbar">
 				<ul>
 					<li>
-						<button id="getButton" class="action-icon download">getmore</button>
+						<button id="getButton" class="icon download">getmore</button>
 					</li>
 				</ul>
 				<ul>
 					<li>
-						<button id="updateButton" class="action-icon email-sync">update</button>
+						<button id="updateButton" class="gaia-icon icon-reload">update</button>
 					</li>
 				</ul>
 			</div>
@@ -259,14 +260,9 @@
 						</p>
 					</form>
 				</div>
-				<form id="postTweetImage" action="#" enctype="multipart/form-data" method="post">
-					<div class="fileArea">
-						<div class="fileName"></div>
-						<div class="chooseFile">
-							画像を添付する
+				<form id="postTweetImage" action="#" enctype="multipart/form-data" method="post" name="form2">
 							<input type="file" id="file" name="my_file">
-						</div>
-					</div>
+							<button id="clearImage">画像をクリア</button>
 				</form>
 			</article>
 		</section>
