@@ -160,8 +160,6 @@ var successFetchRequestToken = function (authUrl) {
 	// 3. ブラウザで認証を行い、ユーザーにPINが表示される
 	window.open(authUrl2);
 
-	setTimeout("",60000);
-
 	// 4. アプリで用意したダイアログにPIN を入力してもらう
 	var pin = prompt("Please enter your PIN", "");
 

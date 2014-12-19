@@ -1,5 +1,5 @@
 {
-    "name": "ShirotakaTwit for FirefoxOS",
+    "name": "ShirotakaTwit",
     "description": "Comfortable Twitter client for FirefoxOS",
     "launch_path": "/index.html",
     "icons": {
