@@ -42,8 +42,8 @@ section[role="region"] > header.fixed:first-child {
 }
 
 .scrollable.header {
-  height: calc(100% - 5rem);
-  top: 5rem;
+  height: calc(100% - 3rem);
+  top: 3rem;
 }
 
 /* Setting proper paddings and margins */

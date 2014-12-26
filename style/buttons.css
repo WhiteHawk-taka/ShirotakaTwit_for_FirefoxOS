@@ -152,7 +152,7 @@ li .button {
   border-radius: 0;
   display: flex;
   height: auto;
-  min-height: 4rem;
+  min-height: 3rem;
   text-overflow: initial;
   white-space: normal;
   line-height: 2rem;
