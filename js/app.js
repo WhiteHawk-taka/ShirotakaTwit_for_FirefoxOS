@@ -1,5 +1,6 @@
 // oauthオブジェクト
 var oauth;
+//var tweetList = new Array();
 
 window.onload = function () {
 	$("#newPostButton").click(function(){
@@ -36,7 +37,7 @@ var clearTweetDom = function(){
 	parent.empty();
 };
 var getHomeTimeline = function(){
-	var url = "https://api.twitter.com/1.1/statuses/home_timeline.json";
+	var url = "https://api.twitter.com/1.1/statuses/home_timeline.json?count=100";
 	oauth.get(url, successGetHomeTimeline, failureTimeLineHandler);
 };
 var successGetHomeTimeline = function(data){
