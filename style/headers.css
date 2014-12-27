@@ -13,14 +13,14 @@ section[role="region"] > header:first-child {
 }
 
 section[role="region"] > header:first-child h1 {
-  font-size: 2.3rem;
+  font-size: 2rem;
   line-height: 3rem;
   white-space: nowrap;
   text-overflow: ellipsis;
   display: block;
   overflow: hidden;
   margin: 0;
-  padding: 0 1rem;
+  padding: 0;
   height: 100%;
   font-weight: 300;
   font-style: italic;
