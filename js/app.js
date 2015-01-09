@@ -5,6 +5,7 @@ var name_str = new Array();
 var tweetText = new Array();
 var id_str = new Array();
 var prof_img_url = new Array();
+var favId = "";
 
 window.onload = function(){
 	$("#newPostButton").click(function(){
@@ -28,6 +29,11 @@ window.onload = function(){
 	});
 	$("#clearImage").click(function(){
 		document.form2.my_file.value = "";
+	});
+	$(document).on('click', '.tweetIcon', function(){
+		favId = "";
+		favId = $(this).attr('id');
+		favoriteCreate();
 	});
 
 	// OAuth関連の処理を開始する
@@ -275,18 +281,18 @@ var failureHandler = function (data) {
 };
 
 var failureTimeLineHandler = function(data){
-	alert("failed to get the timeline");
+	alert("タイムラインの取得に失敗しました");
 };
 
 var failurePostHandler = function(data){
-	alert("Post failed");
+	alert("ツイートに失敗しました");
 };
 
 /***ふぁぼ***/
 var favoriteCreate = function(){
 	oauth.request({
 		method:"POST",
-		url:"https://api.twitter.com/1.1/favorites/create.json?id="+"id_str",
+		url:"https://api.twitter.com/1.1/favorites/create.json?id=" + favId,
 	});
 };
 
