@@ -1,8 +1,12 @@
 // oauthオブジェクト
 var oauth;
-//var tweetList = new Array();
+var screenName = new Array();
+var name_str = new Array();
+var tweetText = new Array();
+var id_str = new Array();
+var prof_img_url = new Array();
 
-window.onload = function () {
+window.onload = function(){
 	$("#newPostButton").click(function(){
 		document.querySelector('#newTweetSection').className = 'current';
 		document.querySelector('[data-position="current"]').className = 'left';
@@ -40,39 +44,118 @@ var getHomeTimeline = function(){
 	var url = "https://api.twitter.com/1.1/statuses/home_timeline.json?count=100";
 	oauth.get(url, successGetHomeTimeline, failureTimeLineHandler);
 };
-var successGetHomeTimeline = function(data){
+
+var first_getHomeTimeline = function(){
+	var url = "https://api.twitter.com/1.1/statuses/home_timeline.json?count=100";
+	oauth.get(url, successFirstTimeline, failureTimeLineHandler);
+};
+
+var successFirstTimeline = function(data){
 	clearTweetDom();
 	var tweetList = JSON.parse(data.text);
-	for(var i = 0; i < tweetList.length; i++){
+	tweetIndex: for(var i = 0; i < tweetList.length; i++){
 		var tweet = tweetList[i];
-		var screenName = tweet.user.screen_name;
-		var name = tweet.user.name;
-		var tweetText = tweet.text;
-		var id_str = tweet.id_str;
+		for(var j = 0; j < id_str.length; j++){
+			var buf = id_str[j];
+			if(tweet.id_str == buf){
+				break tweetIndex;
+			}
+		}
+		screenName.unshift(tweet.user.screen_name);
+		name_str.unshift(tweet.user.name);
+		tweetText.unshift(tweet.text);
+		id_str.unshift(tweet.id_str);
+		prof_img_url.unshift(tweet.user.profile_image_url);
 		console.log("screenName:" + screenName);
 		console.log("name      :" + name);
 		console.log("tweetText :" + tweetText);
 		console.log("tweetID :" + id_str);
-		addTweetToDom(tweet);
 
 	}
+	addFirstTweetToDom(tweet);
 };
+var addFirstTweetToDom = function(tweet){
+	for(var i = id_str.length - 1; i > 0; i--){
+		var buf_screenName = screenName[i];
+		var buf_name = name_str[i];
+		var buf_tweetText = tweetText[i];
+		var buf_prof_img_url = prof_img_url[i];
+		var buf_id_str = id_str[i];
+
+		var $parent = $("#tweetBox");
+		var $li = $("<li>").appendTo($parent);
+		var $div = $("<div>").addClass("tweet").appendTo($li);
+		var $userDiv = $("<div>").appendTo($div);
+
+		$("<img>").addClass("tweetIcon").attr('id', buf_id_str).attr('src', buf_prof_img_url).appendTo($userDiv);
+		$("<span>").addClass("name").text(buf_name).appendTo($userDiv);
+		$("<span>").addClass("screenName").text("@" + buf_screenName).appendTo($userDiv);
+		$("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
+	}
+
+};
+
+var successGetHomeTimeline = function(data){
+	clearTweetDom();
+	var tweetList = JSON.parse(data.text);
+	var buf_screenName = new Array();
+	var buf_name_str = new Array();
+	var buf_tweetText = new Array();
+	var buf_id_str = new Array();
+	var buf_prof_img_url = new Array();
+	tweetIndex: for(var i = 0; i < tweetList.length; i++){
+		var tweet = tweetList[i];
+		for(var j = 0; j < id_str.length; j++){
+			var buf = id_str[j];
+			if(tweet.id_str == buf){
+				break tweetIndex;
+			}
+		}
+		buf_screenName.push(tweet.user.screen_name);
+		buf_name_str.push(tweet.user.name);
+		buf_tweetText.push(tweet.text);
+		buf_id_str.push(tweet.id_str);
+		buf_prof_img_url.push(tweet.user.profile_image_url);
+		console.log("screenName:" + screenName);
+		console.log("name      :" + name);
+		console.log("tweetText :" + tweetText);
+		console.log("tweetID :" + id_str);
+
+	}
+	buf_screenName.reverse();
+	buf_name_str.reverse();
+	buf_tweetText.reverse();
+	buf_id_str.reverse();
+	buf_prof_img_url.reverse();
+
+	for(var i = 0; i < buf_id_str.length; i++){
+		screenName.push(buf_screenName[i]);
+		name_str.push(buf_name_str[i]);
+		tweetText.push(buf_tweetText[i]);
+		id_str.push(buf_id_str[i]);
+		prof_img_url.push(buf_prof_img_url[i]);
+	}
+	addTweetToDom(tweet);
+};
+
 var addTweetToDom = function(tweet){
-	var screenName = tweet.user.screen_name;
-	var name = tweet.user.name;
-	var tweetText = tweet.text;
-	var prof_img_url = tweet.user.profile_image_url;
-	var id_str = tweet.id_str;
+	for(var i = id_str.length - 1; i > 0; i--){
+		var buf_screenName = screenName[i];
+		var buf_name = name_str[i];
+		var buf_tweetText = tweetText[i];
+		var buf_prof_img_url = prof_img_url[i];
+		var buf_id_str = id_str[i];
 
-	var $parent = $("#tweetBox");
-	var $li = $("<li>").appendTo($parent);
-	var $div = $("<div>").addClass("tweet").appendTo($li);
-	var $userDiv = $("<div>").appendTo($div);
+		var $parent = $("#tweetBox");
+		var $li = $("<li>").appendTo($parent);
+		var $div = $("<div>").addClass("tweet").appendTo($li);
+		var $userDiv = $("<div>").appendTo($div);
 
-	$("<img>").addClass("tweetIcon").attr('id', id_str).attr('src', prof_img_url).appendTo($userDiv);
-	$("<span>").addClass("name").text(name).appendTo($userDiv);
-	$("<span>").addClass("screenName").text("@" + screenName).appendTo($userDiv);
-	$("<div>").addClass("tweetText").text(tweetText).appendTo($div);
+		$("<img>").addClass("tweetIcon").attr('id', buf_id_str).attr('src', buf_prof_img_url).appendTo($userDiv);
+		$("<span>").addClass("name").text(buf_name).appendTo($userDiv);
+		$("<span>").addClass("screenName").text("@" + buf_screenName).appendTo($userDiv);
+		$("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
+	}
 
 };
 var newTweetPost = function(){
@@ -127,7 +210,7 @@ var firstOAuthFunc = function(){
 		localStorage.setItem("firstoauth", 1);
 		if(accessTokenKey){
 			oauth.setAccessToken(accessTokenKey, accessTokenSecret);
-			getHomeTimeline();
+			first_getHomeTimeline();
 		}else{
 			// 1. consumer key と consumer secret を使って、リクエストトークンを取得する
 			oauth.fetchRequestToken(successFetchRequestToken, failureHandler);
