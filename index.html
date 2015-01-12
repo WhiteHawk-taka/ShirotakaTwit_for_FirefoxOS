@@ -214,24 +214,35 @@
 	</head>
 
 	<body>
-		<section role="region" id="Home" data-position="current">
+
+		<!-- タイムライン -->
+		<section role="region" id="home" data-position="current">
 			<header class="fixed">
 				<menu type="toolbar">
-					<a href="#" id="newPostButton">
+					<a href="#" class="newPostButton">
 						<span class="icon icon-compose"></span>
 					</a>
 				</menu>
-				<h1>  TimeLine  </h1>
+				<h1> タイムライン </h1>
 			</header>
 			<div role="toolbar">
 				<ul>
 					<li>
-						<button id="getButton" class="icon download">getmore</button>
+						<a href="index.html#home">
+							<button class="gaia-icon icon-contact-twitter">tl</button>
+						</a>
 					</li>
 				</ul>
 				<ul>
 					<li>
-						<button id="updateButton" class="gaia-icon icon-reload">update</button>
+						<a href="index.html#mentions">
+							<button class="gaia-icon icon-calllog-incomingsms">getMention</button>
+						</a>
+					</li>
+				</ul>
+				<ul>
+					<li>
+						<button class="updateButton" class="gaia-icon icon-reload">update</button>
 					</li>
 				</ul>
 			</div>
@@ -242,6 +253,47 @@
 				</div>
 			</article>
 		</section>
+
+		<!-- メンション -->
+		<section role="region" id="mentions" data-position="current">
+			<header class="fixed">
+				<menu type=toolbar>
+					<a href='#' class="newPostButton">
+						<span class="icon icon-compose"></span>
+					</a>
+				</menu>
+				<h1> 返信 <h1>
+			</header>
+			<div role="toolbar">
+				<ul>
+					<li>
+						<a href="index.html#home">
+							<button class="gaia-icon icon-contact-twitter">tl</button>
+						</a>
+					</li>
+				</ul>
+				<ul>
+					<li>
+						<a href="index.html#mentions">
+							<button class="gaia-icon icon-calllog-incomingsms">getMention</button>
+						</a>
+					</li>
+				</ul>
+				<ul>
+					<li>
+						<button id="updateButton" class="gaia-icon icon-reload">uodate</button>
+					</li>
+				</ul>
+			</div>
+			<article class="scrollable header">
+				<div>
+					<ul id="mentionBox">
+					</ul>
+				</div>
+			</article>
+		</section>
+
+		<!-- 新規ツイート -->
 		<section role="region" id="newTweetSection" data-position="right">
 			<header class="fixed">
 				<a id="backButton" href="#">

@@ -8,6 +8,7 @@
 	margin-right: 5px;
 	font-size: 16px;
 	color: #333;
+	font-weight: bold;
 }
 
 .screenName{
@@ -25,10 +26,21 @@
 	box-sizing: border-box;
 }
 
+#mentionBox li{
+	width: 100%;
+	min-height: 70px;
+	padding: 5px 5px 10px;
+	border-bottom: 1px solid gray;
+	word-wrap: break-word;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
 .tweetText{
 	line-height: 1.4;
 	font-size: 12px;
 	color: #333;
+	margin-top: 5px;
 }
 
 .tweet{
@@ -41,6 +53,11 @@
 	margin-left: -58px;
 	height: 46px;
 
+}
+
+.menu-button{
+	float: right;
+	height: 1.5rem;
 }
 
 header h1{
