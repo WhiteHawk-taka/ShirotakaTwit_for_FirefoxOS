@@ -357,9 +357,8 @@ var successHandler = function(){
 
 
 
-/**
-* OAuth関連で最初に行う処理
-*/
+
+// OAuth関連で最初に行う処理
 var firstOAuthFunc = function(){
 	var firstoauth = localStorage.getItem("firstoauth");
 
@@ -405,9 +404,7 @@ var firstOAuthFunc = function(){
 
 };
 
-/**
-* 1の処理の成功時のコールバック関数
-*/
+// 1の処理の成功時のコールバック関数
 var successFetchRequestToken = function (authUrl) {
 
 	//URLを訂正
@@ -429,9 +426,7 @@ var successFetchRequestToken = function (authUrl) {
 	oauth.fetchAccessToken(successFetchAccessToken, failureHandler);
 };
 
-/**
-* 5の処理の成功時のコールバック関数
-*/
+// 5の処理の成功時のコールバック関数
 var successFetchAccessToken = function () {
 	localStorage.setItem("accessTokenKey", oauth.getAccessTokenKey());
 	localStorage.setItem("accessTokenSecret", oauth.getAccessTokenSecret());
@@ -441,9 +436,8 @@ var successFetchAccessToken = function () {
 
 };
 
-/**
-* 各処理失敗時のコールバック関数
-*/
+
+// 各処理失敗時のコールバック関数
 var failureHandler = function (data) {
 	localStorage.setItem("firstoauth",0);
 	alert("failure");
