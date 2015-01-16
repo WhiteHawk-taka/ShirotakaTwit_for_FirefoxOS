@@ -18,10 +18,12 @@ var favId = "";
 
 window.onload = function(){
 	$(".newPostButton").click(function(){
+		$("#menuSection").hide();
 		document.querySelector('#newTweetSection').className = 'current';
 		document.querySelector('[data-position="current"]').className = 'left';
 	});
 	$("#backButton").click(function(){
+		$("#menuSection").show();
 		document.querySelector('#newTweetSection').className = 'right';
 		document.querySelector('[data-position="current"]').className = 'current';
 	});
@@ -35,6 +37,7 @@ window.onload = function(){
 		document.form2.my_file.value = "";
 		document.querySelector('#newTweetSection').className = 'right';
 		document.querySelector('[data-position="current"]').className = 'current';
+		$("#menuSection").show();
 
 	});
 	$("#clearImage").click(function(){
