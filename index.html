@@ -214,9 +214,9 @@
 	</head>
 
 	<body>
-		<div id="index">
+		<section id="index" class="current" data-position="current">
 			<!-- タイムライン -->
-			<section role="region" id="drawer" data-position="current">
+			<section role="region" id="drawer">
 				<header class="fixed">
 					<menu type="toolbar">
 						<a href="#" class="newPostButton">
@@ -235,7 +235,7 @@
 					</ul>
 					<ul>
 						<li>
-							<a href="mention.html">
+							<a href="mention.html" id="mentionlink">
 								<button class="gaia-icon icon-calllog-incomingsms">getMention</button>
 							</a>
 						</li>
@@ -253,42 +253,40 @@
 					</div>
 				</article>
 			</section>
-
-			<!-- 新規ツイート -->
-			<section role="region" id="newTweetSection" data-position="right">
-				<header class="fixed">
-					<a id="backButton" href="#">
-						<span class="icon icon-back">back</span>
-					</a>
-					<menu type="toolbar">
-						<a href="#" id="statusUpdateButton"><span class="icon icon-send">send</span></a>
-					</menu>
-					<h1>New Tweet</h1>
-				</header>
-				<article class="content scrollable header">
-					<div>
-						<form name="form1">
-							<p>
-								<textarea id="newTweetText" placeholder="input tweet text" required name="postform">
-								</textarea>
-							</p>
-						</form>
-					</div>
-					<form id="postTweetImage" action="#" enctype="multipart/form-data" method="post" name="form2">
-						<input type="file" id="file" name="my_file">
-						<button id="clearImage">画像をクリア</button>
-					</form>
-				</article>
-			</section>
-
 			<!-- ツイートメニュー -->
 			<section id="menuSection" data-type="sidebar">
 				<a href="#">
 					<button class="gaia-icon icon-closecancel"></button>
 				</a>
 			</section>
+		</section>
 
-		</div>
+		<!-- 新規ツイート -->
+		<section role="region" id="newTweetSection" class="right" data-position="right">
+			<header class="fixed">
+				<a id="backButton" href="#">
+					<span class="icon icon-back">back</span>
+				</a>
+				<menu type="toolbar">
+					<a href="#" id="statusUpdateButton"><span class="icon icon-send">send</span></a>
+				</menu>
+				<h1>New Tweet</h1>
+			</header>
+			<article class="content scrollable header">
+				<div>
+					<form name="form1">
+						<p>
+							<textarea id="newTweetText" placeholder="input tweet text" required name="postform">
+							</textarea>
+						</p>
+					</form>
+				</div>
+				<form id="postTweetImage" action="#" enctype="multipart/form-data" method="post" name="form2">
+					<input type="file" id="file" name="my_file">
+					<button id="clearImage">画像をクリア</button>
+				</form>
+			</article>
+		</section>
 
 	</body>
 </html>

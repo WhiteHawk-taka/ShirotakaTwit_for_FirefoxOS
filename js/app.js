@@ -17,6 +17,12 @@ var favId = "";
 
 
 window.onload = function(){
+	$("#mentionlink").click(function(){
+		localStorage.setItem("loading",1);
+	});
+	$("#homelink").click(function(){
+		localStorage.setItem("loading",1);
+	});
 	$(".newPostButton").click(function(){
 		$("#menuSection").hide();
 		document.querySelector('#newTweetSection').className = 'current';
@@ -29,6 +35,8 @@ window.onload = function(){
 	});
 	$(".updateButton").click(function(){
 		getHomeTimeline();
+	});
+	$("#mentionupdateButton").click(function(){
 		getMentionTimeline();
 	});
 	$("#statusUpdateButton").click(function(){
@@ -53,9 +61,13 @@ window.onload = function(){
 	});
 
 
-	// OAuth関連の処理を開始する
-	firstOAuthFunc();
+	localStorage.setItem("loading",0);
 
+	// OAuth関連の処理を開始する
+	var loadingop = localStorage.getItem("loading");
+	if(loadingop == 0){
+		firstOAuthFunc();
+	}
 
 };
 
@@ -143,7 +155,7 @@ var addFirstTweetToDom = function(tweet){
 		$("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
 	}
 	$(".tweetText").each(function(){
-		$(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/, '<a target="_blank" href="$&">$&</a>'));
+		$(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/g, '<a target="_blank" href="$&">$&</a>'));
 	});
 
 };
@@ -214,7 +226,7 @@ var addTweetToDom = function(tweet){
 		$("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
 	}
 	$(".tweetText").each(function(){
-		$(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/, '<a target="_blank" href="$&">$&</a>'));
+		$(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/g, '<a target="_blank" href="$&">$&</a>'));
 	});
 
 };
@@ -267,7 +279,7 @@ var addFirstMentionTweetToDom = function(tweet){
 		$("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
 	}
 	$(".tweetText").each(function(){
-		$(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/, '<a target="_blank" href="$&">$&</a>'));
+		$(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/g, '<a target="_blank" href="$&">$&</a>'));
 	});
 
 };
@@ -338,7 +350,7 @@ var addMentionTweetToDom = function(tweet){
 		$("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
 	}
 	$(".tweetText").each(function(){
-		$(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/, '<a target="_blank" href="$&">$&</a>'));
+		$(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/g, '<a target="_blank" href="$&">$&</a>'));
 	});
 
 };
