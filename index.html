@@ -213,111 +213,81 @@
 
 	</head>
 
-	<body id="def">
-
-		<!-- タイムライン -->
-		<section role="region" id="home" data-position="current">
-			<header class="fixed">
-				<menu type="toolbar">
-					<a href="#" class="newPostButton">
-						<span class="icon icon-compose"></span>
-					</a>
-				</menu>
-				<h1> タイムライン </h1>
-			</header>
-			<div role="toolbar">
-				<ul>
-					<li>
-						<a href="index.html#def">
-							<button class="gaia-icon icon-contact-twitter">tl</button>
+	<body>
+		<section id="index" data-position="current">
+			<!-- タイムライン -->
+			<section role="region" id="drawer" data-position="current">
+				<header class="fixed">
+					<menu type="toolbar">
+						<a href="#" class="newPostButton">
+							<span class="icon icon-compose"></span>
 						</a>
-					</li>
-				</ul>
-				<ul>
-					<li>
-						<a href="index.html#mentions">
-							<button class="gaia-icon icon-calllog-incomingsms">getMention</button>
-						</a>
-					</li>
-				</ul>
-				<ul>
-					<li>
-						<button class="updateButton" class="gaia-icon icon-reload">update</button>
-					</li>
-				</ul>
-			</div>
-			<article class="scrollable header">
-				<div>
-					<ul id="tweetBox">
+					</menu>
+					<h1> タイムライン </h1>
+				</header>
+				<div role="toolbar">
+					<ul>
+						<li>
+							<a href="#index">
+								<button class="gaia-icon icon-contact-twitter">tl</button>
+							</a>
+						</li>
+					</ul>
+					<ul>
+						<li>
+							<a href="mention.html">
+								<button class="gaia-icon icon-calllog-incomingsms">getMention</button>
+							</a>
+						</li>
+					</ul>
+					<ul>
+						<li>
+							<button class="updateButton gaia-icon icon-reload">update</button>
+						</li>
 					</ul>
 				</div>
-			</article>
-		</section>
+				<article class="scrollable header">
+					<div>
+						<ul id="tweetBox">
+						</ul>
+					</div>
+				</article>
+			</section>
 
-		<!-- メンション -->
-		<section role="region" id="mentions" data-position="current">
-			<header class="fixed">
-				<menu type=toolbar>
-					<a href='#' class="newPostButton">
-						<span class="icon icon-compose"></span>
+			<!-- 新規ツイート -->
+			<section role="region" id="newTweetSection" data-position="right">
+				<header class="fixed">
+					<a id="backButton" href="#">
+						<span class="icon icon-back">back</span>
 					</a>
-				</menu>
-				<h1> 返信 <h1>
-			</header>
-			<div role="toolbar">
-				<ul>
-					<li>
-						<a href="index.html#def">
-							<button class="gaia-icon icon-contact-twitter">tl</button>
-						</a>
-					</li>
-				</ul>
-				<ul>
-					<li>
-						<a href="index.html#mentions">
-							<button class="gaia-icon icon-calllog-incomingsms">getMention</button>
-						</a>
-					</li>
-				</ul>
-				<ul>
-					<li>
-						<button id="updateButton" class="gaia-icon icon-reload">uodate</button>
-					</li>
-				</ul>
-			</div>
-			<article class="scrollable header">
-				<div>
-					<ul id="mentionBox">
-					</ul>
-				</div>
-			</article>
-		</section>
-
-		<!-- 新規ツイート -->
-		<section role="region" id="newTweetSection" data-position="right">
-			<header class="fixed">
-				<a id="backButton" href="#">
-					<span class="icon icon-back">back</span>
-				</a>
-				<menu type="toolbar">
-					<a href="#" id="statusUpdateButton"><span class="icon icon-send">send</span></a>
-				</menu>
-				<h1>New Tweet</h1>
-			</header>
-			<article class="content scrollable header">
-				<div>
-					<form name="form1">
-						<p>
-							<textarea id="newTweetText" placeholder="input tweet text" required name="postform">
-							</textarea>
-						</p>
+					<menu type="toolbar">
+						<a href="#" id="statusUpdateButton"><span class="icon icon-send">send</span></a>
+					</menu>
+					<h1>New Tweet</h1>
+				</header>
+				<article class="content scrollable header">
+					<div>
+						<form name="form1">
+							<p>
+								<textarea id="newTweetText" placeholder="input tweet text" required name="postform">
+								</textarea>
+							</p>
+						</form>
+					</div>
+					<form id="postTweetImage" action="#" enctype="multipart/form-data" method="post" name="form2">
+						<input type="file" id="file" name="my_file">
+						<button id="clearImage">画像をクリア</button>
 					</form>
-				</div>
-				<form id="postTweetImage" action="#" enctype="multipart/form-data" method="post" name="form2">
-							<input type="file" id="file" name="my_file">
-							<button id="clearImage">画像をクリア</button>
-				</form>
-			</article>
+				</article>
+			</section>
+
+			<!-- ツイートメニュー -->
+			<section data-type="sidebar">
+				<a href="#">
+					<button class="gaia-icon icon-closecancel"></button>
+				</a>
+			</section>
+
 		</section>
 
 	</body>

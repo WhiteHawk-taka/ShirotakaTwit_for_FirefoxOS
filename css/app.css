@@ -60,6 +60,17 @@
 	height: 1.5rem;
 }
 
+.icon-closecancel{
+	margin: 0 auto;
+	border-radius: unset;
+	line-height: 0;
+	text-align: left;
+	padding-left: 0.5rem;
+	position: absolute;
+	bottom: 0;
+	height: 3rem;
+}
+
 header h1{
 	padding-left: 10px;
 }
@@ -101,5 +112,4 @@ section[role="region"] > .content{
 #file{
 	height: 44px;
 }
-
 

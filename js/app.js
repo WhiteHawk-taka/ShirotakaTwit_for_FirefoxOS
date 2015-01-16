@@ -83,13 +83,13 @@ var first_getHomeTimeline = function(){
 var getMentionTimeline = function(){
 	var url = "https://api.twitter.com/1.1/statuses/mentions_timeline.json?count=100";
 	oauth.get(url, successMention, failureTimeLineHandler);
-}
+};
 
 //初回メンション取得OAuth
 var first_getMentionTimeline = function(){
 	var url = "https://api.twitter.com/1.1/statuses/mentions_timeline.json?count=100";
 	oauth.get(url, successFirstMention, failureTimeLineHandler);
-}
+};
 
 //初回タイムライン取得データ処理
 var successFirstTimeline = function(data){
@@ -130,11 +130,12 @@ var addFirstTweetToDom = function(tweet){
 		var $li = $("<li>").appendTo($parent);
 		var $div = $("<div>").addClass("tweet").appendTo($li);
 		var $userDiv = $("<div>").appendTo($div);
+		var $a1 = $("<a>").attr('href', "#drawer").appendTo($userDiv);
 
 		$("<img>").addClass("tweetIcon").attr('id', buf_id_str).attr('src', buf_prof_img_url).appendTo($userDiv);
 		$("<span>").addClass("name").text(buf_name).appendTo($userDiv);
 		$("<span>").addClass("screenName").text("@" + buf_screenName).appendTo($userDiv);
-		$("<img>").addClass("menu-button").attr('src', "img/icons/menu-button.png").appendTo($userDiv);
+		$("<img>").addClass("menu-button").attr('src', "img/icons/menu-button.png").appendTo($a1);
 		$("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
 	}
 
@@ -196,14 +197,13 @@ var addTweetToDom = function(tweet){
 		var $parent = $("#tweetBox");
 		var $li = $("<li>").appendTo($parent);
 		var $div = $("<div>").addClass("tweet").appendTo($li);
-		var $a = $("<a>").attr('href', "#drawer").appendTo($userDiv);
 		var $userDiv = $("<div>").appendTo($div);
-
+		var $a1 = $("<a>").attr('href', "#drawer").appendTo($userDiv);
 
 		$("<img>").addClass("tweetIcon").attr('id', buf_id_str).attr('src', buf_prof_img_url).appendTo($userDiv);
 		$("<span>").addClass("name").text(buf_name).appendTo($userDiv);
 		$("<span>").addClass("screenName").text("@" + buf_screenName).appendTo($userDiv);
-		$("<img>").addClass("menu-button").attr('src', "img/icons/menu-button.png").appendTo($a);
+		$("<img>").addClass("menu-button").attr('src', "img/icons/menu-button.png").appendTo($a1);
 		$("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
 	}
 
@@ -248,11 +248,12 @@ var addFirstMentionTweetToDom = function(tweet){
 		var $li = $("<li>").appendTo($parent);
 		var $div = $("<div>").addClass("tweet").appendTo($li);
 		var $userDiv = $("<div>").appendTo($div);
+		var $a1 = $("<a>").attr('href', "#drawer").appendTo($userDiv);
 
 		$("<img>").addClass("tweetIcon").attr('id', buf_id_str).attr('src', buf_prof_img_url).appendTo($userDiv);
 		$("<span>").addClass("name").text(buf_name).appendTo($userDiv);
 		$("<span>").addClass("screenName").text("@" + buf_screenName).appendTo($userDiv);
-		$("<img>").addClass("menu-button").attr('src', "img/icons/menu-button.png").appendTo($userDiv);
+		$("<img>").addClass("menu-button").attr('src', "img/icons/menu-button.png").appendTo($a1);
 		$("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
 	}
 
@@ -314,14 +315,13 @@ var addMentionTweetToDom = function(tweet){
 		var $parent = $("#mentionBox");
 		var $li = $("<li>").appendTo($parent);
 		var $div = $("<div>").addClass("tweet").appendTo($li);
-		var $a = $("<a>").attr('href', "#drawer").appendTo($userDiv);
 		var $userDiv = $("<div>").appendTo($div);
-
+		var $a1 = $("<a>").attr('href', "#drawer").appendTo($userDiv);
 
 		$("<img>").addClass("tweetIcon").attr('id', buf_id_str).attr('src', buf_prof_img_url).appendTo($userDiv);
 		$("<span>").addClass("name").text(buf_name).appendTo($userDiv);
 		$("<span>").addClass("screenName").text("@" + buf_screenName).appendTo($userDiv);
-		$("<img>").addClass("menu-button").attr('src', "img/icons/menu-button.png").appendTo($a);
+		$("<img>").addClass("menu-button").attr('src', "img/icons/menu-button.png").appendTo($a1);
 		$("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
 	}
 
@@ -377,7 +377,6 @@ var firstOAuthFunc = function(){
 		oauth = new OAuth(config);
 
 		//保存してあるアクセストークンがあればロードする
-
 		var accessTokenKey = localStorage.getItem("accessTokenKey");
 		var accessTokenSecret = localStorage.getItem("accessTokenSecret");
 		localStorage.setItem("firstoauth", 1);
@@ -449,6 +448,9 @@ var failureTimeLineHandler = function(data){
 
 var failurePostHandler = function(data){
 	alert("ツイートに失敗しました");
+};
+
+var nonerror = function(data){
 };
 
 /***ふぁぼ***/
