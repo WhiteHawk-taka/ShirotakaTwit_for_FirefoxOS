@@ -49,6 +49,7 @@ window.onload = function(){
 		favoriteCreate();
 	});
 
+
 	// OAuth関連の処理を開始する
 	firstOAuthFunc();
 
@@ -138,6 +139,9 @@ var addFirstTweetToDom = function(tweet){
 		$("<img>").addClass("menu-button").attr('src', "img/icons/menu-button.png").appendTo($a1);
 		$("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
 	}
+	$(".tweetText").each(function(){
+		$(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/, '<a target="_blank" href="$&">$&</a>'));
+	});
 
 };
 
@@ -206,6 +210,9 @@ var addTweetToDom = function(tweet){
 		$("<img>").addClass("menu-button").attr('src', "img/icons/menu-button.png").appendTo($a1);
 		$("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
 	}
+	$(".tweetText").each(function(){
+		$(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/, '<a target="_blank" href="$&">$&</a>'));
+	});
 
 };
 
@@ -256,6 +263,9 @@ var addFirstMentionTweetToDom = function(tweet){
 		$("<img>").addClass("menu-button").attr('src', "img/icons/menu-button.png").appendTo($a1);
 		$("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
 	}
+	$(".tweetText").each(function(){
+		$(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/, '<a target="_blank" href="$&">$&</a>'));
+	});
 
 };
 
@@ -324,6 +334,9 @@ var addMentionTweetToDom = function(tweet){
 		$("<img>").addClass("menu-button").attr('src', "img/icons/menu-button.png").appendTo($a1);
 		$("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
 	}
+	$(".tweetText").each(function(){
+		$(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/, '<a target="_blank" href="$&">$&</a>'));
+	});
 
 };
 
@@ -460,6 +473,7 @@ var favoriteCreate = function(){
 		url:"https://api.twitter.com/1.1/favorites/create.json?id=" + favId,
 	});
 };
+
 
 
 
