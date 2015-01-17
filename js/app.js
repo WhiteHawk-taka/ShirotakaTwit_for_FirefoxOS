@@ -62,10 +62,11 @@ window.onload = function(){
 
 
 	//ふぁぼ
-	$(document).on('click', '.icon-bookmark', function(){
+	$(".icon-bookmark").click(function(){
 		favId = "";
 		favId = $(this).attr('id');
 		favoriteCreate();
+		utils.status.show('お気に入りに追加しました');
 	});
 
 
