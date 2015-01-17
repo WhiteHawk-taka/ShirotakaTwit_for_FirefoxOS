@@ -499,5 +499,3 @@ var favoriteCreate = function(){
 };
 
 
-
-
