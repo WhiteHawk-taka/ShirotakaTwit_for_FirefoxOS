@@ -6,12 +6,14 @@ var name_str = new Array();
 var tweetText = new Array();
 var id_str = new Array();
 var prof_img_url = new Array();
+var favorited = new Array();
 
 var mention_screenName = new Array();
 var mention_name_str = new Array();
 var mention_tweetText = new Array();
 var mention_id_str = new Array();
 var mention_prof_img_url = new Array();
+var mention_favorited = new Array();
 
 var favId = "";
 
@@ -55,7 +57,7 @@ window.onload = function(){
 	});
 	//メニューを閉じた時の処理
 	$(".icon-closecancel").click(function(){
-		$(".icon-bookmark"),attr('id', '');
+		$(".icon-bookmark").attr('id', "");
 	});
 
 
@@ -175,6 +177,7 @@ var successGetHomeTimeline = function(data){
 	var buf_tweetText = new Array();
 	var buf_id_str = new Array();
 	var buf_prof_img_url = new Array();
+
 	tweetIndex1: for(var i = 0; i < tweetList.length; i++){
 		var tweet = tweetList[i];
 		for(var j = 0; j < id_str.length; j++){
