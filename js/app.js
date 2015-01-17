@@ -24,12 +24,10 @@ window.onload = function(){
 		localStorage.setItem("loading",1);
 	});
 	$(".newPostButton").click(function(){
-		$("#menuSection").hide();
 		document.querySelector('#newTweetSection').className = 'current';
 		document.querySelector('[data-position="current"]').className = 'left';
 	});
 	$("#backButton").click(function(){
-		$("#menuSection").show();
 		document.querySelector('#newTweetSection').className = 'right';
 		document.querySelector('[data-position="current"]').className = 'current';
 	});
@@ -45,16 +43,24 @@ window.onload = function(){
 		document.form2.my_file.value = "";
 		document.querySelector('#newTweetSection').className = 'right';
 		document.querySelector('[data-position="current"]').className = 'current';
-		$("#menuSection").show();
 
 	});
 	$("#clearImage").click(function(){
 		document.form2.my_file.value = "";
 	});
 
+	//メニューを開いた時の処理
+	$(document).on('click', '.menu-button', function() {
+		$(".icon-bookmark").attr('id', $(this).attr('id'));
+	});
+	//メニューを閉じた時の処理
+	$(".icon-closecancel").click(function(){
+		$(".icon-bookmark"),attr('id', '');
+	});
+
 
 	//ふぁぼ
-	$(document).on('click', '.tweetIcon', function(){
+	$(document).on('click', '.icon-bookmark', function(){
 		favId = "";
 		favId = $(this).attr('id');
 		favoriteCreate();
@@ -151,7 +157,7 @@ var addFirstTweetToDom = function(tweet){
 		$("<img>").addClass("tweetIcon").attr('id', buf_id_str).attr('src', buf_prof_img_url).appendTo($userDiv);
 		$("<span>").addClass("name").text(buf_name).appendTo($userDiv);
 		$("<span>").addClass("screenName").text("@" + buf_screenName).appendTo($userDiv);
-		$("<img>").addClass("menu-button").attr('src', "img/icons/menu-button.png").appendTo($a1);
+		$("<img>").addClass("menu-button").attr('id', buf_id_str).attr('src', "img/icons/menu-button.png").appendTo($a1);
 		$("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
 	}
 	$(".tweetText").each(function(){
@@ -222,7 +228,7 @@ var addTweetToDom = function(tweet){
 		$("<img>").addClass("tweetIcon").attr('id', buf_id_str).attr('src', buf_prof_img_url).appendTo($userDiv);
 		$("<span>").addClass("name").text(buf_name).appendTo($userDiv);
 		$("<span>").addClass("screenName").text("@" + buf_screenName).appendTo($userDiv);
-		$("<img>").addClass("menu-button").attr('src', "img/icons/menu-button.png").appendTo($a1);
+		$("<img>").addClass("menu-button").attr('id', buf_id_str).attr('src', "img/icons/menu-button.png").appendTo($a1);
 		$("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
 	}
 	$(".tweetText").each(function(){
@@ -275,7 +281,7 @@ var addFirstMentionTweetToDom = function(tweet){
 		$("<img>").addClass("tweetIcon").attr('id', buf_id_str).attr('src', buf_prof_img_url).appendTo($userDiv);
 		$("<span>").addClass("name").text(buf_name).appendTo($userDiv);
 		$("<span>").addClass("screenName").text("@" + buf_screenName).appendTo($userDiv);
-		$("<img>").addClass("menu-button").attr('src', "img/icons/menu-button.png").appendTo($a1);
+		$("<img>").addClass("menu-button").attr('id', buf_id_str).attr('src', "img/icons/menu-button.png").appendTo($a1);
 		$("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
 	}
 	$(".tweetText").each(function(){
@@ -346,7 +352,7 @@ var addMentionTweetToDom = function(tweet){
 		$("<img>").addClass("tweetIcon").attr('id', buf_id_str).attr('src', buf_prof_img_url).appendTo($userDiv);
 		$("<span>").addClass("name").text(buf_name).appendTo($userDiv);
 		$("<span>").addClass("screenName").text("@" + buf_screenName).appendTo($userDiv);
-		$("<img>").addClass("menu-button").attr('src', "img/icons/menu-button.png").appendTo($a1);
+		$("<img>").addClass("menu-button").attr('id', buf_id_str).attr('src', "img/icons/menu-button.png").appendTo($a1);
 		$("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
 	}
 	$(".tweetText").each(function(){
