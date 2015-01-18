@@ -17,6 +17,7 @@ var mention_favorited = new Array();
 
 var repId = "";
 var repName = "";
+var rtId = "";
 var favId = "";
 
 
@@ -93,6 +94,13 @@ window.onload = function(){
 		$("#replyBackButton").attr('id', "backButton");
 	});
 
+	//リツイート
+	$(".icon-sync").click(function(){
+		rtId = "";
+		rtId = $(this).attr('id');
+		rtCreate();
+		utils.status.show('リツイートしました');
+	});
 
 	//ふぁぼ
 	$(".icon-bookmark").click(function(){
@@ -562,6 +570,14 @@ var replyCreate = function(){
 	document.form1.postform.value = "@" + repName + " ";
 	document.querySelector('#newTweetSection').className = 'current';
 	document.querySelector('[data-position="current"]').className = 'left';
+};
+
+//リツイート
+var rtCreate = function(){
+	oauth.request({
+		method:"POST",
+		url:"https://api.twitter.com/1.1/statuses/retweet/" + rtId + ".json",
+	});
 };
 
 
