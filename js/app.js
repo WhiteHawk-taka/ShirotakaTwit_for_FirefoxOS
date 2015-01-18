@@ -15,6 +15,8 @@ var mention_id_str = new Array();
 var mention_prof_img_url = new Array();
 var mention_favorited = new Array();
 
+var repId = "";
+var repName = "";
 var favId = "";
 
 
@@ -29,7 +31,7 @@ window.onload = function(){
 		document.querySelector('#newTweetSection').className = 'current';
 		document.querySelector('[data-position="current"]').className = 'left';
 	});
-	$("#backButton").click(function(){
+	$(document).on('click', '#backButton', function(){
 		document.querySelector('#newTweetSection').className = 'right';
 		document.querySelector('[data-position="current"]').className = 'current';
 	});
@@ -39,13 +41,12 @@ window.onload = function(){
 	$("#mentionupdateButton").click(function(){
 		getMentionTimeline();
 	});
-	$("#statusUpdateButton").click(function(){
+	$(document).on('click', '#statusUpdateButton', function(){
 		newTweetPost();
 		document.form1.postform.value = "";
 		document.form2.my_file.value = "";
 		document.querySelector('#newTweetSection').className = 'right';
 		document.querySelector('[data-position="current"]').className = 'current';
-
 	});
 	$("#clearImage").click(function(){
 		document.form2.my_file.value = "";
@@ -54,10 +55,42 @@ window.onload = function(){
 	//メニューを開いた時の処理
 	$(document).on('click', '.menu-button', function() {
 		$(".icon-bookmark").attr('id', $(this).attr('id'));
+		$(".icon-calllog-incomingsms").attr('id', $(this).attr('id'));
+		$(".icon-calllog-incomingsms").attr('data-name', $(this).attr('data-name'));
+		$(".icon-sync").attr('id', $(this).attr('id'));
 	});
 	//メニューを閉じた時の処理
 	$(".icon-closecancel").click(function(){
 		$(".icon-bookmark").attr('id', "");
+		$(".icon-calllog-incomingsms").attr('id', "");
+		$(".icon-calllog-incomingsms").attr('data-name', "");
+		$(".icon-sync").attr('id', "");
+	});
+
+
+	//リプ
+	$(".icon-calllog-incomingsms").click(function(){
+		repId = "";
+		repId = $(this).attr('id');
+		repName = $(this).attr('data-name');
+		replyCreate();
+	});
+	//リプ用のボタン
+	$(document).on('click', '#replyUpdateButton', function(){
+		replyTweetPost();
+		document.form1.postform.value = "";
+		document.form2.my_file.value = "";
+		document.querySelector('#newTweetSection').className = 'right';
+		document.querySelector('[data-position="current"]').className = 'current';
+		$("#replyUpdateButton").attr('id', "statusUpdateButton");
+		$("#replyBackButton").attr('id', "backButton");
+	});
+	$(document).on('click', '#replyBackButton', function(){
+		document.form1.postform.value = "";
+		document.querySelector('#newTweetSection').className = 'right';
+		document.querySelector('[data-position="current"]').className = 'current';
+		$("#replyUpdateButton").attr('id', "statusUpdateButton");
+		$("#replyBackButton").attr('id', "backButton");
 	});
 
 
@@ -160,7 +193,7 @@ var addFirstTweetToDom = function(tweet){
 		$("<img>").addClass("tweetIcon").attr('id', buf_id_str).attr('src', buf_prof_img_url).appendTo($userDiv);
 		$("<span>").addClass("name").text(buf_name).appendTo($userDiv);
 		$("<span>").addClass("screenName").text("@" + buf_screenName).appendTo($userDiv);
-		$("<img>").addClass("menu-button").attr('id', buf_id_str).attr('src', "img/icons/menu-button.png").appendTo($a1);
+		$("<img>").addClass("menu-button").attr('id', buf_id_str).attr('data-name', buf_screenName).attr('src', "img/icons/menu-button.png").appendTo($a1);
 		$("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
 	}
 	$(".tweetText").each(function(){
@@ -232,7 +265,7 @@ var addTweetToDom = function(tweet){
 		$("<img>").addClass("tweetIcon").attr('id', buf_id_str).attr('src', buf_prof_img_url).appendTo($userDiv);
 		$("<span>").addClass("name").text(buf_name).appendTo($userDiv);
 		$("<span>").addClass("screenName").text("@" + buf_screenName).appendTo($userDiv);
-		$("<img>").addClass("menu-button").attr('id', buf_id_str).attr('src', "img/icons/menu-button.png").appendTo($a1);
+		$("<img>").addClass("menu-button").attr('id', buf_id_str).attr('data-name', buf_screenName).attr('src', "img/icons/menu-button.png").appendTo($a1);
 		$("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
 	}
 	$(".tweetText").each(function(){
@@ -285,7 +318,7 @@ var addFirstMentionTweetToDom = function(tweet){
 		$("<img>").addClass("tweetIcon").attr('id', buf_id_str).attr('src', buf_prof_img_url).appendTo($userDiv);
 		$("<span>").addClass("name").text(buf_name).appendTo($userDiv);
 		$("<span>").addClass("screenName").text("@" + buf_screenName).appendTo($userDiv);
-		$("<img>").addClass("menu-button").attr('id', buf_id_str).attr('src', "img/icons/menu-button.png").appendTo($a1);
+		$("<img>").addClass("menu-button").attr('id', buf_id_str).attr('data-name', buf_screenName).attr('src', "img/icons/menu-button.png").appendTo($a1);
 		$("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
 	}
 	$(".tweetText").each(function(){
@@ -356,7 +389,7 @@ var addMentionTweetToDom = function(tweet){
 		$("<img>").addClass("tweetIcon").attr('id', buf_id_str).attr('src', buf_prof_img_url).appendTo($userDiv);
 		$("<span>").addClass("name").text(buf_name).appendTo($userDiv);
 		$("<span>").addClass("screenName").text("@" + buf_screenName).appendTo($userDiv);
-		$("<img>").addClass("menu-button").attr('id', buf_id_str).attr('src', "img/icons/menu-button.png").appendTo($a1);
+		$("<img>").addClass("menu-button").attr('id', buf_id_str).attr('data-name', buf_screenName).attr('src', "img/icons/menu-button.png").appendTo($a1);
 		$("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
 	}
 	$(".tweetText").each(function(){
@@ -383,6 +416,29 @@ var newTweetPost = function(){
 		oauth.request({
 			method:"POST",
 			url:"https://api.twitter.com/1.1/statuses/update_with_media.json",
+			data:data
+		});
+	}
+};
+
+//リプツイ
+var replyTweetPost = function(){
+	var data;
+	var statusText = document.getElementById("newTweetText").value;
+	var file = document.querySelector("#file").files[0];
+	if(typeof file === "undefined"){
+		data={
+			status:statusText
+		};
+		oauth.post('https://api.twitter.com/1.1/statuses/update.json?in_reply_to_status_id=' + repId, data, successHandler, failurePostHandler);
+	}else{
+		data={
+			"status":statusText,
+			"media[]":file
+		};
+		oauth.request({
+			method:"POST",
+			url:"https://api.twitter.com/1.1/statuses/update_with_media.json?in_reply_to_status_id=" + repId,
 			data:data
 		});
 	}
@@ -497,6 +553,15 @@ var favoriteCreate = function(){
 		method:"POST",
 		url:"https://api.twitter.com/1.1/favorites/create.json?id=" + favId,
 	});
+};
+
+//リプ
+var replyCreate = function(){
+	$("#statusUpdateButton").attr('id', "replyUpdateButton");
+	$("#backButton").attr('id', "replyBackButton");
+	document.form1.postform.value = "@" + repName + " ";
+	document.querySelector('#newTweetSection').className = 'current';
+	document.querySelector('[data-position="current"]').className = 'left';
 };
 
 
