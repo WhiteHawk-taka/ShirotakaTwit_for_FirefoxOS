@@ -15,10 +15,11 @@ var mention_id_str = new Array();
 var mention_prof_img_url = new Array();
 var mention_favorited = new Array();
 
+localStorage.setItem("loading",0);
+
+
 
 window.onload = function(){
-	localStorage.setItem("loading",0);
-
 	// OAuth関連の処理を開始する
 	var loadingop = localStorage.getItem("loading");
 	if(loadingop == 0){

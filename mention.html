@@ -13,8 +13,6 @@
 	<script src="js/event.js"></script>
 	<script src="js/key.js"></script>
 
-
-
 	<!-- Building blocks -->
 	<link rel="stylesheet" href="style/action_menu.css">
 	<link rel="stylesheet" href="style/buttons.css">
@@ -211,11 +209,11 @@
 	</head>
 
 	<body>
-		<section id="index" class="current" data-position="current">
+		<section id="mentions" data-position="current">
 			<!-- メンション -->
 			<section role="region" id="drawer">
 				<header class="fixed">
-					<menu type=toolbar>
+					<menu type="toolbar">
 						<a href='#' class="newPostButton">
 							<span class="icon icon-compose"></span>
 						</a>
@@ -255,7 +253,7 @@
 				<nav>
 					<ul>
 						<li>
-							<button class="gaia-icon icon-calllog-incomingsms"></button>
+							<button class="gaia-icon icon-calllog-incomingsms repform"></button>
 						</li>
 						<li>
 							<button class="gaia-icon icon-sync"></button>
@@ -272,10 +270,11 @@
 						</li>
 					</ul>
 				</nav>
+			</section>
 		</section>
 
 		<!-- 新規ツイート -->
-		<section role="region" id="newTweetSection" data-position="right">
+		<section role="region" id="newTweetSection" class="right" data-position="right">
 			<header class="fixed">
 				<a id="backButton" href="#">
 					<span class="icon icon-back">back</span>
@@ -289,6 +288,7 @@
 				<div>
 					<form name="form1">
 						<p>
+							<!-- 終了タグを改行すると軽微なバグあり -->
 							<textarea id="newTweetText" placeholder="input tweet text" required="" name="postform"></textarea>
 						</p>
 					</form>

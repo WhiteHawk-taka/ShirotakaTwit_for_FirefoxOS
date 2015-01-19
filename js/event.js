@@ -47,7 +47,7 @@ $(document).on('click', '.icon-closecancel', function(){
 
 
 //リプ
-$(document).on('click', '.icon-calllog-incomingsms', function(){
+$(document).on('click', '.repform', function(){
 	var repId = "";
 	repId = $(this).attr('id');
 	var repName = $(this).attr('data-name');
