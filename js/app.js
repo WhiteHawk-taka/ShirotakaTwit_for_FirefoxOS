@@ -15,102 +15,8 @@ var mention_id_str = new Array();
 var mention_prof_img_url = new Array();
 var mention_favorited = new Array();
 
-var repId = "";
-var repName = "";
-var rtId = "";
-var favId = "";
-
 
 window.onload = function(){
-	$("#mentionlink").click(function(){
-		localStorage.setItem("loading",1);
-	});
-	$("#homelink").click(function(){
-		localStorage.setItem("loading",1);
-	});
-	$(".newPostButton").click(function(){
-		document.querySelector('#newTweetSection').className = 'current';
-		document.querySelector('[data-position="current"]').className = 'left';
-	});
-	$(document).on('click', '#backButton', function(){
-		document.querySelector('#newTweetSection').className = 'right';
-		document.querySelector('[data-position="current"]').className = 'current';
-	});
-	$(".updateButton").click(function(){
-		getHomeTimeline();
-	});
-	$("#mentionupdateButton").click(function(){
-		getMentionTimeline();
-	});
-	$(document).on('click', '#statusUpdateButton', function(){
-		newTweetPost();
-		document.form1.postform.value = "";
-		document.form2.my_file.value = "";
-		document.querySelector('#newTweetSection').className = 'right';
-		document.querySelector('[data-position="current"]').className = 'current';
-	});
-	$("#clearImage").click(function(){
-		document.form2.my_file.value = "";
-	});
-
-	//メニューを開いた時の処理
-	$(document).on('click', '.menu-button', function() {
-		$(".icon-bookmark").attr('id', $(this).attr('id'));
-		$(".icon-calllog-incomingsms").attr('id', $(this).attr('id'));
-		$(".icon-calllog-incomingsms").attr('data-name', $(this).attr('data-name'));
-		$(".icon-sync").attr('id', $(this).attr('id'));
-	});
-	//メニューを閉じた時の処理
-	$(".icon-closecancel").click(function(){
-		$(".icon-bookmark").attr('id', "");
-		$(".icon-calllog-incomingsms").attr('id', "");
-		$(".icon-calllog-incomingsms").attr('data-name', "");
-		$(".icon-sync").attr('id', "");
-	});
-
-
-	//リプ
-	$(".icon-calllog-incomingsms").click(function(){
-		repId = "";
-		repId = $(this).attr('id');
-		repName = $(this).attr('data-name');
-		replyCreate();
-	});
-	//リプ用のボタン
-	$(document).on('click', '#replyUpdateButton', function(){
-		replyTweetPost();
-		document.form1.postform.value = "";
-		document.form2.my_file.value = "";
-		document.querySelector('#newTweetSection').className = 'right';
-		document.querySelector('[data-position="current"]').className = 'current';
-		$("#replyUpdateButton").attr('id', "statusUpdateButton");
-		$("#replyBackButton").attr('id', "backButton");
-	});
-	$(document).on('click', '#replyBackButton', function(){
-		document.form1.postform.value = "";
-		document.querySelector('#newTweetSection').className = 'right';
-		document.querySelector('[data-position="current"]').className = 'current';
-		$("#replyUpdateButton").attr('id', "statusUpdateButton");
-		$("#replyBackButton").attr('id', "backButton");
-	});
-
-	//リツイート
-	$(".icon-sync").click(function(){
-		rtId = "";
-		rtId = $(this).attr('id');
-		rtCreate();
-		utils.status.show('リツイートしました');
-	});
-
-	//ふぁぼ
-	$(".icon-bookmark").click(function(){
-		favId = "";
-		favId = $(this).attr('id');
-		favoriteCreate();
-		utils.status.show('お気に入りに追加しました');
-	});
-
-
 	localStorage.setItem("loading",0);
 
 	// OAuth関連の処理を開始する
@@ -467,9 +373,11 @@ var firstOAuthFunc = function(){
 	if(firstoauth == 1){
 		localStorage.setItem("firstoauth",0);
 		// 最初にOAuthオブジェクトに喰わせる値たち
+		var ck = ckload();
+		var cs = csload();
 		var config = {
-			consumerKey:"コンシューマーキー",
-			consumerSecret:"シークレットキー",
+			consumerKey:ck,
+			consumerSecret:cs,
 			requestTokenUrl:"https://api.twitter.com/oauth/request_token",
 			authorizationUrl:"https://api.twitter.com/oauth/authorize",
 			accessTokenUrl:"https://api.twitter.com/oauth/access_token"
@@ -499,6 +407,7 @@ var firstOAuthFunc = function(){
 			firstOAuthFunc();
 		}else{
 			window.alert('中止されました');
+			localStorage.setTimeout("firstoauth", 0);
 			return;
 		}
 	}
@@ -556,7 +465,7 @@ var nonerror = function(data){
 };
 
 /***ふぁぼ***/
-var favoriteCreate = function(){
+var favoriteCreate = function(favId){
 	oauth.request({
 		method:"POST",
 		url:"https://api.twitter.com/1.1/favorites/create.json?id=" + favId,
@@ -564,7 +473,7 @@ var favoriteCreate = function(){
 };
 
 //リプ
-var replyCreate = function(){
+var replyCreate = function(repId, repName){
 	$("#statusUpdateButton").attr('id', "replyUpdateButton");
 	$("#backButton").attr('id', "replyBackButton");
 	document.form1.postform.value = "@" + repName + " ";
@@ -573,7 +482,7 @@ var replyCreate = function(){
 };
 
 //リツイート
-var rtCreate = function(){
+var rtCreate = function(rtId){
 	oauth.request({
 		method:"POST",
 		url:"https://api.twitter.com/1.1/statuses/retweet/" + rtId + ".json",
