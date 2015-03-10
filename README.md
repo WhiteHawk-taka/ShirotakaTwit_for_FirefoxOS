@@ -1,10 +1,9 @@
 ShirotakaTwit_for_FirefoxOS
 ===========================
 
-js/key.js　のコンシューマーキー及びシークレットキーを書き込んで使用してください
+Please use by writing a consumer key and secret key of js/key.js
 
-
-参考
+Reference
 
 http://www.slideshare.net/KazutoshiKashimoto/firefoxos-31254576
 
