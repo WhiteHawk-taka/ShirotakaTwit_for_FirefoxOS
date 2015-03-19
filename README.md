@@ -3,6 +3,11 @@ ShirotakaTwit_for_FirefoxOS
 
 Please use by writing a consumer key and secret key of js/key.js
 
+
+
+Translation system is soon.
+
+
 Reference
 
 http://www.slideshare.net/KazutoshiKashimoto/firefoxos-31254576
