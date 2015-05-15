@@ -175,7 +175,7 @@ var favoriteCreate = function(favId){
 
 //リプ
 var replyCreate = function(repId, repName){
-	$("#statusUpdateButton").attr('id', "replyUpdateButton");
+	$("#statusUpdateButton").attr('id', "replyUpdateButton").addClass(repId);
 	$("#backButton").attr('id', "replyBackButton");
 	document.form1.postform.value = "@" + repName + " ";
 	document.querySelector('#newTweetSection').className = 'current';
