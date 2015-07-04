@@ -8,6 +8,9 @@ Please use by writing a consumer key and secret key of js/key.js
 Translation system is soon.
 
 
+Some of icon used from Daniel Bruce.
+
+
 Reference
 
 http://www.slideshare.net/KazutoshiKashimoto/firefoxos-31254576
