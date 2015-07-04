@@ -425,7 +425,15 @@ var successFetchRequestToken = function (authUrl) {
 
 	// 2. リクエストトークンを使い、ユーザにアクセス許可を求めるURLを生成して ブラウザを起動
 	// 3. ブラウザで認証を行い、ユーザーにPINが表示される
-	window.open(authUrl2);
+	//window.open(authUrl2);
+	new MozActivity({
+    	"name":"view",
+    	"data":
+      	{
+        	"type":"url",
+        	"url":authUrl2
+    	}
+	});
 
 	// 4. アプリで用意したダイアログにPIN を入力してもらう
 	var pin = prompt("Please enter your PIN", "");
