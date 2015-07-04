@@ -439,6 +439,7 @@ var successFetchRequestToken = function (authUrl) {
 
 // 5の処理の成功時のコールバック関数
 var successFetchAccessToken = function () {
+	localStorage.setItem("firstoauth", 0);
 	localStorage.setItem("accessTokenKey", oauth.getAccessTokenKey());
 	localStorage.setItem("accessTokenSecret", oauth.getAccessTokenSecret());
 	localStorage.setItem("firstoauth",1);
