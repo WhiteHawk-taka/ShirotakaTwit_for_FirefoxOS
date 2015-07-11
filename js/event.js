@@ -55,7 +55,8 @@ $(document).on('click', '.repform', function(){
 });
 //リプ用のボタン
 $(document).on('click', '#replyUpdateButton', function(){
-	replyTweetPost();
+	var repId = document.getElementById("replyUpdateButton").className;
+	replyTweetPost(repId);
 	document.form1.postform.value = "";
 	document.form2.my_file.value = "";
 	document.querySelector('#newTweetSection').className = 'right';
