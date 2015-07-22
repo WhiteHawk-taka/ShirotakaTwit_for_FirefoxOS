@@ -146,18 +146,6 @@ var first_getHomeTimeline = function(){
 	oauth.get(url, successFirstTimeline, failureTimeLineHandler);
 };
 
-//通常メンション取得OAuth
-var getMentionTimeline = function(){
-	var url = "https://api.twitter.com/1.1/statuses/mentions_timeline.json?count=100";
-	oauth.get(url, successMention, failureTimeLineHandler);
-};
-
-//初回メンション取得OAuth
-var first_getMentionTimeline = function(){
-	var url = "https://api.twitter.com/1.1/statuses/mentions_timeline.json?count=100";
-	oauth.get(url, successFirstMention, failureTimeLineHandler);
-};
-
 //初回タイムライン取得データ処理
 var successFirstTimeline = function(data){
 	clearTweetDom();
@@ -289,6 +277,19 @@ var addTweetToDom = function(tweet){
 var clearMentionTweetDom = function(){
 	var parent = $("#mentionBox");
 	parent.empty();
+};
+
+
+//通常メンション取得OAuth
+var getMentionTimeline = function(){
+	var url = "https://api.twitter.com/1.1/statuses/mentions_timeline.json?count=100";
+	oauth.get(url, successMention, failureTimeLineHandler);
+};
+
+//初回メンション取得OAuth
+var first_getMentionTimeline = function(){
+	var url = "https://api.twitter.com/1.1/statuses/mentions_timeline.json?count=100";
+	oauth.get(url, successFirstMention, failureTimeLineHandler);
 };
 
 //初回メンション取得処理
