@@ -17,94 +17,19 @@ var mention_favorited = [];
 
 localStorage.setItem("loading", 0);
 
-// 1の処理の成功時のコールバック関数
-var successFetchRequestToken = function (authUrl) {
-        //URLを訂正
-        var tmp = authUrl.indexOf("&");
-        var authUrl2 = authUrl.substring(0, tmp);
-
-        // 2. リクエストトークンを使い、ユーザにアクセス許可を求めるURLを生成して ブラウザを起動
-        // 3. ブラウザで認証を行い、ユーザーにPINが表示される
-        //window.open(authUrl2);
-        new MozActivity({
-                "name": "view",
-                "data": {
-                        "type": "url",
-                        "url": authUrl2
-                }
-        });
-
-        // 4. アプリで用意したダイアログにPIN を入力してもらう
-        var pin = prompt("Please enter your PIN", "");
-
-        // oauthオブジェクトにPINをセット
-        oauth.setVerifier(pin);
-
-        // 5の処理の成功時のコールバック関数
-        var successFetchAccessToken = function () {
-                localStorage.setItem("firstoauth", 0);
-                localStorage.setItem("accessTokenKey", oauth.getAccessTokenKey());
-                localStorage.setItem("accessTokenSecret", oauth.getAccessTokenSecret());
-                localStorage.setItem("firstoauth", 1);
-                alert("success oauth");
-                getHomeTimeline();
-        };
-
-        // 各処理失敗時のコールバック関数
-        var failureHandler = function (data) {
-                localStorage.setItem("firstoauth", 0);
-                alert("failure");
-        };
-
-        // 5. consumer key, consumer secret, リクエストトークン, PIN を使って、アクセストークンを取得する
-        oauth.fetchAccessToken(successFetchAccessToken, failureHandler);
-};
-
-//タイムラインに関する処理/////////////////////////////////////////////////////////////////
-//タイムラインの削除
-var clearTweetDom = function () {
-        var parent = $("#tweetBox");
-        parent.empty();
-};
-
-//初回タイムライン取得データ処理
-var successFirstTimeline = function (data) {
-        clearTweetDom();
-        var tweetList = JSON.parse(data.text);
-        tweetIndex: for (var i = 0; i < tweetList.length; i++) {
-                var tweet = tweetList[i];
-                for (var j = 0; j < id_str.length; j++) {
-                        var buf = id_str[j];
-                        if (tweet.id_str == buf) {
-                                break tweetIndex;
-                        }
-                }
-                screenName.unshift(tweet.user.screen_name);
-                name_str.unshift(tweet.user.name);
-                tweetText.unshift(tweet.text);
-                id_str.unshift(tweet.id_str);
-                prof_img_url.unshift(tweet.user.profile_image_url);
+window.onload = function () {
+        // OAuth関連の処理を開始する
+        var loadingop = localStorage.getItem("loading");
+        if (parseInt(loadingop,10) === 0) {
+                firstOAuthFunc();
         }
-        addFirstTweetToDom(tweet);
-};
-
-//通常タイムライン取得OAuth
-var getHomeTimeline = function () {
-        var url = "https://api.twitter.com/1.1/statuses/home_timeline.json?count=100";
-        oauth.get(url, successGetHomeTimeline, failureTimeLineHandler);
-};
-
-//初回タイムライン取得OAuth
-var first_getHomeTimeline = function () {
-        var url = "https://api.twitter.com/1.1/statuses/home_timeline.json?count=100";
-        oauth.get(url, successFirstTimeline, failureTimeLineHandler);
 };
 
 // OAuth処理 ///////////////////////////////////////////////////////////////////////////////
 var firstOAuthFunc = function () {
         var firstoauth = localStorage.getItem("firstoauth");
 
-        if (parseInt(firstoauth, 10) === 1) {
+        if (parseInt(firstoauth,10) === 1) {
                 localStorage.setItem("firstoauth", 0);
                 // 最初にOAuthオブジェクトに喰わせる値たち
                 var ck = ckload();
@@ -132,15 +57,111 @@ var firstOAuthFunc = function () {
                         // 1. consumer key と consumer secret を使って、リクエストトークンを取得する
                         oauth.fetchRequestToken(successFetchRequestToken, failureHandler);
                 }
+
         } else {
+
                 if (window.confirm('Twitterで認証を行ってください')) {
                         localStorage.setItem("firstoauth", 1);
+
                         firstOAuthFunc();
                 } else {
                         window.alert('中止されました');
                         localStorage.setTimeout("firstoauth", 0);
                 }
         }
+};
+
+// 1の処理の成功時のコールバック関数
+var successFetchRequestToken = function (authUrl) {
+
+        //URLを訂正
+        var tmp = authUrl.indexOf("&");
+        var authUrl2 = authUrl.substring(0, tmp);
+
+
+        // 2. リクエストトークンを使い、ユーザにアクセス許可を求めるURLを生成して ブラウザを起動
+        // 3. ブラウザで認証を行い、ユーザーにPINが表示される
+        //window.open(authUrl2);
+        new MozActivity({
+                "name": "view",
+                "data": {
+                        "type": "url",
+                        "url": authUrl2
+                }
+        });
+
+        // 4. アプリで用意したダイアログにPIN を入力してもらう
+        var pin = prompt("Please enter your PIN", "");
+
+        // oauthオブジェクトにPINをセット
+        oauth.setVerifier(pin);
+
+        // 5. consumer key, consumer secret, リクエストトークン, PIN を使って、アクセストークンを取得する
+        oauth.fetchAccessToken(successFetchAccessToken, failureHandler);
+};
+
+// 5の処理の成功時のコールバック関数
+var successFetchAccessToken = function () {
+        localStorage.setItem("firstoauth", 0);
+        localStorage.setItem("accessTokenKey", oauth.getAccessTokenKey());
+        localStorage.setItem("accessTokenSecret", oauth.getAccessTokenSecret());
+        localStorage.setItem("firstoauth", 1);
+        alert("success oauth");
+        getHomeTimeline();
+
+};
+
+
+// 各処理失敗時のコールバック関数
+var failureHandler = function (data) {
+        localStorage.setItem("firstoauth", 0);
+        alert("failure");
+};
+
+
+//タイムラインに関する処理/////////////////////////////////////////////////////////////////
+//タイムラインの削除
+var clearTweetDom = function () {
+        var parent = $("#tweetBox");
+        parent.empty();
+};
+
+//通常タイムライン取得OAuth
+var getHomeTimeline = function () {
+        var url = "https://api.twitter.com/1.1/statuses/home_timeline.json?count=100";
+        oauth.get(url, successGetHomeTimeline, failureTimeLineHandler);
+};
+
+//初回タイムライン取得OAuth
+var first_getHomeTimeline = function () {
+        var url = "https://api.twitter.com/1.1/statuses/home_timeline.json?count=100";
+        oauth.get(url, successFirstTimeline, failureTimeLineHandler);
+};
+
+//初回タイムライン取得データ処理
+var successFirstTimeline = function (data) {
+        clearTweetDom();
+        var tweetList = JSON.parse(data.text);
+        tweetIndex: for (var i = 0; i < tweetList.length; i++) {
+                var tweet = tweetList[i];
+                for (var j = 0; j < id_str.length; j++) {
+                        var buf = id_str[j];
+                        if (tweet.id_str == buf) {
+                                break tweetIndex;
+                        }
+                }
+                screenName.unshift(tweet.user.screen_name);
+                name_str.unshift(tweet.user.name);
+                tweetText.unshift(tweet.text);
+                id_str.unshift(tweet.id_str);
+                prof_img_url.unshift(tweet.user.profile_image_url);
+                console.log("screenName:" + screenName);
+                console.log("name      :" + name_str);
+                console.log("tweetText :" + tweetText);
+                console.log("tweetID :" + id_str);
+
+        }
+        addFirstTweetToDom(tweet);
 };
 
 //初回タイムライン書き出し処理
@@ -192,6 +213,11 @@ var successGetHomeTimeline = function (data) {
                 buf_tweetText.push(tweet.text);
                 buf_id_str.push(tweet.id_str);
                 buf_prof_img_url.push(tweet.user.profile_image_url);
+                console.log("screenName:" + screenName);
+                console.log("name      :" + name_str);
+                console.log("tweetText :" + tweetText);
+                console.log("tweetID :" + id_str);
+
         }
         buf_screenName.reverse();
         buf_name_str.reverse();
@@ -233,7 +259,6 @@ var addTweetToDom = function (tweet) {
         $(".tweetText").each(function () {
                 $(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/g, '<a target="_blank" href="$&">$&</a>'));
         });
-
 };
 
 
@@ -274,6 +299,11 @@ var successFirstMention = function (data) {
                 mention_tweetText.unshift(tweet.text);
                 mention_id_str.unshift(tweet.id_str);
                 mention_prof_img_url.unshift(tweet.user.profile_image_url);
+                console.log("screenName:" + mention_screenName);
+                console.log("name      :" + mention_name_str);
+                console.log("tweetText :" + mention_tweetText);
+                console.log("tweetID :" + mention_id_str);
+
         }
         addFirstMentionTweetToDom(tweet);
 };
@@ -326,6 +356,11 @@ var successMention = function (data) {
                 buf_tweetText.push(tweet.text);
                 buf_id_str.push(tweet.id_str);
                 buf_prof_img_url.push(tweet.user.profile_image_url);
+                console.log("screenName:" + mention_screenName);
+                console.log("name      :" + mention_name_str);
+                console.log("tweetText :" + mention_tweetText);
+                console.log("tweetID :" + mention_id_str);
+
         }
         buf_screenName.reverse();
         buf_name_str.reverse();
@@ -442,13 +477,11 @@ var rtCreate = function (rtId) {
         });
 };
 
-
 //エラー系のダイアログ処理/////////////////////////////////////////////////////
 //成功時の出力ログ
 var successHandler = function () {
         console.log("success");
 };
-
 
 var failureTimeLineHandler = function (data) {
         alert("タイムラインの取得に失敗しました");
@@ -460,13 +493,3 @@ var failurePostHandler = function (data) {
 
 var nonerror = function (data) {
 };
-
-window.onload = function () {
-        // OAuth関連の処理を開始する
-        var loadingop = localStorage.getItem("loading");
-        if (parseInt(loadingop, 10) === 0) {
-                firstOAuthFunc();
-        }
-};
-
-
