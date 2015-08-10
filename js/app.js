@@ -1,19 +1,19 @@
 // oauthオブジェクト
 var oauth;
 
-var screenName = new Array();
-var name_str = new Array();
-var tweetText = new Array();
-var id_str = new Array();
-var prof_img_url = new Array();
-var favorited = new Array();
+var screenName = [];
+var name_str = [];
+var tweetText = [];
+var id_str = [];
+var prof_img_url = [];
+var favorited = [];
 
-var mention_screenName = new Array();
-var mention_name_str = new Array();
-var mention_tweetText = new Array();
-var mention_id_str = new Array();
-var mention_prof_img_url = new Array();
-var mention_favorited = new Array();
+var mention_screenName = [];
+var mention_name_str = [];
+var mention_tweetText = [];
+var mention_id_str = [];
+var mention_prof_img_url = [];
+var mention_favorited = [];
 
 localStorage.setItem("loading",0);
 
@@ -203,11 +203,11 @@ var addFirstTweetToDom = function(tweet){
 var successGetHomeTimeline = function(data){
 	clearTweetDom();
 	var tweetList = JSON.parse(data.text);
-	var buf_screenName = new Array();
-	var buf_name_str = new Array();
-	var buf_tweetText = new Array();
-	var buf_id_str = new Array();
-	var buf_prof_img_url = new Array();
+	var buf_screenName = [];
+	var buf_name_str = [];
+	var buf_tweetText = [];
+	var buf_id_str = [];
+	var buf_prof_img_url = [];
 
 	tweetIndex1: for(var i = 0; i < tweetList.length; i++){
 		var tweet = tweetList[i];
@@ -349,11 +349,11 @@ var addFirstMentionTweetToDom = function(tweet){
 var successMention = function(data){
 	clearMentionTweetDom();
 	var tweetList = JSON.parse(data.text);
-	var buf_screenName = new Array();
-	var buf_name_str = new Array();
-	var buf_tweetText = new Array();
-	var buf_id_str = new Array();
-	var buf_prof_img_url = new Array();
+	var buf_screenName = [];
+	var buf_name_str = [];
+	var buf_tweetText = [];
+	var buf_id_str = [];
+	var buf_prof_img_url = [];
 	mentionIndex1: for(var i = 0; i < tweetList.length; i++){
 		var tweet = tweetList[i];
 		for(var j = 0; j < id_str.length; j++){
