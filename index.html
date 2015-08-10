@@ -45,6 +45,7 @@
 
 	<!-- Additional markup to make Building Blocks kind of cross browser -->
 	<!--link rel="stylesheet" href="cross_browser.css"-->
+	<!-- in html -->
 	<link rel="stylesheet" href="bbinhtml.css">
 
 	<!-- css -->
@@ -141,6 +142,25 @@
 					<input type="file" id="file" name="my_file">
 					<button id="clearImage">画像をクリア</button>
 				</form>
+			</article>
+		</section>
+		<!-- ユーザー情報 -->
+		<section role="region" id="userdataSection" class="right" data-position="right">
+			<header class="fixed">
+				<a id="userbackButton" href="#">
+					<span class="icon icon-back">back</span>					
+				</a>
+				<h1>ユーザー情報</h1>
+			</header>
+			<article class="content scrollable header">
+				<div id="userdata">
+					<img src="" id="userimage"></img>
+					<div id="username"></div>
+					<div id="userscreenname"></div>
+					<div id="userdescription"></div>
+					<div id="userlocation"></div>
+					<div id="userurl"></div>
+				</div>
 			</article>
 		</section>
 

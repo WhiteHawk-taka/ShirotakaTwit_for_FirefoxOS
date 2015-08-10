@@ -185,9 +185,9 @@ var addFirstTweetToDom = function(tweet){
 		var $li = $("<li>").appendTo($parent);
 		var $div = $("<div>").addClass("tweet").appendTo($li);
 		var $userDiv = $("<div>").appendTo($div);
-		var $a1 = $("<a>").attr('href', "#drawer").appendTo($userDiv);
+		var $a1 = $("<a>").attr('href', "#drawer").addClass("tlmenu").appendTo($userDiv);
 
-		$("<img>").addClass("tweetIcon").attr('id', buf_id_str).attr('src', buf_prof_img_url).appendTo($userDiv);
+		$("<img>").addClass("tweetIcon").attr('id', buf_id_str).attr('data-name', buf_screenName).attr('src', buf_prof_img_url).appendTo($userDiv);
 		$("<span>").addClass("name").text(buf_name).appendTo($userDiv);
 		$("<span>").addClass("screenName").text("@" + buf_screenName).appendTo($userDiv);
 		$("<img>").addClass("menu-button").attr('id', buf_id_str).attr('data-name', buf_screenName).attr('src', "img/icons/menu-button.png").appendTo($a1);
@@ -257,9 +257,9 @@ var addTweetToDom = function(tweet){
 		var $li = $("<li>").appendTo($parent);
 		var $div = $("<div>").addClass("tweet").appendTo($li);
 		var $userDiv = $("<div>").appendTo($div);
-		var $a1 = $("<a>").attr('href', "#drawer").appendTo($userDiv);
+		var $a1 = $("<a>").attr('href', "#drawer").addClass("tlmenu").appendTo($userDiv);
 
-		$("<img>").addClass("tweetIcon").attr('id', buf_id_str).attr('src', buf_prof_img_url).appendTo($userDiv);
+		$("<img>").addClass("tweetIcon").attr('id', buf_id_str).attr('data-name', buf_screenName).attr('src', buf_prof_img_url).appendTo($userDiv);
 		$("<span>").addClass("name").text(buf_name).appendTo($userDiv);
 		$("<span>").addClass("screenName").text("@" + buf_screenName).appendTo($userDiv);
 		$("<img>").addClass("menu-button").attr('id', buf_id_str).attr('data-name', buf_screenName).attr('src', "img/icons/menu-button.png").appendTo($a1);
@@ -331,9 +331,9 @@ var addFirstMentionTweetToDom = function(tweet){
 		var $li = $("<li>").appendTo($parent);
 		var $div = $("<div>").addClass("tweet").appendTo($li);
 		var $userDiv = $("<div>").appendTo($div);
-		var $a1 = $("<a>").attr('href', "#drawer").appendTo($userDiv);
+		var $a1 = $("<a>").attr('href', "#drawer").addClass("tlmenu").appendTo($userDiv);
 
-		$("<img>").addClass("tweetIcon").attr('id', buf_id_str).attr('src', buf_prof_img_url).appendTo($userDiv);
+		$("<img>").addClass("tweetIcon").attr('id', buf_id_str).attr('data-name', buf_screenName).attr('src', buf_prof_img_url).appendTo($userDiv);
 		$("<span>").addClass("name").text(buf_name).appendTo($userDiv);
 		$("<span>").addClass("screenName").text("@" + buf_screenName).appendTo($userDiv);
 		$("<img>").addClass("menu-button").attr('id', buf_id_str).attr('data-name', buf_screenName).attr('src', "img/icons/menu-button.png").appendTo($a1);
@@ -402,9 +402,9 @@ var addMentionTweetToDom = function(tweet){
 		var $li = $("<li>").appendTo($parent);
 		var $div = $("<div>").addClass("tweet").appendTo($li);
 		var $userDiv = $("<div>").appendTo($div);
-		var $a1 = $("<a>").attr('href', "#drawer").appendTo($userDiv);
+		var $a1 = $("<a>").attr('href', "#drawer").addClass("tlmenu").appendTo($userDiv);
 
-		$("<img>").addClass("tweetIcon").attr('id', buf_id_str).attr('src', buf_prof_img_url).appendTo($userDiv);
+		$("<img>").addClass("tweetIcon").attr('id', buf_id_str).attr('data-name', buf_screenName).attr('src', buf_prof_img_url).appendTo($userDiv);
 		$("<span>").addClass("name").text(buf_name).appendTo($userDiv);
 		$("<span>").addClass("screenName").text("@" + buf_screenName).appendTo($userDiv);
 		$("<img>").addClass("menu-button").attr('id', buf_id_str).attr('data-name', buf_screenName).attr('src', "img/icons/menu-button.png").appendTo($a1);
@@ -414,6 +414,21 @@ var addMentionTweetToDom = function(tweet){
 		$(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/g, '<a target="_blank" href="$&">$&</a>'));
 	});
 
+};
+
+//ユーザー情報の取得////////////////////////////////////////////////////////
+//ユーザー情報取得OAuth
+var getUserData = function(screenName){
+	var url = "https://api.twitter.com/1.1/users/show.json?screen_name=" + screenName;
+	oauth.get(url, successGetUserData, failureGetUserDataHandler);
+};
+
+var successGetUserData = function(data){
+	var userdata = JSON.parse(data.text);
+	document.getElementById("userimage").setAttribute("src", userdata.profile_image_url_https);
+	document.getElementById("username").innerHTML = userdata.name;
+	document.getElementById("userscreenname").innerHTML = "@" + userdata.screen_name;
+	document.getElementById("userdescription").innerHTML = userdata.description;
 };
 
 
@@ -505,6 +520,10 @@ var failureTimeLineHandler = function(data){
 
 var failurePostHandler = function(data){
 	alert("ツイートに失敗しました");
+};
+
+var failureGetUserDataHandler = function(data){
+	alert("ユーザー情報の取得に失敗しました");
 };
 
 var nonerror = function(data){
