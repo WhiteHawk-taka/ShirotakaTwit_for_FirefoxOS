@@ -32,6 +32,7 @@ $(document).on('click', '#clearImage', function(){
 
 //ユーザー情報の表示関連
 $(document).on('click', '.tweetIcon', function(){
+	clearUserData();
 	document.querySelector('#userdataSection').className = 'current';
 	document.querySelector('[data-position="current"]').className = 'left';
 	getUserData($(this).attr('data-name'));

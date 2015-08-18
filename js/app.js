@@ -98,7 +98,7 @@ var successFetchRequestToken = function (authUrl) {
 	});
 
 	// 4. アプリで用意したダイアログにPIN を入力してもらう
-	var pin = prompt("Please enter your PIN", "");
+	var pin = prompt("PINコードを入力してください", "");
 
 	// oauthオブジェクトにPINをセット
 	oauth.setVerifier(pin);
@@ -113,7 +113,7 @@ var successFetchAccessToken = function () {
 	localStorage.setItem("accessTokenKey", oauth.getAccessTokenKey());
 	localStorage.setItem("accessTokenSecret", oauth.getAccessTokenSecret());
 	localStorage.setItem("firstoauth",1);
-	alert("success oauth");
+	alert("認証に成功しました");
 	getHomeTimeline();
 
 };
@@ -418,6 +418,13 @@ var addMentionTweetToDom = function(tweet){
 
 //ユーザー情報の取得////////////////////////////////////////////////////////
 //ユーザー情報取得OAuth
+var clearUserData = function(){
+	document.getElementById("userimage").setAttribute("src", "");
+	document.getElementById("username").innerHTML = "";
+	document.getElementById("userscreenname").innerHTML = "";
+	document.getElementById("userdescription").innerHTML = "";
+};
+
 var getUserData = function(screenName){
 	var url = "https://api.twitter.com/1.1/users/show.json?screen_name=" + screenName;
 	oauth.get(url, successGetUserData, failureGetUserDataHandler);

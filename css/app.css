@@ -169,3 +169,17 @@ section[role="region"] > .content{
 #userdata{
 	text-align: center;
 }
+
+#userimage{
+	width: 5rem;
+	padding: 1rem;
+}
+
+#username{
+	font-weight: bold;
+}
+
+#userscreenname{
+	font-weight: bold;
+	padding-bottom: 0.5rem;
+}
