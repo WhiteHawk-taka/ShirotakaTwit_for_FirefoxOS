@@ -30,6 +30,18 @@ $(document).on('click', '#clearImage', function(){
 	document.form2.my_file.value = "";
 });
 
+//ユーザー情報の表示関連
+$(document).on('click', '.tweetIcon', function(){
+	clearUserData();
+	document.querySelector('#userdataSection').className = 'current';
+	document.querySelector('[data-position="current"]').className = 'left';
+	getUserData($(this).attr('data-name'));
+});
+$(document).on('click', '#userbackButton', function(){
+	document.querySelector('#userdataSection').className = 'right';
+	document.querySelector('[data-position="current"]').className = 'current';
+});
+
 //メニューを開いた時の処理
 $(document).on('click', '.menu-button', function() {
 	$(".icon-bookmark").attr('id', $(this).attr('id'));

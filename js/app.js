@@ -90,8 +90,9 @@ var successFetchRequestToken = function (authUrl) {
                 }
         });
 
-        // 4. アプリで用意したダイアログにPIN を入力してもらう
-        var pin = prompt("Please enter your PIN", "");
+	// 4. アプリで用意したダイアログにPIN を入力してもらう
+	var pin = prompt("PINコードを入力してください", "");
+
 
         // oauthオブジェクトにPINをセット
         oauth.setVerifier(pin);
@@ -102,12 +103,13 @@ var successFetchRequestToken = function (authUrl) {
 
 // 5の処理の成功時のコールバック関数
 var successFetchAccessToken = function () {
-        localStorage.setItem("firstoauth", 0);
-        localStorage.setItem("accessTokenKey", oauth.getAccessTokenKey());
-        localStorage.setItem("accessTokenSecret", oauth.getAccessTokenSecret());
-        localStorage.setItem("firstoauth", 1);
-        alert("success oauth");
-        getHomeTimeline();
+	localStorage.setItem("firstoauth", 0);
+	localStorage.setItem("accessTokenKey", oauth.getAccessTokenKey());
+	localStorage.setItem("accessTokenSecret", oauth.getAccessTokenSecret());
+	localStorage.setItem("firstoauth",1);
+	alert("認証に成功しました");
+	getHomeTimeline();
+
 
 };
 
@@ -166,28 +168,29 @@ var successFirstTimeline = function (data) {
 
 //初回タイムライン書き出し処理
 var addFirstTweetToDom = function (tweet) {
-        for (var i = id_str.length - 1; i > 0; i--) {
-                var buf_screenName = screenName[i];
-                var buf_name = name_str[i];
-                var buf_tweetText = tweetText[i];
-                var buf_prof_img_url = prof_img_url[i];
-                var buf_id_str = id_str[i];
+	for(var i = id_str.length - 1; i > 0; i--){
+		var buf_screenName = screenName[i];
+		var buf_name = name_str[i];
+		var buf_tweetText = tweetText[i];
+		var buf_prof_img_url = prof_img_url[i];
+		var buf_id_str = id_str[i];
 
-                var $parent = $("#tweetBox");
-                var $li = $("<li>").appendTo($parent);
-                var $div = $("<div>").addClass("tweet").appendTo($li);
-                var $userDiv = $("<div>").appendTo($div);
-                var $a1 = $("<a>").attr('href', "#drawer").appendTo($userDiv);
+		var $parent = $("#tweetBox");
+		var $li = $("<li>").appendTo($parent);
+		var $div = $("<div>").addClass("tweet").appendTo($li);
+		var $userDiv = $("<div>").appendTo($div);
+		var $a1 = $("<a>").attr('href', "#drawer").addClass("tlmenu").appendTo($userDiv);
 
-                $("<img>").addClass("tweetIcon").attr('id', buf_id_str).attr('src', buf_prof_img_url).appendTo($userDiv);
-                $("<span>").addClass("name").text(buf_name).appendTo($userDiv);
-                $("<span>").addClass("screenName").text("@" + buf_screenName).appendTo($userDiv);
-                $("<img>").addClass("menu-button").attr('id', buf_id_str).attr('data-name', buf_screenName).attr('src', "img/icons/menu-button.png").appendTo($a1);
-                $("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
-        }
-        $(".tweetText").each(function () {
-                $(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/g, '<a target="_blank" href="$&">$&</a>'));
-        });
+		$("<img>").addClass("tweetIcon").attr('id', buf_id_str).attr('data-name', buf_screenName).attr('src', buf_prof_img_url).appendTo($userDiv);
+		$("<span>").addClass("name").text(buf_name).appendTo($userDiv);
+		$("<span>").addClass("screenName").text("@" + buf_screenName).appendTo($userDiv);
+		$("<img>").addClass("menu-button").attr('id', buf_id_str).attr('data-name', buf_screenName).attr('src', "img/icons/menu-button.png").appendTo($a1);
+		$("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
+	}
+	$(".tweetText").each(function(){
+		$(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/g, '<a target="_blank" href="$&">$&</a>'));
+	});
+
 };
 
 //通常ライムライン取得データ処理
@@ -237,28 +240,29 @@ var successGetHomeTimeline = function (data) {
 
 //通常タイムライン書き出し処理
 var addTweetToDom = function (tweet) {
-        for (var i = id_str.length - 1; i > 0; i--) {
-                var buf_screenName = screenName[i];
-                var buf_name = name_str[i];
-                var buf_tweetText = tweetText[i];
-                var buf_prof_img_url = prof_img_url[i];
-                var buf_id_str = id_str[i];
+	for(var i = id_str.length - 1; i > 0; i--){
+		var buf_screenName = screenName[i];
+		var buf_name = name_str[i];
+		var buf_tweetText = tweetText[i];
+		var buf_prof_img_url = prof_img_url[i];
+		var buf_id_str = id_str[i];
 
-                var $parent = $("#tweetBox");
-                var $li = $("<li>").appendTo($parent);
-                var $div = $("<div>").addClass("tweet").appendTo($li);
-                var $userDiv = $("<div>").appendTo($div);
-                var $a1 = $("<a>").attr('href', "#drawer").appendTo($userDiv);
+		var $parent = $("#tweetBox");
+		var $li = $("<li>").appendTo($parent);
+		var $div = $("<div>").addClass("tweet").appendTo($li);
+		var $userDiv = $("<div>").appendTo($div);
+		var $a1 = $("<a>").attr('href', "#drawer").addClass("tlmenu").appendTo($userDiv);
 
-                $("<img>").addClass("tweetIcon").attr('id', buf_id_str).attr('src', buf_prof_img_url).appendTo($userDiv);
-                $("<span>").addClass("name").text(buf_name).appendTo($userDiv);
-                $("<span>").addClass("screenName").text("@" + buf_screenName).appendTo($userDiv);
-                $("<img>").addClass("menu-button").attr('id', buf_id_str).attr('data-name', buf_screenName).attr('src', "img/icons/menu-button.png").appendTo($a1);
-                $("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
-        }
-        $(".tweetText").each(function () {
-                $(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/g, '<a target="_blank" href="$&">$&</a>'));
-        });
+		$("<img>").addClass("tweetIcon").attr('id', buf_id_str).attr('data-name', buf_screenName).attr('src', buf_prof_img_url).appendTo($userDiv);
+		$("<span>").addClass("name").text(buf_name).appendTo($userDiv);
+		$("<span>").addClass("screenName").text("@" + buf_screenName).appendTo($userDiv);
+		$("<img>").addClass("menu-button").attr('id', buf_id_str).attr('data-name', buf_screenName).attr('src', "img/icons/menu-button.png").appendTo($a1);
+		$("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
+	}
+	$(".tweetText").each(function(){
+		$(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/g, '<a target="_blank" href="$&">$&</a>'));
+	});
+
 };
 
 
@@ -310,28 +314,29 @@ var successFirstMention = function (data) {
 
 //初回メンション書き出し処理
 var addFirstMentionTweetToDom = function (tweet) {
-        for (var i = mention_id_str.length - 1; i > 0; i--) {
-                var buf_screenName = mention_screenName[i];
-                var buf_name = mention_name_str[i];
-                var buf_tweetText = mention_tweetText[i];
-                var buf_prof_img_url = mention_prof_img_url[i];
-                var buf_id_str = mention_id_str[i];
+	for(var i = mention_id_str.length - 1; i > 0; i--){
+		var buf_screenName = mention_screenName[i];
+		var buf_name = mention_name_str[i];
+		var buf_tweetText = mention_tweetText[i];
+		var buf_prof_img_url = mention_prof_img_url[i];
+		var buf_id_str = mention_id_str[i];
 
-                var $parent = $("#mentionBox");
-                var $li = $("<li>").appendTo($parent);
-                var $div = $("<div>").addClass("tweet").appendTo($li);
-                var $userDiv = $("<div>").appendTo($div);
-                var $a1 = $("<a>").attr('href', "#drawer").appendTo($userDiv);
+		var $parent = $("#mentionBox");
+		var $li = $("<li>").appendTo($parent);
+		var $div = $("<div>").addClass("tweet").appendTo($li);
+		var $userDiv = $("<div>").appendTo($div);
+		var $a1 = $("<a>").attr('href', "#drawer").addClass("tlmenu").appendTo($userDiv);
 
-                $("<img>").addClass("tweetIcon").attr('id', buf_id_str).attr('src', buf_prof_img_url).appendTo($userDiv);
-                $("<span>").addClass("name").text(buf_name).appendTo($userDiv);
-                $("<span>").addClass("screenName").text("@" + buf_screenName).appendTo($userDiv);
-                $("<img>").addClass("menu-button").attr('id', buf_id_str).attr('data-name', buf_screenName).attr('src', "img/icons/menu-button.png").appendTo($a1);
-                $("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
-        }
-        $(".tweetText").each(function () {
-                $(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/g, '<a target="_blank" href="$&">$&</a>'));
-        });
+		$("<img>").addClass("tweetIcon").attr('id', buf_id_str).attr('data-name', buf_screenName).attr('src', buf_prof_img_url).appendTo($userDiv);
+		$("<span>").addClass("name").text(buf_name).appendTo($userDiv);
+		$("<span>").addClass("screenName").text("@" + buf_screenName).appendTo($userDiv);
+		$("<img>").addClass("menu-button").attr('id', buf_id_str).attr('data-name', buf_screenName).attr('src', "img/icons/menu-button.png").appendTo($a1);
+		$("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
+	}
+	$(".tweetText").each(function(){
+		$(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/g, '<a target="_blank" href="$&">$&</a>'));
+	});
+
 };
 
 //通常メンション取得処理
@@ -380,28 +385,51 @@ var successMention = function (data) {
 
 //通常メンション書き出し処理
 var addMentionTweetToDom = function (tweet) {
-        for (var i = mention_id_str.length - 1; i > 0; i--) {
-                var buf_screenName = mention_screenName[i];
-                var buf_name = mention_name_str[i];
-                var buf_tweetText = mention_tweetText[i];
-                var buf_prof_img_url = mention_prof_img_url[i];
-                var buf_id_str = mention_id_str[i];
+	for(var i = mention_id_str.length - 1; i > 0; i--){
+		var buf_screenName = mention_screenName[i];
+		var buf_name = mention_name_str[i];
+		var buf_tweetText = mention_tweetText[i];
+		var buf_prof_img_url = mention_prof_img_url[i];
+		var buf_id_str = mention_id_str[i];
 
-                var $parent = $("#mentionBox");
-                var $li = $("<li>").appendTo($parent);
-                var $div = $("<div>").addClass("tweet").appendTo($li);
-                var $userDiv = $("<div>").appendTo($div);
-                var $a1 = $("<a>").attr('href', "#drawer").appendTo($userDiv);
+		var $parent = $("#mentionBox");
+		var $li = $("<li>").appendTo($parent);
+		var $div = $("<div>").addClass("tweet").appendTo($li);
+		var $userDiv = $("<div>").appendTo($div);
+		var $a1 = $("<a>").attr('href', "#drawer").addClass("tlmenu").appendTo($userDiv);
 
-                $("<img>").addClass("tweetIcon").attr('id', buf_id_str).attr('src', buf_prof_img_url).appendTo($userDiv);
-                $("<span>").addClass("name").text(buf_name).appendTo($userDiv);
-                $("<span>").addClass("screenName").text("@" + buf_screenName).appendTo($userDiv);
-                $("<img>").addClass("menu-button").attr('id', buf_id_str).attr('data-name', buf_screenName).attr('src', "img/icons/menu-button.png").appendTo($a1);
-                $("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
-        }
-        $(".tweetText").each(function () {
-                $(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/g, '<a target="_blank" href="$&">$&</a>'));
-        });
+		$("<img>").addClass("tweetIcon").attr('id', buf_id_str).attr('data-name', buf_screenName).attr('src', buf_prof_img_url).appendTo($userDiv);
+		$("<span>").addClass("name").text(buf_name).appendTo($userDiv);
+		$("<span>").addClass("screenName").text("@" + buf_screenName).appendTo($userDiv);
+		$("<img>").addClass("menu-button").attr('id', buf_id_str).attr('data-name', buf_screenName).attr('src', "img/icons/menu-button.png").appendTo($a1);
+		$("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
+	}
+	$(".tweetText").each(function(){
+		$(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/g, '<a target="_blank" href="$&">$&</a>'));
+	});
+
+};
+
+//ユーザー情報の取得////////////////////////////////////////////////////////
+//ユーザー情報取得OAuth
+var clearUserData = function () {
+	document.getElementById("userimage").setAttribute("src", "");
+	document.getElementById("username").innerHTML = "";
+	document.getElementById("userscreenname").innerHTML = "";
+	document.getElementById("userdescription").innerHTML = "";
+};
+
+var getUserData = function (screenName) {
+	var url = "https://api.twitter.com/1.1/users/show.json?screen_name=" + screenName;
+	oauth.get(url, successGetUserData, failureGetUserDataHandler);
+};
+
+var successGetUserData = function (data) {
+	var userdata = JSON.parse(data.text);
+	document.getElementById("userimage").setAttribute("src", userdata.profile_image_url_https);
+	document.getElementById("username").innerHTML = userdata.name;
+	document.getElementById("userscreenname").innerHTML = "@" + userdata.screen_name;
+	document.getElementById("userdescription").innerHTML = userdata.description;
 };
 
 
@@ -489,6 +517,10 @@ var failureTimeLineHandler = function (data) {
 
 var failurePostHandler = function (data) {
         alert("ツイートに失敗しました");
+};
+
+var failureGetUserDataHandler = function (data) {
+	alert("ユーザー情報の取得に失敗しました");
 };
 
 var nonerror = function (data) {
