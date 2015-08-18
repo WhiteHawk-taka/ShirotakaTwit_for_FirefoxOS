@@ -81,7 +81,6 @@ var successFetchRequestToken = function (authUrl) {
 
         // 2. リクエストトークンを使い、ユーザにアクセス許可を求めるURLを生成して ブラウザを起動
         // 3. ブラウザで認証を行い、ユーザーにPINが表示される
-        //window.open(authUrl2);
         new MozActivity({
                 "name": "view",
                 "data": {
@@ -157,10 +156,6 @@ var successFirstTimeline = function (data) {
                 tweetText.unshift(tweet.text);
                 id_str.unshift(tweet.id_str);
                 prof_img_url.unshift(tweet.user.profile_image_url);
-                console.log("screenName:" + screenName);
-                console.log("name      :" + name_str);
-                console.log("tweetText :" + tweetText);
-                console.log("tweetID :" + id_str);
 
         }
         addFirstTweetToDom(tweet);
@@ -216,10 +211,7 @@ var successGetHomeTimeline = function (data) {
                 buf_tweetText.push(tweet.text);
                 buf_id_str.push(tweet.id_str);
                 buf_prof_img_url.push(tweet.user.profile_image_url);
-                console.log("screenName:" + screenName);
-                console.log("name      :" + name_str);
-                console.log("tweetText :" + tweetText);
-                console.log("tweetID :" + id_str);
+
 
         }
         buf_screenName.reverse();
@@ -303,10 +295,6 @@ var successFirstMention = function (data) {
                 mention_tweetText.unshift(tweet.text);
                 mention_id_str.unshift(tweet.id_str);
                 mention_prof_img_url.unshift(tweet.user.profile_image_url);
-                console.log("screenName:" + mention_screenName);
-                console.log("name      :" + mention_name_str);
-                console.log("tweetText :" + mention_tweetText);
-                console.log("tweetID :" + mention_id_str);
 
         }
         addFirstMentionTweetToDom(tweet);
@@ -361,10 +349,6 @@ var successMention = function (data) {
                 buf_tweetText.push(tweet.text);
                 buf_id_str.push(tweet.id_str);
                 buf_prof_img_url.push(tweet.user.profile_image_url);
-                console.log("screenName:" + mention_screenName);
-                console.log("name      :" + mention_name_str);
-                console.log("tweetText :" + mention_tweetText);
-                console.log("tweetID :" + mention_id_str);
 
         }
         buf_screenName.reverse();
