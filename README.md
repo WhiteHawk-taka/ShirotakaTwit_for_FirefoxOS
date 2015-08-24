@@ -1,6 +1,7 @@
 ShirotakaTwit_for_FirefoxOS
 ===========================
 
+First, you use this app, you change extension js/key.txt to js/key.js
 Please use by writing a consumer key and secret key of js/key.js
 
 
