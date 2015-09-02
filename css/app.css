@@ -183,3 +183,7 @@ section[role="region"] > .content{
 	font-weight: bold;
 	padding-bottom: 0.5rem;
 }
+
+#userlocation{
+	padding-top: 1rem;
+}

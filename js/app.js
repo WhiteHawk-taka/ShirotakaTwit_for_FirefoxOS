@@ -413,7 +413,9 @@ var successGetUserData = function (data) {
 	document.getElementById("userimage").setAttribute("src", userdata.profile_image_url_https);
 	document.getElementById("username").innerHTML = userdata.name;
 	document.getElementById("userscreenname").innerHTML = "@" + userdata.screen_name;
-	document.getElementById("userdescription").innerHTML = userdata.description;
+        document.getElementById("userdescription").innerHTML = userdata.description;
+        document.getElementById("userlocation").setAttribute("href", userdata.entities.url.urls[0].expanded_url);
+        document.getElementById("userlocation").innerHTML = userdata.entities.url.urls[0].expanded_url;
 };
 
 
