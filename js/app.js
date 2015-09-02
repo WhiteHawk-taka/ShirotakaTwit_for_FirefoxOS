@@ -401,6 +401,8 @@ var clearUserData = function () {
 	document.getElementById("username").innerHTML = "";
 	document.getElementById("userscreenname").innerHTML = "";
 	document.getElementById("userdescription").innerHTML = "";
+        document.getElementById("userlocation").innerHTML = "";
+        document.getElementById("userurl").innerHTML = "";
 };
 
 var getUserData = function (screenName) {
@@ -417,6 +419,7 @@ var successGetUserData = function (data) {
         document.getElementById("userlocation").innerHTML = userdata.location;
         document.getElementById("userurl").setAttribute("href", userdata.entities.url.urls[0].expanded_url);
         document.getElementById("userurl").innerHTML = userdata.entities.url.urls[0].expanded_url;
+        document.getElementById("userdata").style.backgroundImage = "url("+userdata.profile_banner_url+")";
 };
 
 

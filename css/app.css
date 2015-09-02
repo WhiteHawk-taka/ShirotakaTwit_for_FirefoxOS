@@ -168,6 +168,8 @@ section[role="region"] > .content{
 
 #userdata{
 	text-align: center;
+	background-size: contain;
+	background-repeat: no-repeat;
 }
 
 #userimage{
