@@ -403,6 +403,7 @@ var clearUserData = function () {
 	document.getElementById("userdescription").innerHTML = "";
         document.getElementById("userlocation").innerHTML = "";
         document.getElementById("userurl").innerHTML = "";
+        document.getElementById("userdata").style.backgroundImage = "url()";
 };
 
 var getUserData = function (screenName) {
