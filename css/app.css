@@ -157,6 +157,7 @@ section[role="region"] > .content{
 	border-radius: 1;
 	line-height: 0;
 	margin-top: 0.2rem;
+	padding: 0;
 }
 
 #clearImageicon{
