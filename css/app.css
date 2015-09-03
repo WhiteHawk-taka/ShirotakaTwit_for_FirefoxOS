@@ -26,6 +26,17 @@
 	color: #bbb;
 }
 
+.toolbaricons{
+	background-repeat: no-repeat;
+    margin: 0px auto;
+    border-radius: unset;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    height: 3rem;
+    text-align: left;
+    line-height: 0;
+}
+
 #tweetBox li{
 	width: 100%;
 	min-height: 70px;
@@ -74,6 +85,11 @@
 	height: 1.5rem;
 }
 
+img.svgButton{
+	padding: 0.2rem;
+	background-repeat: no-repeat;
+}
+
 button.icon-closecancel{
 	background:  none repeat scroll 0% 0% rgba(255, 255, 255, 1);
 	margin: 0 auto;
@@ -86,17 +102,7 @@ button.icon-closecancel{
 	height: 3rem;
 }
 
-button.icon-bookmark{
-	background:  none repeat scroll 0% 0% rgba(255, 255, 255, 1);
-	margin: 0 auto;
-	border-radius: unset;
-	line-height: 0;
-	text-align: left;
-	padding-left: 0.5rem;
-	height: 3rem;
-}
-
-button.icon-calllog-incomingsms{
+.tltweetmenu{
 	background:  none repeat scroll 0% 0% rgba(255, 255, 255, 1);
 	margin: 0 auto;
 	border-radius: unset;
@@ -106,14 +112,8 @@ button.icon-calllog-incomingsms{
 	line-height: 0;
 }
 
-button.icon-sync{
-	background:  none repeat scroll 0% 0% rgba(255, 255, 255, 1);
-	margin: 0 auto;
-	border-radius: unset;
-	padding-left: 0.5rem;
-	height: 3rem;
-	text-align: left;
-	line-height: 0;
+.tltweetmenuicons{
+	margin-top: -1rem;
 }
 
 header h1{

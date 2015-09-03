@@ -44,17 +44,17 @@ $(document).on('click', '#userbackButton', function(){
 
 //メニューを開いた時の処理
 $(document).on('click', '.menu-button', function() {
-	$(".icon-bookmark").attr('id', $(this).attr('id'));
-	$(".icon-calllog-incomingsms").attr('id', $(this).attr('id'));
-	$(".icon-calllog-incomingsms").attr('data-name', $(this).attr('data-name'));
-	$(".icon-sync").attr('id', $(this).attr('id'));
+	$(".tlfavicon").attr('id', $(this).attr('id'));
+	$(".tlreplyicon").attr('id', $(this).attr('id'));
+	$(".tlreplyicon").attr('data-name', $(this).attr('data-name'));
+	$(".tlretweeticon").attr('id', $(this).attr('id'));
 });
 //メニューを閉じた時の処理
 $(document).on('click', '.icon-closecancel', function(){
-	$(".icon-bookmark").attr('id', "");
-	$(".icon-calllog-incomingsms").attr('id', "");
-	$(".icon-calllog-incomingsms").attr('data-name', "");
-	$(".icon-sync").attr('id', "");
+	$(".tlfavicon").attr('id', "");
+	$(".tlreplyicon").attr('id', "");
+	$(".tlreplyicon").attr('data-name', "");
+	$(".tlretweeticon").attr('id', "");
 });
 
 
@@ -85,7 +85,7 @@ $(document).on('click', '#replyBackButton', function(){
 });
 
 //リツイート
-$(document).on('click', '.icon-sync', function(){
+$(document).on('click', '.tlretweeticon', function(){
 	var rtId = "";
 	rtId = $(this).attr('id');
 	rtCreate(rtId);
@@ -93,7 +93,7 @@ $(document).on('click', '.icon-sync', function(){
 });
 
 //ふぁぼ
-$(document).on('click', '.icon-bookmark', function(){
+$(document).on('click', '.tlfavicon', function(){
 	var favId = "";
 	favId = $(this).attr('id');
 	favoriteCreate(favId);

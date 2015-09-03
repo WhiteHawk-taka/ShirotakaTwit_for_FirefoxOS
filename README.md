@@ -10,6 +10,7 @@ Translation system is soon.
 
 
 Some of icon used from Daniel Bruce.
+http://www.entypo.com/
 
 
 Reference
