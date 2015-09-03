@@ -20,7 +20,9 @@ $(document).on('click', '#mentionupdateButton', function(){
 });
 
 $(document).on('click', '#statusUpdateButton', function(){
-	newTweetPost();
+	if(document.form1.postform.value != "" || document.form2.my_file.value != ""){
+		newTweetPost();
+	}
 	document.form1.postform.value = "";
 	document.form2.my_file.value = "";
 	document.querySelector('#newTweetSection').className = 'right';
