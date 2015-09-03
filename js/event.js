@@ -30,6 +30,7 @@ $(document).on('click', '#statusUpdateButton', function(){
 });
 $(document).on('click', '#clearImage', function(){
 	document.form2.my_file.value = "";
+	return false;
 });
 
 //ユーザー情報の表示関連
