@@ -496,6 +496,35 @@ var rtCreate = function (rtId) {
         });
 };
 
+//投稿画像の追加
+var addNewPostImage = function () {
+        if (document.getElementsByClassName("postImageform").length >= 4) {
+                return;
+        }
+        var $addbutton = $("<button>").attr("type", "button").attr("id", "addPostImagebutton").appendTo("#postTweetImage");
+        $("<img>").attr("src", "img/Entypo+/Entypo+/plus.svg").attr("id", "addPostImagebuttonimg").appendTo($addbutton);
+};
+
+var addNewImageForm = function () {
+        $("#addPostImagebutton").remove();
+        $("<input>").attr("type", "file").addClass("postImageform").appendTo("#postTweetImage");
+        var $clearbutton = $("<button>").addClass("clearImage").appendTo("#postTweetImage");
+        $("<img>").attr("id", "clearImageicon").attr("src", "img/Entypo+/Entypo+/trash.svg").appendTo($clearbutton);
+};
+
+//画像削除
+var clearImageValue = function (num) {
+        document.getElementsByClassName("postImageform")[num].value = "";
+        if(this.value === undefined && num != 0){
+                $(".postImageform")[num].remove();
+                $(".clearImage")[num].remove();
+                if(document.getElementById("addPostImagebutton")){
+                        return;
+                }
+                addNewPostImage();
+        }
+};
+
 //エラー系のダイアログ処理/////////////////////////////////////////////////////
 //成功時の出力ログ
 var successHandler = function () {

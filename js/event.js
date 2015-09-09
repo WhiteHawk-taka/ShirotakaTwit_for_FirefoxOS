@@ -28,9 +28,19 @@ $(document).on('click', '#statusUpdateButton', function(){
 	document.querySelector('#newTweetSection').className = 'right';
 	document.querySelector('[data-position="current"]').className = 'current';
 });
-$(document).on('click', '#clearImage', function(){
-	document.form2.my_file.value = "";
+$(document).on('click', '.clearImage', function(){
+	var num = $(".clearImage").index(this);
+	clearImageValue(num);
 	return false;
+});
+
+//画像複数対応
+$(document).change('.postImageform', function(){
+	addNewPostImage();
+});
+
+$(document).on('click', '#addPostImagebutton', function(){
+	addNewImageForm();
 });
 
 //ユーザー情報の表示関連
