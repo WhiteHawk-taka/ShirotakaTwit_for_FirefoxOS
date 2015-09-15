@@ -20,11 +20,10 @@ $(document).on('click', '#mentionupdateButton', function(){
 });
 
 $(document).on('click', '#statusUpdateButton', function(){
-	if(document.form1.postform.value != "" || document.form2.my_file.value != ""){
-		newTweetPost();
-	}
-	document.form1.postform.value = "";
-	document.form2.my_file.value = "";
+	newTweetPost();
+	removeImagebutton();
+	document.getElementById("newTweetText").value = "";
+	document.getElementsByClassName("postImageform")[0].value = "";
 	document.querySelector('#newTweetSection').className = 'right';
 	document.querySelector('[data-position="current"]').className = 'current';
 });
@@ -82,15 +81,17 @@ $(document).on('click', '.repform', function(){
 $(document).on('click', '#replyUpdateButton', function(){
 	var repId = document.getElementById("replyUpdateButton").className;
 	replyTweetPost(repId);
-	document.form1.postform.value = "";
-	document.form2.my_file.value = "";
+	removeImagebutton();
+	document.getElementById("newTweetText").value = "";
+	document.getElementsByClassName("postImageform")[0].value = "";
 	document.querySelector('#newTweetSection').className = 'right';
 	document.querySelector('[data-position="current"]').className = 'current';
 	$("#replyUpdateButton").attr('id', "statusUpdateButton");
 	$("#replyBackButton").attr('id', "backButton");
 });
 $(document).on('click', '#replyBackButton', function(){
-	document.form1.postform.value = "";
+	document.getElementById("newTweetText").value = "";
+	document.getElementsByClassName("postImageform")[0].value = "";
 	document.querySelector('#newTweetSection').className = 'right';
 	document.querySelector('[data-position="current"]').className = 'current';
 	$("#replyUpdateButton").attr('id', "statusUpdateButton");
