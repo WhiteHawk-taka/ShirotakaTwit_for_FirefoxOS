@@ -7,6 +7,8 @@ var tweetText = [];
 var id_str = [];
 var prof_img_url = [];
 var favorited = [];
+var photo_url = [[],[],[],[]];
+
 var post_imagefile = [];
 var tweet_media = [];
 var post_tweettext = "";
@@ -18,6 +20,7 @@ var mention_tweetText = [];
 var mention_id_str = [];
 var mention_prof_img_url = [];
 var mention_favorited = [];
+var mention_photo_url = [[],[],[],[]];
 
 localStorage.setItem("loading", 0);
 
@@ -147,6 +150,7 @@ var first_getHomeTimeline = function () {
 var successFirstTimeline = function (data) {
         clearTweetDom();
         var tweetList = JSON.parse(data.text);
+        console.log(tweetList);
         tweetIndex: for (var i = 0; i < tweetList.length; i++) {
                 var tweet = tweetList[i];
                 for (var j = 0; j < id_str.length; j++) {
@@ -160,6 +164,31 @@ var successFirstTimeline = function (data) {
                 tweetText.unshift(tweet.text);
                 id_str.unshift(tweet.id_str);
                 prof_img_url.unshift(tweet.user.profile_image_url);
+                try{
+                        photo_url[0].unshift(tweet.extended_entities.media[0].media_url_https);
+                        photo_url[1].unshift(tweet.extended_entities.media[1].media_url_https);
+                        photo_url[2].unshift(tweet.extended_entities.media[2].media_url_https);
+                        photo_url[3].unshift(tweet.extended_entities.media[3].media_url_https);
+
+                } catch (e) {
+                        try{
+                                if(photo_url[0][i] === undefined){
+                                        photo_url[0].unshift(tweet.entities.media[0].media_url_https);
+                                }
+                        } catch (e) {
+                                photo_url[0].unshift(null);
+                                photo_url[1].unshift(null);
+                                photo_url[2].unshift(null);
+                                photo_url[3].unshift(null);
+                        }
+                        if(photo_url[3][i] === undefined){
+                                photo_url[3].unshift(null);
+                        } else if(photo_url[2][i] === undefined){
+                                photo_url[2].unshift(null);
+                        } else if(photo_url[1][i] === undefined){
+                                photo_url[1].unshift(null);
+                        }
+                }
 
         }
         addFirstTweetToDom(tweet);
@@ -173,18 +202,37 @@ var addFirstTweetToDom = function (tweet) {
 		var buf_tweetText = tweetText[i];
 		var buf_prof_img_url = prof_img_url[i];
 		var buf_id_str = id_str[i];
+                var buf_photo_url = ""
+
 
 		var $parent = $("#tweetBox");
 		var $li = $("<li>").appendTo($parent);
 		var $div = $("<div>").addClass("tweet").appendTo($li);
 		var $userDiv = $("<div>").appendTo($div);
-		var $a1 = $("<a>").attr('href', "#drawer").addClass("tlmenu").appendTo($userDiv);
+                var $menudiv = $("<div>").appendTo($userDiv);
+		var $a1 = $("<a>").attr('href', "#drawer").addClass("tlmenu").appendTo($menudiv);
 
 		$("<img>").addClass("tweetIcon").attr('id', buf_id_str).attr('data-name', buf_screenName).attr('src', buf_prof_img_url).appendTo($userDiv);
 		$("<span>").addClass("name").text(buf_name).appendTo($userDiv);
 		$("<span>").addClass("screenName").text("@" + buf_screenName).appendTo($userDiv);
 		$("<img>").addClass("menu-button").attr('id', buf_id_str).attr('data-name', buf_screenName).attr('src', "img/Entypo+/Entypo+/menu.svg").appendTo($a1);
 		$("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
+                if(photo_url[0][i]){
+                        buf_photo_url = photo_url[0][i];
+                        $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
+                }
+                if(photo_url[1][i]){
+                        buf_photo_url = photo_url[1][i];
+                        $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
+                }
+                if(photo_url[2][i]){
+                        buf_photo_url = photo_url[2][i];
+                        $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
+                }
+                if(photo_url[3][i]){
+                        buf_photo_url = photo_url[3][i];
+                        $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
+                }
 	}
 	$(".tweetText").each(function(){
 		$(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/g, '<a target="_blank" href="$&">$&</a>'));
@@ -195,6 +243,7 @@ var addFirstTweetToDom = function (tweet) {
 //通常ライムライン取得データ処理
 var successGetHomeTimeline = function (data) {
         clearTweetDom();
+        var buf_photo_url = [[], [], [], []];
         var tweetList = JSON.parse(data.text);
         var buf_screenName = [];
         var buf_name_str = [];
@@ -215,6 +264,31 @@ var successGetHomeTimeline = function (data) {
                 buf_tweetText.push(tweet.text);
                 buf_id_str.push(tweet.id_str);
                 buf_prof_img_url.push(tweet.user.profile_image_url);
+                try{
+                        buf_photo_url[0].push(tweet.extended_entities.media[0].media_url_https);
+                        buf_photo_url[1].push(tweet.extended_entities.media[1].media_url_https);
+                        buf_photo_url[2].push(tweet.extended_entities.media[2].media_url_https);
+                        buf_photo_url[3].push(tweet.extended_entities.media[3].media_url_https);
+
+                } catch (e) {
+                        try{
+                                if(buf_photo_url[0][i] === undefined){
+                                        buf_photo_url[0].push(tweet.entities.media[0].media_url_https);
+                                }
+                        } catch (e) {
+                                buf_photo_url[0].push(null);
+                                buf_photo_url[1].push(null);
+                                buf_photo_url[2].push(null);
+                                buf_photo_url[3].push(null);
+                        }
+                        if(buf_photo_url[3][i] === undefined){
+                                buf_photo_url[3].push(null);
+                        } else if(buf_photo_url[2][i] === undefined){
+                                buf_photo_url[2].push(null);
+                        } else if(buf_photo_url[1][i] === undefined){
+                                buf_photo_url[1].push(null);
+                        }
+                }
 
 
         }
@@ -223,6 +297,10 @@ var successGetHomeTimeline = function (data) {
         buf_tweetText.reverse();
         buf_id_str.reverse();
         buf_prof_img_url.reverse();
+        buf_photo_url[0].reverse();
+        buf_photo_url[1].reverse();
+        buf_photo_url[2].reverse();
+        buf_photo_url[3].reverse();
 
         for (var i = 0; i < buf_id_str.length; i++) {
                 screenName.push(buf_screenName[i]);
@@ -230,6 +308,10 @@ var successGetHomeTimeline = function (data) {
                 tweetText.push(buf_tweetText[i]);
                 id_str.push(buf_id_str[i]);
                 prof_img_url.push(buf_prof_img_url[i]);
+                photo_url[0].push(buf_photo_url[0][i]);
+                photo_url[1].push(buf_photo_url[1][i]);
+                photo_url[2].push(buf_photo_url[2][i]);
+                photo_url[3].push(buf_photo_url[3][i]);
         }
         addTweetToDom(tweet);
 };
@@ -242,6 +324,7 @@ var addTweetToDom = function (tweet) {
 		var buf_tweetText = tweetText[i];
 		var buf_prof_img_url = prof_img_url[i];
 		var buf_id_str = id_str[i];
+                var buf_photo_url = "";
 
 		var $parent = $("#tweetBox");
 		var $li = $("<li>").appendTo($parent);
@@ -254,6 +337,22 @@ var addTweetToDom = function (tweet) {
 		$("<span>").addClass("screenName").text("@" + buf_screenName).appendTo($userDiv);
 		$("<img>").addClass("menu-button").attr('id', buf_id_str).attr('data-name', buf_screenName).attr('src', "img/Entypo+/Entypo+/menu.svg").appendTo($a1);
 		$("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
+                if(photo_url[0][i]){
+                        buf_photo_url = photo_url[0][i];
+                        $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
+                }
+                if(photo_url[1][i]){
+                        buf_photo_url = photo_url[1][i];
+                        $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
+                }
+                if(photo_url[2][i]){
+                        buf_photo_url = photo_url[2][i];
+                        $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
+                }
+                if(photo_url[3][i]){
+                        buf_photo_url = photo_url[3][i];
+                        $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
+                }
 	}
 	$(".tweetText").each(function(){
 		$(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/g, '<a target="_blank" href="$&">$&</a>'));
@@ -299,7 +398,31 @@ var successFirstMention = function (data) {
                 mention_tweetText.unshift(tweet.text);
                 mention_id_str.unshift(tweet.id_str);
                 mention_prof_img_url.unshift(tweet.user.profile_image_url);
+                try{
+                        mention_photo_url[0].unshift(tweet.extended_entities.media[0].media_url_https);
+                        mention_photo_url[1].unshift(tweet.extended_entities.media[1].media_url_https);
+                        mention_photo_url[2].unshift(tweet.extended_entities.media[2].media_url_https);
+                        mention_photo_url[3].unshift(tweet.extended_entities.media[3].media_url_https);
 
+                } catch (e) {
+                        try{
+                                if(mention_photo_url[0][i] === undefined){
+                                        mention_photo_url[0].unshift(tweet.entities.media[0].media_url_https);
+                                }
+                        } catch (e) {
+                                mention_photo_url[0].unshift(null);
+                                mention_photo_url[1].unshift(null);
+                                mention_photo_url[2].unshift(null);
+                                mention_photo_url[3].unshift(null);
+                        }
+                        if(mention_photo_url[3][i] === undefined){
+                                mention_photo_url[3].unshift(null);
+                        } else if(mention_photo_url[2][i] === undefined){
+                                mention_photo_url[2].unshift(null);
+                        } else if(mention_photo_url[1][i] === undefined){
+                                mention_photo_url[1].unshift(null);
+                        }
+                }
         }
         addFirstMentionTweetToDom(tweet);
 };
@@ -312,6 +435,7 @@ var addFirstMentionTweetToDom = function (tweet) {
 		var buf_tweetText = mention_tweetText[i];
 		var buf_prof_img_url = mention_prof_img_url[i];
 		var buf_id_str = mention_id_str[i];
+                var buf_photo_url = "";
 
 		var $parent = $("#mentionBox");
 		var $li = $("<li>").appendTo($parent);
@@ -324,6 +448,22 @@ var addFirstMentionTweetToDom = function (tweet) {
 		$("<span>").addClass("screenName").text("@" + buf_screenName).appendTo($userDiv);
 		$("<img>").addClass("menu-button").attr('id', buf_id_str).attr('data-name', buf_screenName).attr('src', "img/Entypo+/Entypo+/menu.svg").appendTo($a1);
 		$("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
+                if(mention_photo_url[0][i]){
+                        buf_photo_url = mention_photo_url[0][i];
+                        $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
+                }
+                if(mention_photo_url[1][i]){
+                        buf_photo_url = mention_photo_url[1][i];
+                        $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
+                }
+                if(mention_photo_url[2][i]){
+                        buf_photo_url = mention_photo_url[2][i];
+                        $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
+                }
+                if(mention_photo_url[3][i]){
+                        buf_photo_url = mention_photo_url[3][i];
+                        $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
+                }
 	}
 	$(".tweetText").each(function(){
 		$(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/g, '<a target="_blank" href="$&">$&</a>'));
@@ -340,6 +480,7 @@ var successMention = function (data) {
         var buf_tweetText = [];
         var buf_id_str = [];
         var buf_prof_img_url = [];
+        var buf_photo_url = [[], [], [], []];
         mentionIndex1: for (var i = 0; i < tweetList.length; i++) {
                 var tweet = tweetList[i];
                 for (var j = 0; j < id_str.length; j++) {
@@ -353,6 +494,31 @@ var successMention = function (data) {
                 buf_tweetText.push(tweet.text);
                 buf_id_str.push(tweet.id_str);
                 buf_prof_img_url.push(tweet.user.profile_image_url);
+                try{
+                        buf_photo_url[0].push(tweet.extended_entities.media[0].media_url_https);
+                        buf_photo_url[1].push(tweet.extended_entities.media[1].media_url_https);
+                        buf_photo_url[2].push(tweet.extended_entities.media[2].media_url_https);
+                        buf_photo_url[3].push(tweet.extended_entities.media[3].media_url_https);
+
+                } catch (e) {
+                        try{
+                                if(buf_photo_url[0][i] === undefined){
+                                        buf_photo_url[0].push(tweet.entities.media[0].media_url_https);
+                                }
+                        } catch (e) {
+                                buf_photo_url[0].push(null);
+                                buf_photo_url[1].push(null);
+                                buf_photo_url[2].push(null);
+                                buf_photo_url[3].push(null);
+                        }
+                        if(buf_photo_url[3][i] === undefined){
+                                buf_photo_url[3].push(null);
+                        } else if(buf_photo_url[2][i] === undefined){
+                                buf_photo_url[2].push(null);
+                        } else if(buf_photo_url[1][i] === undefined){
+                                buf_photo_url[1].push(null);
+                        }
+                }
 
         }
         buf_screenName.reverse();
@@ -360,6 +526,10 @@ var successMention = function (data) {
         buf_tweetText.reverse();
         buf_id_str.reverse();
         buf_prof_img_url.reverse();
+        buf_photo_url[0].reverse();
+        buf_photo_url[1].reverse();
+        buf_photo_url[2].reverse();
+        buf_photo_url[3].reverse();
 
         for (var i = 0; i < buf_id_str.length; i++) {
                 mention_screenName.push(buf_screenName[i]);
@@ -367,6 +537,10 @@ var successMention = function (data) {
                 mention_tweetText.push(buf_tweetText[i]);
                 mention_id_str.push(buf_id_str[i]);
                 mention_prof_img_url.push(buf_prof_img_url[i]);
+                mention_photo_url[0].push(buf_photo_url[0][i]);
+                mention_photo_url[1].push(buf_photo_url[1][i]);
+                mention_photo_url[2].push(buf_photo_url[2][i]);
+                mention_photo_url[3].push(buf_photo_url[3][i]);
         }
         addMentionTweetToDom(tweet);
 };
@@ -379,6 +553,7 @@ var addMentionTweetToDom = function (tweet) {
 		var buf_tweetText = mention_tweetText[i];
 		var buf_prof_img_url = mention_prof_img_url[i];
 		var buf_id_str = mention_id_str[i];
+                var buf_photo_url = "";
 
 		var $parent = $("#mentionBox");
 		var $li = $("<li>").appendTo($parent);
@@ -391,6 +566,22 @@ var addMentionTweetToDom = function (tweet) {
 		$("<span>").addClass("screenName").text("@" + buf_screenName).appendTo($userDiv);
 		$("<img>").addClass("menu-button").attr('id', buf_id_str).attr('data-name', buf_screenName).attr('src', "img/Entypo+/Entypo+/menu.svg").appendTo($a1);
 		$("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
+                if(mention_photo_url[0][i]){
+                        buf_photo_url = mention_photo_url[0][i];
+                        $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
+                }
+                if(mention_photo_url[1][i]){
+                        buf_photo_url = mention_photo_url[1][i];
+                        $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
+                }
+                if(mention_photo_url[2][i]){
+                        buf_photo_url = mention_photo_url[2][i];
+                        $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
+                }
+                if(mention_photo_url[3][i]){
+                        buf_photo_url = mention_photo_url[3][i];
+                        $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
+                }
 	}
 	$(".tweetText").each(function(){
 		$(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/g, '<a target="_blank" href="$&">$&</a>'));

@@ -85,6 +85,16 @@
 	height: 1.5rem;
 }
 
+#tweetImage{
+	width: 90%;
+	margin-top: 0.2rem;
+	margin-bottom: 0.2rem;
+}
+
+#tweetButton{
+	width: 2.5rem;
+}
+
 img.svgButton{
 	padding: 0.2rem;
 	background-repeat: no-repeat;
