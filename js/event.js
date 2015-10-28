@@ -60,6 +60,12 @@ $(document).on('click', '.menu-button', function() {
 	$(".tlreplyicon").attr('id', $(this).attr('id'));
 	$(".tlreplyicon").attr('data-name', $(this).attr('data-name'));
 	$(".tlretweeticon").attr('id', $(this).attr('id'));
+	$(".tltrashicon").attr('id', $(this).attr('id'));
+	scname = $(this).attr('data-name');
+	if(my_screenName !== scname){
+		$(".tltrashicon").addClass("hide");
+	}else{
+	}
 });
 //メニューを閉じた時の処理
 $(document).on('click', '.icon-closecancel', function(){
@@ -112,5 +118,15 @@ $(document).on('click', '.tlfavicon', function(){
 	favId = $(this).attr('id');
 	favoriteCreate(favId);
 	utils.status.show('お気に入りに追加しました');
+});
+
+//つい消し
+$(document).on('click', '.tltrashicon', function() {
+	trashtweet($(this).attr('id'));
+	$(".tlfavicon").attr('id', "");
+	$(".tlreplyicon").attr('id', "");
+	$(".tlreplyicon").attr('data-name', "");
+	$(".tlretweeticon").attr('id', "");
+	utils.status.show('ツイートを削除しました');
 });
 

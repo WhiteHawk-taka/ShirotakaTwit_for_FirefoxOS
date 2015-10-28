@@ -1,6 +1,13 @@
 // oauthオブジェクト
 var oauth;
 
+var my_name = "";
+var my_screenName = "";
+var my_id = "";
+var my_description = "";
+var my_location = "";
+var my_url = "";
+
 var screenName = [];
 var name_str = [];
 var tweetText = [];
@@ -59,6 +66,7 @@ var firstOAuthFunc = function () {
                 if (accessTokenKey) {
                         oauth.setAccessToken(accessTokenKey, accessTokenSecret);
                         first_getHomeTimeline();
+                        my_account();
                         first_getMentionTimeline();
                 } else {
                         // 1. consumer key と consumer secret を使って、リクエストトークンを取得する
@@ -115,6 +123,7 @@ var successFetchAccessToken = function () {
 	localStorage.setItem("firstoauth",1);
 	alert("認証に成功しました");
 	getHomeTimeline();
+        my_account();
 
 
 };
@@ -206,7 +215,7 @@ var addFirstTweetToDom = function (tweet) {
 
 
 		var $parent = $("#tweetBox");
-		var $li = $("<li>").appendTo($parent);
+		var $li = $("<li>").attr('id', "li" + buf_id_str).appendTo($parent);
 		var $div = $("<div>").addClass("tweet").appendTo($li);
 		var $userDiv = $("<div>").appendTo($div);
                 var $menudiv = $("<div>").appendTo($userDiv);
@@ -219,7 +228,8 @@ var addFirstTweetToDom = function (tweet) {
 		$("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
                 if(photo_url[0][i]){
                         buf_photo_url = photo_url[0][i];
-                        $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
+                        var $a2 = $("<a>").attr('href', buf_photo_url).attr('download', 'a.png').appendTo($div);
+                        $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($a2);
                 }
                 if(photo_url[1][i]){
                         buf_photo_url = photo_url[1][i];
@@ -234,9 +244,7 @@ var addFirstTweetToDom = function (tweet) {
                         $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
                 }
 	}
-	$(".tweetText").each(function(){
-		$(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/g, '<a target="_blank" href="$&">$&</a>'));
-	});
+
 
 };
 
@@ -354,9 +362,9 @@ var addTweetToDom = function (tweet) {
                         $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
                 }
 	}
-	$(".tweetText").each(function(){
-		$(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/g, '<a target="_blank" href="$&">$&</a>'));
-	});
+        $(".tweetText").each(function(){
+                $(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/g, '<a target="_blank" href="$&">$&</a>'));
+        });
 
 };
 
@@ -465,9 +473,9 @@ var addFirstMentionTweetToDom = function (tweet) {
                         $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
                 }
 	}
-	$(".tweetText").each(function(){
-		$(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/g, '<a target="_blank" href="$&">$&</a>'));
-	});
+        $(".tweetText").each(function(){
+                $(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/g, '<a target="_blank" href="$&">$&</a>'));
+        });
 
 };
 
@@ -583,9 +591,9 @@ var addMentionTweetToDom = function (tweet) {
                         $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
                 }
 	}
-	$(".tweetText").each(function(){
-		$(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/g, '<a target="_blank" href="$&">$&</a>'));
-	});
+        $(".tweetText").each(function(){
+                $(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/g, '<a target="_blank" href="$&">$&</a>'));
+        });
 };
 
 //ユーザー情報の取得////////////////////////////////////////////////////////
@@ -615,6 +623,19 @@ var successGetUserData = function (data) {
         document.getElementById("userurl").setAttribute("href", userdata.entities.url.urls[0].expanded_url);
         document.getElementById("userurl").innerHTML = userdata.entities.url.urls[0].expanded_url;
         document.getElementById("userdata").style.backgroundImage = "url("+userdata.profile_banner_url+")";
+};
+
+var my_account = function (data) {
+        var url = "https://api.twitter.com/1.1/account/verify_credentials.json";
+        oauth.get(url, function (data) {
+                var userdata = JSON.parse(data.text);
+                my_id = userdata.id;
+                my_name = userdata.name;
+                my_screenName = userdata.screen_name;
+                my_description = userdata.description;
+                my_location = userdata.location;
+                my_url = userdata.entities.url.urls[0].expanded_url;
+        }, nonerror);
 };
 
 
@@ -783,6 +804,28 @@ var rtCreate = function (rtId) {
                 method: "POST",
                 url: "https://api.twitter.com/1.1/statuses/retweet/" + rtId + ".json"
         });
+};
+
+//つい消し
+var trashtweet = function (trashid) {
+        oauth.request({
+                method: "POST",
+                url: "https://api.twitter.com/1.1/statuses/destroy/" + trashid + ".json"
+        });
+        var $trashed = "#li" + trashid;
+        var $li = $($trashed).closest("ul").children();
+        var $arraynum = $li.index($($trashed).closest($li));
+        $($trashed).remove();
+        screenName.splice(screenName.length - 1 - $arraynum, 1);
+        name_str.splice(name_str.length - 1 - $arraynum, 1);
+        tweetText.splice(tweetText.length - 1 - $arraynum, 1);
+        id_str.splice(id_str.length - 1 - $arraynum, 1);
+        prof_img_url.splice(prof_img_url.length - 1 - $arraynum, 1);
+        photo_url[0].splice(photo_url[0].length - 1 - $arraynum, 1);
+        photo_url[1].splice(photo_url[1].length - 1 - $arraynum, 1);
+        photo_url[2].splice(photo_url[2].length - 1 - $arraynum, 1);
+        photo_url[3].splice(photo_url[3].length - 1 - $arraynum, 1);
+        location.href = "#";
 };
 
 //投稿画像の追加
