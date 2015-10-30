@@ -43,6 +43,7 @@
 	padding: 5px 5px 10px;
 	border-bottom: 1px solid gray;
 	word-wrap: break-word;
+	overflow: hidden;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
@@ -53,6 +54,7 @@
 	padding: 5px 5px 10px;
 	border-bottom: 1px solid gray;
 	word-wrap: break-word;
+	overflow: hidden;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
