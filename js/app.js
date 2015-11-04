@@ -81,7 +81,7 @@ var firstOAuthFunc = function () {
                         firstOAuthFunc();
                 } else {
                         window.alert('中止されました');
-                        localStorage.setTimeout("firstoauth", 0);
+                        localStorage.setItem("firstoauth", 0);
                 }
         }
 };
