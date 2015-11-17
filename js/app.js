@@ -211,7 +211,7 @@ var addFirstTweetToDom = function (tweet) {
 		var buf_tweetText = tweetText[i];
 		var buf_prof_img_url = prof_img_url[i];
 		var buf_id_str = id_str[i];
-                var buf_photo_url = ""
+                var buf_photo_url = "";
 
 
 		var $parent = $("#tweetBox");
@@ -228,20 +228,19 @@ var addFirstTweetToDom = function (tweet) {
 		$("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
                 if(photo_url[0][i]){
                         buf_photo_url = photo_url[0][i];
-                        var $a2 = $("<a>").attr('href', buf_photo_url).attr('download', 'a.png').appendTo($div);
-                        $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($a2);
+                        $("<img>").attr('src', buf_photo_url).addClass('tweetImage').appendTo($div);
                 }
                 if(photo_url[1][i]){
                         buf_photo_url = photo_url[1][i];
-                        $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
+                        $("<img>").attr('src', buf_photo_url).addClass('tweetImage').appendTo($div);
                 }
                 if(photo_url[2][i]){
                         buf_photo_url = photo_url[2][i];
-                        $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
+                        $("<img>").attr('src', buf_photo_url).addClass('tweetImage').appendTo($div);
                 }
                 if(photo_url[3][i]){
                         buf_photo_url = photo_url[3][i];
-                        $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
+                        $("<img>").attr('src', buf_photo_url).addClass('tweetImage').appendTo($div);
                 }
 	}
 
@@ -347,19 +346,19 @@ var addTweetToDom = function (tweet) {
 		$("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
                 if(photo_url[0][i]){
                         buf_photo_url = photo_url[0][i];
-                        $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
+                        $("<img>").attr('src', buf_photo_url).addClass('tweetImage').appendTo($div);
                 }
                 if(photo_url[1][i]){
                         buf_photo_url = photo_url[1][i];
-                        $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
+                        $("<img>").attr('src', buf_photo_url).addClass('tweetImage').appendTo($div);
                 }
                 if(photo_url[2][i]){
                         buf_photo_url = photo_url[2][i];
-                        $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
+                        $("<img>").attr('src', buf_photo_url).addClass('tweetImage').appendTo($div);
                 }
                 if(photo_url[3][i]){
                         buf_photo_url = photo_url[3][i];
-                        $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
+                        $("<img>").attr('src', buf_photo_url).addClass('tweetImage').appendTo($div);
                 }
 	}
         $(".tweetText").each(function(){
@@ -458,19 +457,19 @@ var addFirstMentionTweetToDom = function (tweet) {
 		$("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
                 if(mention_photo_url[0][i]){
                         buf_photo_url = mention_photo_url[0][i];
-                        $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
+                        $("<img>").attr('src', buf_photo_url).addClass('tweetImage').appendTo($div);
                 }
                 if(mention_photo_url[1][i]){
                         buf_photo_url = mention_photo_url[1][i];
-                        $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
+                        $("<img>").attr('src', buf_photo_url).addClass('tweetImage').appendTo($div);
                 }
                 if(mention_photo_url[2][i]){
                         buf_photo_url = mention_photo_url[2][i];
-                        $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
+                        $("<img>").attr('src', buf_photo_url).addClass('tweetImage').appendTo($div);
                 }
                 if(mention_photo_url[3][i]){
                         buf_photo_url = mention_photo_url[3][i];
-                        $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
+                        $("<img>").attr('src', buf_photo_url).addClass('tweetImage').appendTo($div);
                 }
 	}
         $(".tweetText").each(function(){
@@ -576,19 +575,19 @@ var addMentionTweetToDom = function (tweet) {
 		$("<div>").addClass("tweetText").text(buf_tweetText).appendTo($div);
                 if(mention_photo_url[0][i]){
                         buf_photo_url = mention_photo_url[0][i];
-                        $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
+                        $("<img>").attr('src', buf_photo_url).addClass('tweetImage').appendTo($div);
                 }
                 if(mention_photo_url[1][i]){
                         buf_photo_url = mention_photo_url[1][i];
-                        $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
+                        $("<img>").attr('src', buf_photo_url).addClass('tweetImage').appendTo($div);
                 }
                 if(mention_photo_url[2][i]){
                         buf_photo_url = mention_photo_url[2][i];
-                        $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
+                        $("<img>").attr('src', buf_photo_url).addClass('tweetImage').appendTo($div);
                 }
                 if(mention_photo_url[3][i]){
                         buf_photo_url = mention_photo_url[3][i];
-                        $("<img>").attr('src', buf_photo_url).attr('id', 'tweetImage').appendTo($div);
+                        $("<img>").attr('src', buf_photo_url).addClass('tweetImage').appendTo($div);
                 }
 	}
         $(".tweetText").each(function(){
@@ -874,7 +873,7 @@ var removeImagebutton = function () {
                 }
         }
         $("#addPostImagebutton").remove();
-}
+};
 
 
 //エラー系のダイアログ処理/////////////////////////////////////////////////////
