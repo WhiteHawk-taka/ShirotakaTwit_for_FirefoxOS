@@ -65,9 +65,14 @@ var firstOAuthFunc = function () {
                 localStorage.setItem("firstoauth", 1);
                 if (accessTokenKey) {
                         oauth.setAccessToken(accessTokenKey, accessTokenSecret);
-                        first_getHomeTimeline();
+                        if(location.pathname === "/index.html"){
+                                first_getHomeTimeline();
+                        }else if(location.pathname === "/mention.html"){
+                                first_getMentionTimeline();
+                        }else{
+                                first_getHomeTimeline();
+                        }
                         my_account();
-                        first_getMentionTimeline();
                 } else {
                         // 1. consumer key と consumer secret を使って、リクエストトークンを取得する
                         oauth.fetchRequestToken(successFetchRequestToken, failureHandler);
@@ -243,6 +248,9 @@ var addFirstTweetToDom = function (tweet) {
                         $("<img>").attr('src', buf_photo_url).addClass('tweetImage').appendTo($div);
                 }
 	}
+        $(".tweetText").each(function(){
+                $(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/g, '<a target="_blank" href="$&">$&</a>'));
+        });
 
 
 };
