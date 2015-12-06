@@ -29,18 +29,27 @@ var mention_prof_img_url = [];
 var mention_favorited = [];
 var mention_photo_url = [[],[],[],[]];
 
-localStorage.setItem("loading", 0);
+var getTweetNumber = "";
+
 
 window.onload = function () {
-        // OAuth関連の処理を開始する
-        var loadingop = localStorage.getItem("loading");
-        if (parseInt(loadingop,10) === 0) {
-                firstOAuthFunc();
+        //設定の初期化
+        try{
+                getTweetNumber = localStorage.getItem("getTweetNumber");
+        }catch(e){
+                getTweetNumber = 100;
         }
+        // OAuth関連の処理を開始する
+        localStorage.setItem("firstoauth", 0);
+        firstOAuthFunc();
 };
 
 // OAuth処理 ///////////////////////////////////////////////////////////////////////////////
 var firstOAuthFunc = function () {
+        if(localStorage.getItem("accessTokenKey")){
+                localStorage.setItem("firstoauth", 1);
+        }else{
+        }
         var firstoauth = localStorage.getItem("firstoauth");
 
         if (parseInt(firstoauth,10) === 1) {
@@ -150,13 +159,13 @@ var clearTweetDom = function () {
 
 //通常タイムライン取得OAuth
 var getHomeTimeline = function () {
-        var url = "https://api.twitter.com/1.1/statuses/home_timeline.json?count=100";
+        var url = "https://api.twitter.com/1.1/statuses/home_timeline.json?count=" + getTweetNumber;
         oauth.get(url, successGetHomeTimeline, failureTimeLineHandler);
 };
 
 //初回タイムライン取得OAuth
 var first_getHomeTimeline = function () {
-        var url = "https://api.twitter.com/1.1/statuses/home_timeline.json?count=100";
+        var url = "https://api.twitter.com/1.1/statuses/home_timeline.json?count=" + getTweetNumber;
         oauth.get(url, successFirstTimeline, failureTimeLineHandler);
 };
 
@@ -210,7 +219,7 @@ var successFirstTimeline = function (data) {
 
 //初回タイムライン書き出し処理
 var addFirstTweetToDom = function (tweet) {
-	for(var i = id_str.length - 1; i > 0; i--){
+	for(var i = id_str.length - 1; i >= 0; i--){
 		var buf_screenName = screenName[i];
 		var buf_name = name_str[i];
 		var buf_tweetText = tweetText[i];
@@ -333,7 +342,7 @@ var successGetHomeTimeline = function (data) {
 
 //通常タイムライン書き出し処理
 var addTweetToDom = function (tweet) {
-	for(var i = id_str.length - 1; i > 0; i--){
+	for(var i = id_str.length - 1; i >= 0; i--){
 		var buf_screenName = screenName[i];
 		var buf_name = name_str[i];
 		var buf_tweetText = tweetText[i];
@@ -386,13 +395,13 @@ var clearMentionTweetDom = function () {
 
 //通常メンション取得OAuth
 var getMentionTimeline = function () {
-        var url = "https://api.twitter.com/1.1/statuses/mentions_timeline.json?count=100";
+        var url = "https://api.twitter.com/1.1/statuses/mentions_timeline.json?count=" + getTweetNumber;
         oauth.get(url, successMention, failureTimeLineHandler);
 };
 
 //初回メンション取得OAuth
 var first_getMentionTimeline = function () {
-        var url = "https://api.twitter.com/1.1/statuses/mentions_timeline.json?count=100";
+        var url = "https://api.twitter.com/1.1/statuses/mentions_timeline.json?count=" + getTweetNumber;
         oauth.get(url, successFirstMention, failureTimeLineHandler);
 };
 
@@ -444,7 +453,7 @@ var successFirstMention = function (data) {
 
 //初回メンション書き出し処理
 var addFirstMentionTweetToDom = function (tweet) {
-	for(var i = mention_id_str.length - 1; i > 0; i--){
+	for(var i = mention_id_str.length - 1; i >= 0; i--){
 		var buf_screenName = mention_screenName[i];
 		var buf_name = mention_name_str[i];
 		var buf_tweetText = mention_tweetText[i];
@@ -562,7 +571,7 @@ var successMention = function (data) {
 
 //通常メンション書き出し処理
 var addMentionTweetToDom = function (tweet) {
-	for(var i = mention_id_str.length - 1; i > 0; i--){
+	for(var i = mention_id_str.length - 1; i >= 0; i--){
 		var buf_screenName = mention_screenName[i];
 		var buf_name = mention_name_str[i];
 		var buf_tweetText = mention_tweetText[i];

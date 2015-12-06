@@ -32,7 +32,7 @@
 
 [role="dialog"][data-type="action"] > header {
   -moz-box-sizing: border-box;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   position: absolute;
   top: 0;
   left: 0;
@@ -215,16 +215,16 @@
 
 [role="dialog"][data-type="action"] > menu > button {
   width: calc(100% - 3rem);
-  height: 4rem;
+  height: 3rem;
   -moz-box-sizing: border-box;
   vertical-align: middle;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   font-weight: normal;
-  line-height: 4rem;
+  line-height: 2rem;
   outline: none;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   text-shadow: none;
   text-align: start;
   padding: 0 1.2rem;
