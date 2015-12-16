@@ -638,7 +638,7 @@ var successGetUserData = function (data) {
         document.getElementById("userlocation").innerHTML = userdata.location;
         document.getElementById("userurl").setAttribute("href", userdata.entities.url.urls[0].expanded_url);
         document.getElementById("userurl").innerHTML = userdata.entities.url.urls[0].expanded_url;
-        document.getElementById("userdata").style.backgroundImage = "url("+userdata.profile_banner_url+")";
+        document.getElementById("userdata").style.backgroundImage = "url("+userdata.profile_banner_url+"/web"+")";
 };
 
 var my_account = function (data) {

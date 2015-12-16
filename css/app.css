@@ -210,11 +210,15 @@ section[role="region"] > .content{
 	text-align: center;
 	background-size: contain;
 	background-repeat: no-repeat;
+	width: calc(100% + 10px);
+	margin-left: -5px;
 }
 
 #userimage{
 	width: 5rem;
-	padding: 1rem;
+	margin-top: 1rem;
+	border: 0.2rem solid #fff;
+	border-radius: 0.2rem;
 }
 
 #username{
@@ -228,4 +232,12 @@ section[role="region"] > .content{
 
 #userlocation{
 	padding-top: 1rem;
+}
+
+#userdescription{
+	margin: 5px;
+}
+
+#userdataback{
+	background-color: rgba(255,255,255,0.45);
 }
