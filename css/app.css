@@ -70,6 +70,12 @@
 
 }
 
+.retweetUser{
+	font-size: 10px;
+	margin-top: 7px;
+	color: #bbb;
+}
+
 .tweet{
 	margin-left: 58px;
 }
@@ -236,6 +242,14 @@ section[role="region"] > .content{
 
 #userdescription{
 	margin: 5px;
+}
+
+#userfollow{
+	width: 90%;
+	height: 3rem;
+	line-height: 2rem;
+	font-size: 1.5rem;
+	margin-top: 1rem;
 }
 
 #userdataback{
