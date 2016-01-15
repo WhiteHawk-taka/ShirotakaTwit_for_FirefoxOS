@@ -33,6 +33,28 @@ var successGetUserData = function (data) {
         }
 };
 
+//フォロー
+var userfollow = function (screenName) {
+        var url = "https://api.twitter.com/1.1/friendships/create.json?screen_name=" + screenName;
+        oauth.post(url, "", successUserfollow, nonerror);
+};
+
+var successUserfollow = function (data){
+        document.getElementById("userfollow").innerHTML = "フォロー中";
+};
+
+//アンフォロー
+
+var userremove = function (screenName) {
+        var url = "https://api.twitter.com/1.1/friendships/destroy.json?screen_name=" + screenName;
+        oauth.post(url, "", successUserremove, nonerror);
+};
+
+var successUserremove = function (data){
+        document.getElementById("userfollow").innerHTML = "フォローする";
+};
+
+//自分の情報
 var my_account = function (data) {
         var url = "https://api.twitter.com/1.1/account/verify_credentials.json";
         oauth.get(url, function (data) {

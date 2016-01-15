@@ -130,3 +130,11 @@ $(document).on('click', '.tltrashicon', function() {
 	utils.status.show('ツイートを削除しました');
 });
 
+//フォロー
+$(document).on('click', '#userfollow', function() {
+	if(document.getElementById("userfollow").innerHTML == "フォロー中"){
+		userremove(document.getElementById("userscreenname").innerHTML);
+	}else{
+		userfollow(document.getElementById("userscreenname").innerHTML);
+	}
+});
