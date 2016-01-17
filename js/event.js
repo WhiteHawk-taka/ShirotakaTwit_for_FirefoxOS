@@ -22,6 +22,10 @@ $(document).on('click', '#getNextTweet', function() {
 $(document).on('click', '#mentionupdateButton', function(){
 	getMentionTimeline();
 });
+$(document).on('click', '#getNextMentionTweet', function() {
+	var $tweetId = $(".menu-button").filter(":last").attr('id');
+	getNextMentionTimeline($tweetId);
+});
 
 $(document).on('click', '#statusUpdateButton', function(){
 	newTweetPost();

@@ -5,6 +5,11 @@ var clearMentionTweetDom = function () {
         parent.empty();
 };
 
+//メンションの続き取得OAuth
+var getNextMentionTimeline = function (id_str) {
+        var url = "https://api.twitter.com/1.1/statuses/mentions_timeline.json?max_id=" + id_str + "&count=" + getTweetNumber;
+        oauth.get(url, successGetNextMentionTimeline, failureTimeLineHandler);
+};
 
 //通常メンション取得OAuth
 var getMentionTimeline = function () {
@@ -20,7 +25,6 @@ var first_getMentionTimeline = function () {
 
 //初回メンション取得処理
 var successFirstMention = function (data) {
-        clearMentionTweetDom();
         var tweetList = JSON.parse(data.text);
         mentionIndex: for (var i = 0; i < tweetList.length; i++) {
                 var tweet = tweetList[i];
@@ -61,6 +65,7 @@ var successFirstMention = function (data) {
                         }
                 }
         }
+        clearMentionTweetDom();
         addFirstMentionTweetToDom(tweet);
 };
 
@@ -102,6 +107,15 @@ var addFirstMentionTweetToDom = function (tweet) {
                         $("<img>").attr('src', buf_photo_url).addClass('tweetImage').appendTo($div);
                 }
 	}
+
+        var $parent = $("#mentionBox");
+        var $li = $("<li>").attr('id', "getNextMentionTweet").appendTo($parent);
+        var $div = $("<div>").addClass("tweet").appendTo($li);
+        var $userDiv = $("<div>").appendTo($div);
+        var $menudiv = $("<div>").appendTo($userDiv);
+
+        $("<h2>").addClass("nextTweet").text("続きを取得").appendTo($userDiv);
+
         $(".tweetText").each(function(){
                 $(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/g, '<a target="_blank" href="$&">$&</a>'));
         });
@@ -110,7 +124,6 @@ var addFirstMentionTweetToDom = function (tweet) {
 
 //通常メンション取得処理
 var successMention = function (data) {
-        clearMentionTweetDom();
         var tweetList = JSON.parse(data.text);
         var buf_screenName = [];
         var buf_name_str = [];
@@ -179,6 +192,7 @@ var successMention = function (data) {
                 mention_photo_url[2].push(buf_photo_url[2][i]);
                 mention_photo_url[3].push(buf_photo_url[3][i]);
         }
+        clearMentionTweetDom();
         addMentionTweetToDom(tweet);
 };
 
@@ -220,7 +234,49 @@ var addMentionTweetToDom = function (tweet) {
                         $("<img>").attr('src', buf_photo_url).addClass('tweetImage').appendTo($div);
                 }
 	}
+
+        var $parent = $("#mentionBox");
+        var $li = $("<li>").attr('id', "getNextMentionTweet").appendTo($parent);
+        var $div = $("<div>").addClass("tweet").appendTo($li);
+        var $userDiv = $("<div>").appendTo($div);
+        var $menudiv = $("<div>").appendTo($userDiv);
+
+        $("<h2>").addClass("nextTweet").text("続きを取得").appendTo($userDiv);
+
         $(".tweetText").each(function(){
                 $(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/g, '<a target="_blank" href="$&">$&</a>'));
         });
 };
+
+
+//続き取得データ処理
+var successGetNextMentionTimeline = function (data) {
+        var tweetList = JSON.parse(data.text);
+        for (var i = 1; i < tweetList.length; i++) {
+                var tweet = tweetList[i];
+
+                mention_screenName.unshift(tweet.user.screen_name);
+                mention_name_str.unshift(tweet.user.name);
+                mention_tweetText.unshift(tweet.text);
+                mention_id_str.unshift(tweet.id_str);
+                mention_prof_img_url.unshift(tweet.user.profile_image_url);
+
+                mention_photo_url[0].unshift(null);
+                mention_photo_url[1].unshift(null);
+                mention_photo_url[2].unshift(null);
+                mention_photo_url[3].unshift(null);
+                try{
+                        mention_photo_url[0][0] = tweet.extended_entities.media[0].media_url_https;
+                        mention_photo_url[1][0] = tweet.extended_entities.media[1].media_url_https;
+                        mention_photo_url[2][0] = tweet.extended_entities.media[2].media_url_https;
+                        mention_photo_url[3][0] = tweet.extended_entities.media[3].media_url_https;
+
+                } catch (e) {
+                }
+
+        }
+        clearMentionTweetDom();
+        addFirstMentionTweetToDom(tweet);
+};
+
+
