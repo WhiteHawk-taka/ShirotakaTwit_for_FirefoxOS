@@ -48,6 +48,18 @@
 	box-sizing: border-box;
 }
 
+#tweetBox li:last-child{
+	width: 100%;
+	min-height: 70px;
+	padding: 5px 5px 10px;
+	padding-bottom: 3rem;
+	border-bottom: 1px solid gray;
+	word-wrap: break-word;
+	overflow: hidden;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
 #mentionBox li{
 	width: 100%;
 	min-height: 70px;

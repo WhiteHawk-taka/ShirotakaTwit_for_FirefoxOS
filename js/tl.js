@@ -4,6 +4,11 @@ var clearTweetDom = function () {
         var parent = $("#tweetBox");
         parent.empty();
 };
+//タイムラインの続き取得OAuth
+var getNextHomeTimeline = function (id_str) {
+        var url = "https://api.twitter.com/1.1/statuses/home_timeline.json?max_id=" + id_str + "&count=" + getTweetNumber;
+        oauth.get(url, successGetNextHomeTimeline, failureTimeLineHandler);
+};
 
 //通常タイムライン取得OAuth
 var getHomeTimeline = function () {
@@ -19,7 +24,6 @@ var first_getHomeTimeline = function () {
 
 //初回タイムライン取得データ処理
 var successFirstTimeline = function (data) {
-        clearTweetDom();
         var tweetList = JSON.parse(data.text);
         tweetIndex: for (var i = 0; i < tweetList.length; i++) {
                 var tweet = tweetList[i];
@@ -30,6 +34,7 @@ var successFirstTimeline = function (data) {
                         }
                 }
                 //retweeted
+                console.log(tweet);
                 if(tweet.retweeted_status){
                         retweeted_user.unshift(tweet.user.name);
                         screenName.unshift(tweet.retweeted_status.user.screen_name);
@@ -99,6 +104,7 @@ var successFirstTimeline = function (data) {
                 }
 
         }
+        clearTweetDom();
         addFirstTweetToDom(tweet);
 };
 
@@ -146,6 +152,14 @@ var addFirstTweetToDom = function (tweet) {
                         $("<div>").addClass("retweetUser").text(retweeted_user[i] + " さんがリツイート").appendTo($div);
                 }
 	}
+        var $parent = $("#tweetBox");
+        var $li = $("<li>").attr('id', "getNextTweet").appendTo($parent);
+        var $div = $("<div>").addClass("tweet").appendTo($li);
+        var $userDiv = $("<div>").appendTo($div);
+        var $menudiv = $("<div>").appendTo($userDiv);
+
+        $("<h2>").addClass("nextTweet").text("続きを取得").appendTo($userDiv);
+
         $(".tweetText").each(function(){
                 $(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/g, '<a target="_blank" href="$&">$&</a>'));
         });
@@ -155,7 +169,6 @@ var addFirstTweetToDom = function (tweet) {
 
 //通常ライムライン取得データ処理
 var successGetHomeTimeline = function (data) {
-        clearTweetDom();
         var buf_photo_url = [[], [], [], []];
         var tweetList = JSON.parse(data.text);
         var buf_screenName = [];
@@ -271,6 +284,7 @@ var successGetHomeTimeline = function (data) {
                 photo_url[2].push(buf_photo_url[2][i]);
                 photo_url[3].push(buf_photo_url[3][i]);
         }
+        clearTweetDom();
         addTweetToDom(tweet);
 };
 
@@ -316,8 +330,76 @@ var addTweetToDom = function (tweet) {
                         $("<div>").addClass("retweetUser").text(retweeted_user[i] + " さんがリツイート").appendTo($div);
                 }
 	}
+
+        var $parent = $("#tweetBox");
+        var $li = $("<li>").attr('id', "getNextTweet").appendTo($parent);
+        var $div = $("<div>").addClass("tweet").appendTo($li);
+        var $userDiv = $("<div>").appendTo($div);
+        var $menudiv = $("<div>").appendTo($userDiv);
+
+        $("<h2>").addClass("nextTweet").text("続きを取得").appendTo($userDiv);
         $(".tweetText").each(function(){
                 $(this).html($(this).html().replace(/(https?|ftps?)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/g, '<a target="_blank" href="$&">$&</a>'));
         });
 
 };
+
+
+//続き取得データ処理
+var successGetNextHomeTimeline = function (data) {
+        var tweetList = JSON.parse(data.text);
+        console.log(tweetList);
+        for (var i = 1; i < tweetList.length; i++) {
+                var tweet = tweetList[i];
+
+                //retweeted
+                console.log(tweet);
+                if(tweet.retweeted_status){
+                        retweeted_user.unshift(tweet.user.name);
+                        screenName.unshift(tweet.retweeted_status.user.screen_name);
+                        name_str.unshift(tweet.retweeted_status.user.name);
+                        tweetText.unshift(tweet.retweeted_status.text);
+                        id_str.unshift(tweet.retweeted_status.id_str);
+                        prof_img_url.unshift(tweet.retweeted_status.user.profile_image_url);
+
+                        photo_url[0].unshift(null);
+                        photo_url[1].unshift(null);
+                        photo_url[2].unshift(null);
+                        photo_url[3].unshift(null);
+                        try{
+                                photo_url[0][0] = tweet.retweeted_status.extended_entities.media[0].media_url_https;
+                                photo_url[1][0] = tweet.retweeted_status.extended_entities.media[1].media_url_https;
+                                photo_url[2][0] = tweet.retweeted_status.extended_entities.media[2].media_url_https;
+                                photo_url[3][0] = tweet.retweeted_status.extended_entities.media[3].media_url_https;
+
+                        } catch (e) {
+                        }
+                } else{
+
+                        //general
+                        retweeted_user.unshift(null);
+                        screenName.unshift(tweet.user.screen_name);
+                        name_str.unshift(tweet.user.name);
+                        tweetText.unshift(tweet.text);
+                        id_str.unshift(tweet.id_str);
+                        prof_img_url.unshift(tweet.user.profile_image_url);
+
+                        photo_url[0].unshift(null);
+                        photo_url[1].unshift(null);
+                        photo_url[2].unshift(null);
+                        photo_url[3].unshift(null);
+                        try{
+                                photo_url[0][0] = tweet.extended_entities.media[0].media_url_https;
+                                photo_url[1][0] = tweet.extended_entities.media[1].media_url_https;
+                                photo_url[2][0] = tweet.extended_entities.media[2].media_url_https;
+                                photo_url[3][0] = tweet.extended_entities.media[3].media_url_https;
+
+                        } catch (e) {
+                        }
+                }
+
+        }
+        clearTweetDom();
+        addFirstTweetToDom(tweet);
+};
+

@@ -15,6 +15,10 @@ $(document).on('click', '#backButton', function(){
 $(document).on('click', '.updateButton', function(){
 	getHomeTimeline();
 });
+$(document).on('click', '#getNextTweet', function() {
+	var $tweetId = $(".menu-button").filter(":last").attr('id');
+	getNextHomeTimeline($tweetId);
+});
 $(document).on('click', '#mentionupdateButton', function(){
 	getMentionTimeline();
 });
