@@ -32,6 +32,7 @@ var mention_favorited = [];
 var mention_photo_url = [[],[],[],[]];
 
 var getTweetNumber = "";
+var iconimagebigger = "";
 
 
 window.onload = function () {
@@ -39,7 +40,12 @@ window.onload = function () {
         if(localStorage.getItem("getTweetNumber")){
                 getTweetNumber = localStorage.getItem("getTweetNumber");
         }else{
-                getTweetNumber = "100";
+                getTweetNumber = 100;
+        }
+        if(localStorage.getItem("iconimagebigger")){
+                iconimagebigger = localStorage.getItem("iconimagebigger");
+        }else{
+                iconimagebigger = 1;
         }
         // OAuth関連の処理を開始する
         localStorage.setItem("firstoauth", 0);

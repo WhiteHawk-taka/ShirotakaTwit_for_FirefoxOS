@@ -34,14 +34,20 @@ var successFirstTimeline = function (data) {
                         }
                 }
                 //retweeted
-                console.log(tweet);
                 if(tweet.retweeted_status){
+                        if(iconimagebigger == 1){
+                                var img_tmp = tweet.retweeted_status.user.profile_image_url_https.substring(0, tweet.retweeted_status.user.profile_image_url_https.indexOf("normal"));
+                                var fileextension = tweet.retweeted_status.user.profile_image_url_https.slice(tweet.retweeted_status.user.profile_image_url_https.lastIndexOf("."));
+                                var profile_image_url_https2 = img_tmp + "bigger" + fileextension;
+                        }else{
+                                var profile_image_url_https2 = tweet.retweeted_status.user.profile_image_url_https;
+                        }
                         retweeted_user.unshift(tweet.user.name);
                         screenName.unshift(tweet.retweeted_status.user.screen_name);
                         name_str.unshift(tweet.retweeted_status.user.name);
                         tweetText.unshift(tweet.retweeted_status.text);
                         id_str.unshift(tweet.retweeted_status.id_str);
-                        prof_img_url.unshift(tweet.retweeted_status.user.profile_image_url);
+                        prof_img_url.unshift(profile_image_url_https2);
                         try{
                                 photo_url[0].unshift(tweet.retweeted_status.extended_entities.media[0].media_url_https);
                                 photo_url[1].unshift(tweet.retweeted_status.extended_entities.media[1].media_url_https);
@@ -70,12 +76,19 @@ var successFirstTimeline = function (data) {
                 } else{
 
                         //general
+                        if(iconimagebigger == 1){
+                                var img_tmp = tweet.user.profile_image_url_https.substring(0, tweet.user.profile_image_url_https.indexOf("normal"));
+                                var fileextension = tweet.user.profile_image_url_https.slice(tweet.user.profile_image_url_https.lastIndexOf("."));
+                                var profile_image_url_https2 = img_tmp + "bigger" + fileextension;
+                        }else{
+                                var profile_image_url_https2 = tweet.user.profile_image_url_https;
+                        }
                         retweeted_user.unshift(null);
                         screenName.unshift(tweet.user.screen_name);
                         name_str.unshift(tweet.user.name);
                         tweetText.unshift(tweet.text);
                         id_str.unshift(tweet.id_str);
-                        prof_img_url.unshift(tweet.user.profile_image_url);
+                        prof_img_url.unshift(profile_image_url_https2);
                         try{
                                 photo_url[0].unshift(tweet.extended_entities.media[0].media_url_https);
                                 photo_url[1].unshift(tweet.extended_entities.media[1].media_url_https);
@@ -194,12 +207,19 @@ var successGetHomeTimeline = function (data) {
                 }
 
                 if(tweet.retweeted_status){
+                        if(iconimagebigger == 1){
+                                var img_tmp = tweet.retweeted_status.user.profile_image_url_https.substring(0, tweet.retweeted_status.user.profile_image_url_https.indexOf("normal"));
+                                var fileextension = tweet.retweeted_status.user.profile_image_url_https.slice(tweet.retweeted_status.user.profile_image_url_https.lastIndexOf("."));
+                                var profile_image_url_https2 = img_tmp + "bigger" + fileextension;
+                        }else{
+                                var profile_image_url_https2 = tweet.retweeted_status.user.profile_image_url_https;
+                        }
                         buf_retweeted_user.push(tweet.user.name);
                         buf_screenName.push(tweet.retweeted_status.user.screen_name);
                         buf_name_str.push(tweet.retweeted_status.user.name);
                         buf_tweetText.push(tweet.retweeted_status.text);
                         buf_id_str.push(tweet.retweeted_status.id_str);
-                        buf_prof_img_url.push(tweet.retweeted_status.user.profile_image_url);
+                        buf_prof_img_url.push(profile_image_url_https2);
                         try{
                                 buf_photo_url[0].push(tweet.retweeted_status.extended_entities.media[0].media_url_https);
                                 buf_photo_url[1].push(tweet.retweeted_status.extended_entities.media[1].media_url_https);
@@ -226,12 +246,19 @@ var successGetHomeTimeline = function (data) {
                                 }
                         }
                 }else{
+                        if(iconimagebigger == 1){
+                                var img_tmp = tweet.user.profile_image_url_https.substring(0, tweet.user.profile_image_url_https.indexOf("normal"));
+                                var fileextension = tweet.user.profile_image_url_https.slice(tweet.user.profile_image_url_https.lastIndexOf("."));
+                                var profile_image_url_https2 = img_tmp + "bigger" + fileextension;
+                        }else{
+                                var profile_image_url_https2 = tweet.user.profile_image_url_https;
+                        }
                         buf_retweeted_user.push(null);
                         buf_screenName.push(tweet.user.screen_name);
                         buf_name_str.push(tweet.user.name);
                         buf_tweetText.push(tweet.text);
                         buf_id_str.push(tweet.id_str);
-                        buf_prof_img_url.push(tweet.user.profile_image_url);
+                        buf_prof_img_url.push(profile_image_url_https2);
                         try{
                                 buf_photo_url[0].push(tweet.extended_entities.media[0].media_url_https);
                                 buf_photo_url[1].push(tweet.extended_entities.media[1].media_url_https);
@@ -348,19 +375,24 @@ var addTweetToDom = function (tweet) {
 //続き取得データ処理
 var successGetNextHomeTimeline = function (data) {
         var tweetList = JSON.parse(data.text);
-        console.log(tweetList);
         for (var i = 1; i < tweetList.length; i++) {
                 var tweet = tweetList[i];
 
                 //retweeted
-                console.log(tweet);
                 if(tweet.retweeted_status){
+                        if(iconimagebigger == 1){
+                                var img_tmp = tweet.retweeted_status.user.profile_image_url_https.substring(0, tweet.retweeted_status.user.profile_image_url_https.indexOf("normal"));
+                                var fileextension = tweet.retweeted_status.user.profile_image_url_https.slice(tweet.retweeted_status.user.profile_image_url_https.lastIndexOf("."));
+                                var profile_image_url_https2 = img_tmp + "bigger" + fileextension;
+                        }else{
+                                var profile_image_url_https2 = tweet.retweeted_status.user.profile_image_url_https;
+                        }
                         retweeted_user.unshift(tweet.user.name);
                         screenName.unshift(tweet.retweeted_status.user.screen_name);
                         name_str.unshift(tweet.retweeted_status.user.name);
                         tweetText.unshift(tweet.retweeted_status.text);
                         id_str.unshift(tweet.retweeted_status.id_str);
-                        prof_img_url.unshift(tweet.retweeted_status.user.profile_image_url);
+                        prof_img_url.unshift(profile_image_url_https2);
 
                         photo_url[0].unshift(null);
                         photo_url[1].unshift(null);
@@ -377,12 +409,19 @@ var successGetNextHomeTimeline = function (data) {
                 } else{
 
                         //general
+                        if(iconimagebigger == 1){
+                                var img_tmp = tweet.user.profile_image_url_https.substring(0, tweet.user.profile_image_url_https.indexOf("normal"));
+                                var fileextension = tweet.user.profile_image_url_https.slice(tweet.user.profile_image_url_https.lastIndexOf("."));
+                                var profile_image_url_https2 = img_tmp + "bigger" + fileextension;
+                        }else{
+                                var profile_image_url_https2 = tweet.user.profile_image_url_https;
+                        }
                         retweeted_user.unshift(null);
                         screenName.unshift(tweet.user.screen_name);
                         name_str.unshift(tweet.user.name);
                         tweetText.unshift(tweet.text);
                         id_str.unshift(tweet.id_str);
-                        prof_img_url.unshift(tweet.user.profile_image_url);
+                        prof_img_url.unshift(profile_image_url_https2);
 
                         photo_url[0].unshift(null);
                         photo_url[1].unshift(null);
