@@ -145,7 +145,8 @@ section[role="region"] > header:first-child {
 }
 
 section[role="region"] > header:first-child h1 {
-  color: #303030;
+  /* color: #303030; */
+	color: #fdf6e3;
 }
 
 section[role="region"] > header:first-child a,
