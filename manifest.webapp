@@ -10,9 +10,9 @@
     },
     "type": "privileged",
     "permissions": {
-    	"systemXHR": {
-    		"description": "for OAuth"
-    	}
+        "systemXHR": {
+            "description": "for OAuth"
+        }
     },
     "developer": { 
     "name": "Shirotaka_Pro", 

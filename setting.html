@@ -1,105 +1,105 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
-	<title>ShirotakaTwit</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>ShirotakaTwit</title>
 
-	<!-- js -->
-	<script src="js/lib/jsOAuth-1.3.7.js"></script>
-	<script src="js/lib/jquery-2.1.4.js"></script>
-	<script src="js/setting.js"></script>
+    <!-- js -->
+    <script src="js/lib/jsOAuth-1.3.7.js"></script>
+    <script src="js/lib/jquery-2.1.4.js"></script>
+    <script src="js/setting.js"></script>
 
-	<!-- Building blocks -->
-	<link rel="stylesheet" href="style/action_menu.css">
-	<link rel="stylesheet" href="style/buttons.css">
-	<link rel="stylesheet" href="style/confirm.css">
-	<link rel="stylesheet" href="style/edit_mode.css">
-	<link rel="stylesheet" href="style/headers.css">
-	<link rel="stylesheet" href="style/input_areas.css">
-	<link rel="stylesheet" href="style/status.css">
-	<link rel="stylesheet" href="style/switches.css">
-	<link rel="stylesheet" href="style/drawer.css">
-	<link rel="stylesheet" href="style/lists.css">
-	<link rel="stylesheet" href="style/progress_activity.css">
-	<link rel="stylesheet" href="style/scrolling.css">
-	<link rel="stylesheet" href="style/seekbars.css">
-	<link rel="stylesheet" href="style/tabs.css">
-	<link rel="stylesheet" href="style/toolbars.css">
-	<link rel="stylesheet" href="style/icons.css">
+    <!-- Building blocks -->
+    <link rel="stylesheet" href="style/action_menu.css">
+    <link rel="stylesheet" href="style/buttons.css">
+    <link rel="stylesheet" href="style/confirm.css">
+    <link rel="stylesheet" href="style/edit_mode.css">
+    <link rel="stylesheet" href="style/headers.css">
+    <link rel="stylesheet" href="style/input_areas.css">
+    <link rel="stylesheet" href="style/status.css">
+    <link rel="stylesheet" href="style/switches.css">
+    <link rel="stylesheet" href="style/drawer.css">
+    <link rel="stylesheet" href="style/lists.css">
+    <link rel="stylesheet" href="style/progress_activity.css">
+    <link rel="stylesheet" href="style/scrolling.css">
+    <link rel="stylesheet" href="style/seekbars.css">
+    <link rel="stylesheet" href="style/tabs.css">
+    <link rel="stylesheet" href="style/toolbars.css">
+    <link rel="stylesheet" href="style/icons.css">
 
-	<!-- Icons -->
-	<link rel="stylesheet" href="icons/styles/action_icons.css">
-	<link rel="stylesheet" href="icons/styles/media_icons.css">
-	<link rel="stylesheet" href="icons/styles/comms_icons.css">
-	<link rel="stylesheet" href="icons/styles/settings_icons.css">
+    <!-- Icons -->
+    <link rel="stylesheet" href="icons/styles/action_icons.css">
+    <link rel="stylesheet" href="icons/styles/media_icons.css">
+    <link rel="stylesheet" href="icons/styles/comms_icons.css">
+    <link rel="stylesheet" href="icons/styles/settings_icons.css">
 
-	<!-- Transitions -->
-	<link rel="stylesheet" href="transitions.css">
+    <!-- Transitions -->
+    <link rel="stylesheet" href="transitions.css">
 
-	<!-- Util CSS: some extra tricks -->
-	<link rel="stylesheet" href="util.css">
+    <!-- Util CSS: some extra tricks -->
+    <link rel="stylesheet" href="util.css">
 
-	<!-- Additional markup to make Building Blocks kind of cross browser -->
-	<!--link rel="stylesheet" href="cross_browser.css"-->
-	<!-- in html -->
-	<link rel="stylesheet" href="bbinhtml.css">
+    <!-- Additional markup to make Building Blocks kind of cross browser -->
+    <!--link rel="stylesheet" href="cross_browser.css"-->
+    <!-- in html -->
+    <link rel="stylesheet" href="bbinhtml.css">
 
-	<!-- css -->
-	<link rel="stylesheet" href="css/setting.css">
+    <!-- css -->
+    <link rel="stylesheet" href="css/setting.css">
 
-	</head>
+    </head>
 
-	<body>
-		<section id="index" data-position="current">
-			<!-- タイムライン -->
-			<section role="region" id="drawer">
-				<header class="fixed">
-						<a id="settingbackButton" href="index.html">
-							<img src="img/Entypo+/Entypo+/chevron-left.svg"></img>
-						</a>
-					<h1> 設定 </h1>
-				</header>
-				<article class="scrollable header">
-					<div>
-						<ul id="settingBox">
-							<li>
-								<p id="getTweetNumber">ツイート取得件数 (初期値100)</p>
-							</li>
-							<li>
-								<p id="iconimagebigger">アイコンの高解像度化(初期値ON)</p>
-							</li>	
-							<li><p id="viewShirotakaSite">Webサイトを見る</p></li>
-							<li><p>バージョン 1.8.0</p></li>
-						</ul>
-					</div>
-				</article>
-			</section>
-		</section>
-		<section id="getTweetNumberMenu" data-position="back" class="fade-out">
-				<form role="dialog" data-type="action">
-	      			<header>一度に取得するツイート数</header> 
-    	 			<menu>
-    					<button id="getTweetNumber10"> 10 </button>
-        				<button id="getTweetNumber20"> 20 </button>
-        				<button id="getTweetNumber30"> 30 </button>
-        				<button id="getTweetNumber40"> 40 </button>
-        				<button id="getTweetNumber50"> 50 </button>
-        				<button id="getTweetNumber100"> 100 </button>
-        				<button id="getTweetNumber200"> 200 </button>
-        				<button> Cancel </button>
-      				</menu>
-    			</form>
-		</section>
-		<section  id="iconimagebiggerMenu" data-position="back" class="fade-out">
-			<form role="dialog" data-type="action">
-				<header>アイコンの高解像度化</header>
-					<menu>
-						<button id="iconimagebigger_ON">ON</button>
-						<button id="iconimagebigger_OFF">OFF</button>
-						<button> Cancel </button>
-					</menu>
-			</form>
-		</section>
-	</body>
+    <body>
+        <section id="index" data-position="current">
+            <!-- タイムライン -->
+            <section role="region" id="drawer">
+                <header class="fixed">
+                        <a id="settingbackButton" href="index.html">
+                            <img src="img/Entypo+/Entypo+/chevron-left.svg"></img>
+                        </a>
+                    <h1> 設定 </h1>
+                </header>
+                <article class="scrollable header">
+                    <div>
+                        <ul id="settingBox">
+                            <li>
+                                <p id="getTweetNumber">ツイート取得件数 (初期値100)</p>
+                            </li>
+                            <li>
+                                <p id="iconimagebigger">アイコンの高解像度化(初期値ON)</p>
+                            </li>    
+                            <li><p id="viewShirotakaSite">Webサイトを見る</p></li>
+                            <li><p>バージョン 1.8.0</p></li>
+                        </ul>
+                    </div>
+                </article>
+            </section>
+        </section>
+        <section id="getTweetNumberMenu" data-position="back" class="fade-out">
+                <form role="dialog" data-type="action">
+                      <header>一度に取得するツイート数</header> 
+                     <menu>
+                        <button id="getTweetNumber10"> 10 </button>
+                        <button id="getTweetNumber20"> 20 </button>
+                        <button id="getTweetNumber30"> 30 </button>
+                        <button id="getTweetNumber40"> 40 </button>
+                        <button id="getTweetNumber50"> 50 </button>
+                        <button id="getTweetNumber100"> 100 </button>
+                        <button id="getTweetNumber200"> 200 </button>
+                        <button> Cancel </button>
+                      </menu>
+                </form>
+        </section>
+        <section  id="iconimagebiggerMenu" data-position="back" class="fade-out">
+            <form role="dialog" data-type="action">
+                <header>アイコンの高解像度化</header>
+                    <menu>
+                        <button id="iconimagebigger_ON">ON</button>
+                        <button id="iconimagebigger_OFF">OFF</button>
+                        <button> Cancel </button>
+                    </menu>
+            </form>
+        </section>
+    </body>
 </html>
