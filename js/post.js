@@ -3,39 +3,37 @@
 var newTweetPost = function () {
   post_tweettext = "";
   post_tweettext = document.getElementById("newTweetText").value;
-  var data;
   tweet_media = [];
   post_imagefile = [];
-  var flag = 0;
-  for (var i = 0; i < 4; i++) {
-    try {
-      post_imagefile[i] = document.getElementsByClassName("postImageform")[i].files[0];
-      if (typeof post_imagefile[i] !== "undefined") {
-        flag = 1;
-        data = {
-          "media": post_imagefile[i]
-        };
-        oauth.post('https://upload.twitter.com/1.1/media/upload.json', data , setTweetMedia, failurePostHandler);
-      }
-    } catch (e) {
+  var imageFiles = document.getElementsByClassName("postImageform");
+  for (var i = 0; i < imageFiles.length; i++){
+    if (imageFiles[i].files[0]) {
+      post_imagefile.push(imageFiles[i].files[0]);
     }
   }
-  if (flag === 1) {
-    return;
-  }
-  tweetPost();
+  Promise.all(post_imagefile.map(function (val, index) {
+    return setTweetMedia(index);
+  })).then(function (data) {
+    for (var i = 0; i < data.length; i++) {
+      tweet_media[i] = data[i];
+    }
+    tweetPost();
+    tweet_media.push(data);
+  }, successHandler);
 };
-var setTweetMedia = function (data) {
-  var mediaids = JSON.parse(data.text);
-  for (var i = 0; i < 4; i++) {
-    if (typeof tweet_media[i] === "undefined") {
-      tweet_media[i] = mediaids.media_id_string;
-      if (i === post_imagefile.length - 1 || (i === post_imagefile.length - 2 && typeof post_imagefile[post_imagefile.length - 1] === "undefined")) {
-        tweetPost();
-      }
-      break;
-    }
-  }
+
+var setTweetMedia = function (i) {
+  return new Promise(function (resolve, reject) {
+    var data = {
+      "media": post_imagefile[i]
+    };
+    oauth.post('https://upload.twitter.com/1.1/media/upload.json', data , function (row) {
+      var mediaids = JSON.parse(row.text);
+      resolve(mediaids.media_id_string);
+    }, function () {
+      reject();
+    });
+  });
 };
 
 var tweetPost = function () {
@@ -79,27 +77,23 @@ var replyTweetPost = function (repId) {
   post_repId = repId;
   post_tweettext = "";
   post_tweettext = document.getElementById("newTweetText").value;
-  var data;
   tweet_media = [];
   post_imagefile = [];
-  var flag = 0;
-  for (var i = 0; i < 4; i++) {
-    try {
-      post_imagefile[i] = document.getElementsByClassName("postImageform")[i].files[0];
-      if (typeof post_imagefile[i] !== "undefined") {
-        flag = 1;
-        data = {
-          "media": post_imagefile[i]
-        };
-        oauth.post('https://upload.twitter.com/1.1/media/upload.json', data , setTweetMedia, failurePostHandler);
-      }
-    } catch (e) {
+  var imageFiles = document.getElementsByClassName("postImageform");
+  for (var i = 0; i < imageFiles.length; i++){
+    if (imageFiles[i].files[0]) {
+      post_imagefile.push(imageFiles[i].files[0]);
     }
   }
-  if (flag === 1) {
-    return;
-  }
-  tweetPost(repId);
+  Promise.all(post_imagefile.map(function (val, index) {
+    return setTweetMedia(index);
+  })).then(function (data) {
+    for (var i = 0; i < data.length; i++) {
+      tweet_media[i] = data[i];
+    }
+    tweetReplyPost(repId);
+    tweet_media.push(data);
+  }, successHandler);
 };
 
 var tweetReplyPost = function (repId) {
@@ -152,7 +146,7 @@ var addNewPostImage = function () {
 
 var addNewImageForm = function () {
   $("#addPostImagebutton").remove();
-  $("<input>").attr("type", "file").addClass("postImageform").appendTo("#postTweetImage");
+  $("<input>").attr("type", "file").attr("accept", "image/*").addClass("postImageform").appendTo("#postTweetImage");
   var $clearbutton = $("<button>").addClass("clearImage").appendTo("#postTweetImage");
   $("<img>").attr("id", "clearImageicon").attr("src", "img/Entypo+/Entypo+/trash.svg").appendTo($clearbutton);
 };
