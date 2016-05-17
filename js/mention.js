@@ -35,32 +35,30 @@ var successFirstMention = function (data) {
       }
     }
     if (iconimagebigger == 1) {
-        var profile_image_url_https2 = tweet.user.profile_image_url_https.replace(/_normal/, '_bigger');
-      } else {
-        var profile_image_url_https2 = tweet.user.profile_image_url_https;
-      }
-      mention_retweeted_user.unshift(null);
-      mention_screenName.unshift(tweet.user.screen_name);
-      mention_name_str.unshift(tweet.user.name);
-      mention_tweetText.unshift(tweet.text);
-      mention_id_str.unshift(tweet.id_str);
-      mention_prof_img_url.unshift(profile_image_url_https2);
-      mention_photo_url[0].unshift(null);
-      mention_photo_url[1].unshift(null);
-      mention_photo_url[2].unshift(null);
-      mention_photo_url[3].unshift(null);
+      var profile_image_url_https2 = tweet.user.profile_image_url_https.replace(/_normal/, '_bigger');
+    } else {
+      var profile_image_url_https2 = tweet.user.profile_image_url_https;
+    }
+    mention_screenName.unshift(tweet.user.screen_name);
+    mention_name_str.unshift(tweet.user.name);
+    mention_tweetText.unshift(tweet.text);
+    mention_id_str.unshift(tweet.id_str);
+    mention_prof_img_url.unshift(profile_image_url_https2);
+    mention_photo_url[0].unshift(null);
+    mention_photo_url[1].unshift(null);
+    mention_photo_url[2].unshift(null);
+    mention_photo_url[3].unshift(null);
+    try {
+      mention_photo_url[0][0] = tweet.extended_entities.media[0].media_url_https;
+      mention_photo_url[1][0] = tweet.extended_entities.media[1].media_url_https;
+      mention_photo_url[2][0] = tweet.extended_entities.media[2].media_url_https;
+      mention_photo_url[3][0] = tweet.extended_entities.media[3].media_url_https;
+    } catch (e) {
       try {
-        mention_photo_url[0][0] = tweet.extended_entities.media[0].media_url_https;
-        mention_photo_url[1][0] = tweet.extended_entities.media[1].media_url_https;
-        mention_photo_url[2][0] = tweet.extended_entities.media[2].media_url_https;
-        mention_photo_url[3][0] = tweet.extended_entities.media[3].media_url_https;
-      } catch (e) {
-        try {
-          if (tweet.entities.media[0].media_url_https) {
-            mention_photo_url[0][0] = tweet.entities.media[0].media_url_https;
-          }
-        } catch (e) {
+        if (tweet.entities.media[0].media_url_https) {
+          mention_photo_url[0][0] = tweet.entities.media[0].media_url_https;
         }
+      } catch (e) {
       }
     }
   }
@@ -86,32 +84,30 @@ var successMention = function (data) {
       }
     }
     if (iconimagebigger == 1) {
-        var profile_image_url_https2 = tweet.user.profile_image_url_https.replace(/_normal/, '_bigger');
-      } else {
-        var profile_image_url_https2 = tweet.user.profile_image_url_https;
-      }
-      buf_retweeted_user.unshift(null);
-      buf_screenName.unshift(tweet.user.screen_name);
-      buf_name_str.unshift(tweet.user.name);
-      buf_tweetText.unshift(tweet.text);
-      buf_id_str.unshift(tweet.id_str);
-      buf_prof_img_url.unshift(profile_image_url_https2);
-      buf_photo_url[0].unshift(null);
-      buf_photo_url[1].unshift(null);
-      buf_photo_url[2].unshift(null);
-      buf_photo_url[3].unshift(null);
+      var profile_image_url_https2 = tweet.user.profile_image_url_https.replace(/_normal/, '_bigger');
+    } else {
+      var profile_image_url_https2 = tweet.user.profile_image_url_https;
+    }
+    buf_screenName.unshift(tweet.user.screen_name);
+    buf_name_str.unshift(tweet.user.name);
+    buf_tweetText.unshift(tweet.text);
+    buf_id_str.unshift(tweet.id_str);
+    buf_prof_img_url.unshift(profile_image_url_https2);
+    buf_photo_url[0].unshift(null);
+    buf_photo_url[1].unshift(null);
+    buf_photo_url[2].unshift(null);
+    buf_photo_url[3].unshift(null);
+    try {
+      buf_photo_url[0][0] = tweet.extended_entities.media[0].media_url_https;
+      buf_photo_url[1][0] = tweet.extended_entities.media[1].media_url_https;
+      buf_photo_url[2][0] = tweet.extended_entities.media[2].media_url_https;
+      buf_photo_url[3][0] = tweet.extended_entities.media[3].media_url_https;
+    } catch (e) {
       try {
-        buf_photo_url[0][0] = tweet.extended_entities.media[0].media_url_https;
-        buf_photo_url[1][0] = tweet.extended_entities.media[1].media_url_https;
-        buf_photo_url[2][0] = tweet.extended_entities.media[2].media_url_https;
-        buf_photo_url[3][0] = tweet.extended_entities.media[3].media_url_https;
-      } catch (e) {
-        try {
-          if (tweet.entities.media[0].media_url_https) {
-            buf_photo_url[0][0] = tweet.entities.media[0].media_url_https;
-          }
-        } catch (e) {
+        if (tweet.entities.media[0].media_url_https) {
+          buf_photo_url[0][0] = tweet.entities.media[0].media_url_https;
         }
+      } catch (e) {
       }
     }
   }
@@ -139,9 +135,7 @@ var successGetNextMentionTimeline = function (data) {
     var tweet = tweetList[i];
 
     if (iconimagebigger == 1) {
-      var img_tmp = tweet.user.profile_image_url_https.substring(0, tweet.user.profile_image_url_https.indexOf("normal"));
-      var fileextension = tweet.user.profile_image_url_https.slice(tweet.user.profile_image_url_https.lastIndexOf("."));
-      var profile_image_url_https2 = img_tmp + "bigger" + fileextension;
+      var profile_image_url_https2 = tweet.user.profile_image_url_https.replace(/_normal/, '_bigger');
     } else {
       var profile_image_url_https2 = tweet.user.profile_image_url_https;
     }
@@ -150,7 +144,6 @@ var successGetNextMentionTimeline = function (data) {
     mention_tweetText.unshift(tweet.text);
     mention_id_str.unshift(tweet.id_str);
     mention_prof_img_url.unshift(profile_image_url_https2);
-
     mention_photo_url[0].unshift(null);
     mention_photo_url[1].unshift(null);
     mention_photo_url[2].unshift(null);
@@ -160,10 +153,14 @@ var successGetNextMentionTimeline = function (data) {
       mention_photo_url[1][0] = tweet.extended_entities.media[1].media_url_https;
       mention_photo_url[2][0] = tweet.extended_entities.media[2].media_url_https;
       mention_photo_url[3][0] = tweet.extended_entities.media[3].media_url_https;
-
     } catch (e) {
+      try {
+        if (tweet.entities.media[0].media_url_https) {
+          mention_photo_url[0][0] = tweet.entities.media[0].media_url_https;
+        }
+      } catch (e) {
+      }
     }
-
   }
   clearMentionTweetDom();
   addFirstMentionTweetToDom(tweet);
