@@ -54,7 +54,7 @@ var tweetPost = function () {
   }
   var medias_s = medias.substr(0 , medias.length - 1);
   if (post_tweettext === "") {
-    setdata = {
+    var setdata = {
       "media_ids": medias_s
     };
     oauth.post('https://api.twitter.com/1.1/statuses/update.json', setdata, successHandler, failurePostHandler);
