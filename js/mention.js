@@ -41,7 +41,7 @@ var successFirstMention = function (data) {
     }
     mention_screenName.unshift(tweet.user.screen_name);
     mention_name_str.unshift(tweet.user.name);
-    mention_tweetText.unshift(tweet.text);
+    mention_tweetText.unshift(tweet.text.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&'));
     mention_id_str.unshift(tweet.id_str);
     mention_prof_img_url.unshift(profile_image_url_https2);
     mention_photo_url[0].unshift(null);
@@ -90,7 +90,7 @@ var successMention = function (data) {
     }
     buf_screenName.unshift(tweet.user.screen_name);
     buf_name_str.unshift(tweet.user.name);
-    buf_tweetText.unshift(tweet.text);
+    buf_tweetText.unshift(tweet.text.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&'));
     buf_id_str.unshift(tweet.id_str);
     buf_prof_img_url.unshift(profile_image_url_https2);
     buf_photo_url[0].unshift(null);
@@ -141,7 +141,7 @@ var successGetNextMentionTimeline = function (data) {
     }
     mention_screenName.unshift(tweet.user.screen_name);
     mention_name_str.unshift(tweet.user.name);
-    mention_tweetText.unshift(tweet.text);
+    mention_tweetText.unshift(tweet.text.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&'));
     mention_id_str.unshift(tweet.id_str);
     mention_prof_img_url.unshift(profile_image_url_https2);
     mention_photo_url[0].unshift(null);

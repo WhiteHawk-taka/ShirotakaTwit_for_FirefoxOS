@@ -37,7 +37,7 @@ var successFirstTimeline = function (data) {
       retweeted_user.unshift(tweet.user.name);
       screenName.unshift(tweet.retweeted_status.user.screen_name);
       name_str.unshift(tweet.retweeted_status.user.name);
-      tweetText.unshift(tweet.retweeted_status.text);
+      tweetText.unshift(tweet.retweeted_status.text.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&'));
       id_str.unshift(tweet.retweeted_status.id_str);
       prof_img_url.unshift(profile_image_url_https2);
       photo_url[0].unshift(null);
@@ -68,7 +68,7 @@ var successFirstTimeline = function (data) {
       retweeted_user.unshift(null);
       screenName.unshift(tweet.user.screen_name);
       name_str.unshift(tweet.user.name);
-      tweetText.unshift(tweet.text);
+      tweetText.unshift(tweet.text.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&'));
       id_str.unshift(tweet.id_str);
       prof_img_url.unshift(profile_image_url_https2);
       photo_url[0].unshift(null);
@@ -130,7 +130,7 @@ var successGetHomeTimeline = function (data) {
       buf_retweeted_user.unshift(tweet.user.name);
       buf_screenName.unshift(tweet.retweeted_status.user.screen_name);
       buf_name_str.unshift(tweet.retweeted_status.user.name);
-      buf_tweetText.unshift(tweet.retweeted_status.text);
+      buf_tweetText.unshift(tweet.retweeted_status.text.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&'));
       buf_id_str.unshift(tweet.retweeted_status.id_str);
       buf_prof_img_url.unshift(profile_image_url_https2);
       buf_photo_url[0].unshift(null);
@@ -161,7 +161,7 @@ var successGetHomeTimeline = function (data) {
       buf_retweeted_user.unshift(null);
       buf_screenName.unshift(tweet.user.screen_name);
       buf_name_str.unshift(tweet.user.name);
-      buf_tweetText.unshift(tweet.text);
+      buf_tweetText.unshift(tweet.text.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&'));
       buf_id_str.unshift(tweet.id_str);
       buf_prof_img_url.unshift(profile_image_url_https2);
       buf_photo_url[0].unshift(null);
@@ -215,7 +215,7 @@ var successGetNextHomeTimeline = function (data) {
       retweeted_user.unshift(tweet.user.name);
       screenName.unshift(tweet.retweeted_status.user.screen_name);
       name_str.unshift(tweet.retweeted_status.user.name);
-      tweetText.unshift(tweet.retweeted_status.text);
+      tweetText.unshift(tweet.retweeted_status.text.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&'));
       id_str.unshift(tweet.retweeted_status.id_str);
       prof_img_url.unshift(profile_image_url_https2);
       photo_url[0].unshift(null);
@@ -246,7 +246,7 @@ var successGetNextHomeTimeline = function (data) {
       retweeted_user.unshift(null);
       screenName.unshift(tweet.user.screen_name);
       name_str.unshift(tweet.user.name);
-      tweetText.unshift(tweet.text);
+      tweetText.unshift(tweet.text.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&'));
       id_str.unshift(tweet.id_str);
       prof_img_url.unshift(profile_image_url_https2);
       photo_url[0].unshift(null);
