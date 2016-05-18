@@ -41,6 +41,11 @@ $(document).on('click', '.clearImage', function () {
   return false;
 });
 
+//文字数のカウント
+$(document).on('keyup', '#newTweetText', function() {
+  document.getElementById('count').innerHTML = '文字数：' + document.getElementById('newTweetText').value.length;
+});
+
 //画像複数対応
 $(document).change('.postImageform', function () {
   addNewPostImage();

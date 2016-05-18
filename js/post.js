@@ -134,7 +134,6 @@ var tweetReplyPost = function (repId) {
   post_repId = "";
 };
 
-
 //投稿画像の追加
 var addNewPostImage = function () {
   if (document.getElementsByClassName("postImageform").length >= 4 || document.getElementById("addPostImagebutton")) {

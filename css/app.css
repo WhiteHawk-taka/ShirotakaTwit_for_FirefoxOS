@@ -296,3 +296,8 @@ section[role="region"] > .content{
 #userdataback{
     background-color: rgba(255,255,255,0.45);
 }
+
+#count{
+    font-size: 1.2rem;
+    opacity: 0.7;
+}
