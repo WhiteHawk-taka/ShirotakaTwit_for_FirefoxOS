@@ -1,10 +1,16 @@
 var getSearch = function (word) {
+  if (searchRT == 0) {
+    word = word + " -rt";
+  }
   var escapeWord = encodeURIComponent(word).replace(/['()]/g, escape).replace(/\*/g, '%2A');
   var url = "https://api.twitter.com/1.1/search/tweets.json?q=" + escapeWord + "&count=" + getTweetNumber;
   oauth.get(url, successGetSearch, failureSearchHandler);
 };
 
 var getNextSearch = function (id_str, word) {
+  if (searchRT == 0) {
+    word = word + " -rt";
+  }
   var escapeWord = encodeURIComponent(word).replace(/['()]/g, escape).replace(/\*/g, '%2A');
   var url = "https://api.twitter.com/1.1/search/tweets.json?q=" + escapeWord + "&max_id=" + id_str + "&count=" + getTweetNumber;
   oauth.get(url, successGetNextSearch, failureSearchHandler);

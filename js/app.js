@@ -42,6 +42,7 @@ var search_retweeted_user = [];
 
 var getTweetNumber = "";
 var iconimagebigger = "";
+var searchRT = "";
 
 var search_word = "";
 
@@ -56,6 +57,11 @@ window.onload = function () {
     iconimagebigger = localStorage.getItem("iconimagebigger");
   } else {
     iconimagebigger = 1;
+  }
+  if (localStorage.getItem("searchRT")) {
+    searchRT = localStorage.getItem("searchRT");
+  } else {
+    searchRT = 0;
   }
   // OAuth関連の処理を開始する
   localStorage.setItem("firstoauth", 0);

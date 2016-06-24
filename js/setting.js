@@ -40,6 +40,19 @@ window.onload = function () {
   document.getElementById("iconimagebigger_OFF").addEventListener("click", function(){
     localStorage.setItem("iconimagebigger", 0);
   }, false);
+  //検索からRTを除外
+  document.getElementById("searchRT").addEventListener("click", function(){
+    document.getElementById("searchRTMenu").className = 'fade-in';
+  }, false);
+  document.getElementById("searchRTMenu").addEventListener ("click", function() {
+    this.className = 'fade-out';
+  });
+  document.getElementById("searchRT_ON").addEventListener("click", function(){
+    localStorage.setItem("searchRT", 1);
+  }, false);
+  document.getElementById("searchRT_OFF").addEventListener("click", function(){
+    localStorage.setItem("searchRT", 0);
+  }, false);
   //サイトに飛ぶ
   document.getElementById("viewShirotakaSite").addEventListener("click", function(){
     new MozActivity({
