@@ -73,15 +73,22 @@
                 <div role="toolbar">
                     <ul>
                         <li>
-                            <a href="index.html" id="homelink">
+                            <a href="#index">
                                 <img src="img/Entypo+/Entypo+/home.svg" class="toolbaricons"></img>
                             </a>
                         </li>
                     </ul>
                     <ul>
                         <li>
-                            <a href="#mentions">
+                            <a href="mention.html" id="mentionlink">
                                 <img src="img/Entypo+/Entypo+/reply.svg" class="toolbaricons"></img>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <a href="search.html" id="searchlink">
+                                <img src="img/Entypo+/Entypo+/magnifying-glass.svg" class="toolbaricons"></img>
                             </a>
                         </li>
                     </ul>
@@ -91,8 +98,10 @@
                                 <img src="img/Entypo+/Entypo+/cog.svg" class="toolbaricons"></img>
                             </a>
                         </li>
+                    </ul>
+                    <ul>
                         <li>
-                            <button id="mentionupdateButton">
+                            <button class="updateButton">
                                 <img src="img/Entypo+/Entypo+/ccw.svg" class="toolbaricons"></img>
                             </button>
                         </li>
@@ -161,6 +170,7 @@
                             <!-- 終了タグを改行すると軽微なバグあり -->
                             <textarea id="newTweetText" placeholder="いまどうしてる？" required="" name="postform"></textarea>
                         </p>
+                        <p id="count">文字数：0</p>
                     </form>
                 </div>
                 <form id="postTweetImage" action="#" enctype="multipart/form-data" method="post" name="form2">

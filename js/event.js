@@ -34,6 +34,7 @@ $(document).on('click', '#statusUpdateButton', function () {
   document.getElementsByClassName("postImageform")[0].value = "";
   document.querySelector('#newTweetSection').className = 'right';
   document.querySelector('[data-position="current"]').className = 'current';
+  document.getElementById('count').innerHTML = '文字数：0';
 });
 $(document).on('click', '.clearImage', function () {
   var num = $(".clearImage").index(this);
@@ -107,6 +108,7 @@ $(document).on('click', '#replyUpdateButton', function () {
   document.querySelector('[data-position="current"]').className = 'current';
   $("#replyUpdateButton").attr('id', "statusUpdateButton");
   $("#replyBackButton").attr('id', "backButton");
+  document.getElementById('count').innerHTML = '文字数：0';
 });
 $(document).on('click', '#replyBackButton', function () {
   document.getElementById("newTweetText").value = "";
@@ -150,4 +152,19 @@ $(document).on('click', '#userfollow', function () {
   } else {
     userfollow(document.getElementById("userscreenname").innerHTML);
   }
+});
+
+
+//検索
+$(document).on('click', '#searchsubmit', function () {
+  search_word = document.getElementById('searchbox').value;
+  if (search_word == ''){
+    return;
+  }
+  getSearch(search_word);
+});
+
+$(document).on('click', '#getNextSearchTweet', function () {
+  var $tweetId = $(".menu-button").filter(":last").attr('id');
+  getNextSearch($tweetId, search_word);
 });

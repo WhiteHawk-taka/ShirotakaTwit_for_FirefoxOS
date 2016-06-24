@@ -37,7 +37,7 @@
     line-height: 0;
 }
 
-#tweetBox li{
+#tweetBox li, #searchTweetBox li{
     width: 100%;
     min-height: 70px;
     padding: 5px 5px 10px;
@@ -301,3 +301,4 @@ section[role="region"] > .content{
     font-size: 1.2rem;
     opacity: 0.7;
 }
+

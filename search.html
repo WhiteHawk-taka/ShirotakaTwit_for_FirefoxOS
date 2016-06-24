@@ -8,16 +8,13 @@
     <!-- js -->
     <script src="js/lib/jsOAuth-1.3.7.js"></script>
     <script src="js/lib/jquery-2.1.4.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/tl.js"></script>
-    <script src="js/mention.js"></script>
-    <script src="js/action.js"></script>
-    <script src="js/post.js"></script>
-    <script src="js/account.js"></script>
-    <script src="js/error.js"></script>
-    <script src="js/status.js"></script>
-    <script src="js/event.js"></script>
     <script src="js/key.js"></script>
+    <script src="js/error.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/account.js"></script>
+    <script src="js/event.js"></script>
+
 
     <!-- Building blocks -->
     <link rel="stylesheet" href="style/action_menu.css">
@@ -55,7 +52,8 @@
     <link rel="stylesheet" href="bbinhtml.css">
 
     <!-- css -->
-    <link rel="stylesheet" href="css/app.css"/>
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/search.css">
 
     </head>
 
@@ -64,53 +62,24 @@
             <!-- タイムライン -->
             <section role="region" id="drawer">
                 <header class="fixed">
-                    <menu type="toolbar">
-                        <a href="#" class="newPostButton">
-                            <img src="img/Entypo+/Entypo+/new-message.svg" class="svgButton" id="tweetButton"></img>
+                        <a href="index.html">
+                            <img src="img/Entypo+/Entypo+/chevron-left.svg"></img>
                         </a>
-                    </menu>
-                    <h1> タイムライン </h1>
+                    <h1> 検索 </h1>
                 </header>
-                <div role="toolbar">
-                    <ul>
-                        <li>
-                            <a href="#index">
-                                <img src="img/Entypo+/Entypo+/home.svg" class="toolbaricons"></img>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li>
-                            <a href="mention.html" id="mentionlink">
-                                <img src="img/Entypo+/Entypo+/reply.svg" class="toolbaricons"></img>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li>
-                            <a href="search.html" id="searchlink">
-                                <img src="img/Entypo+/Entypo+/magnifying-glass.svg" class="toolbaricons"></img>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li>
-                            <a href="setting.html" id="settingButton">
-                                <img src="img/Entypo+/Entypo+/cog.svg" class="toolbaricons"></img>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li>
-                            <button class="updateButton">
-                                <img src="img/Entypo+/Entypo+/ccw.svg" class="toolbaricons"></img>
-                            </button>
-                        </li>
-                    </ul>
-                </div>
                 <article class="scrollable header">
                     <div>
-                        <ul id="tweetBox">
+                        <ul>
+                            <li>
+                                <p>
+                                    <input id="searchbox" type="text" placeholder="キーワード"></input>
+                                    <button type="submit" id="searchsubmit">検索</button>
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul id="searchTweetBox">
                         </ul>
                     </div>
                 </article>
@@ -150,38 +119,6 @@
                 </nav>
             </section>
         </section>
-
-        <!-- 新規ツイート -->
-        <section role="region" id="newTweetSection" class="right" data-position="right">
-            <header class="fixed">
-                <a id="backButton" href="#">
-                    <img src="img/Entypo+/Entypo+/chevron-left.svg"></img>
-                </a>
-                <menu type="toolbar">
-                    <a href="#" id="statusUpdateButton">
-                        <img src="img/Entypo+/Entypo+/paper-plane.svg" class="svgButton"></img>
-                    </a>
-                </menu>
-                <h1>ツイート</h1>
-            </header>
-            <article class="content scrollable header">
-                <div>
-                    <form name="form1">
-                        <p>
-                            <!-- 終了タグを改行すると軽微なバグあり -->
-                            <textarea id="newTweetText" placeholder="いまどうしてる？" required="" name="postform"></textarea>
-                        </p>
-                        <p id="count">文字数：0</p>
-                    </form>
-                </div>
-                <form id="postTweetImage" action="#" enctype="multipart/form-data" method="post" name="form2">
-                    <input accept="image/*" type="file" id="file" name="my_file" class="postImageform">
-                    <button class="clearImage">
-                        <img id="clearImageicon" src="img/Entypo+/Entypo+/trash.svg"></img>
-                    </button>
-                </form>
-            </article>
-        </section>
         <!-- ユーザー情報 -->
         <section role="region" id="userdataSection" class="right" data-position="right">
             <header class="fixed">
@@ -209,21 +146,5 @@
                 </div>
             </article>
         </section>
-
-        <!-- ふぁぼ通知 -->
-        <section class="hidden" role="status">
-            <p>お気に入りに追加しました</p>
-        </section>
-
-        <!-- リツイート通知 -->
-        <section class="hidden" role="status">
-            <p>リツイートしました</p>
-        </section>
-
-        <!-- つい消し通知 -->
-        <section class="hidden" role="status">
-            <p>ツイートを削除しました</p>
-        </section>
-
     </body>
 </html>

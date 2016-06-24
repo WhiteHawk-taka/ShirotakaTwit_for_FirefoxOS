@@ -792,9 +792,10 @@ exports.OAuth = (function (global) {
             return '';
         }
 
-        return string.replace(/%[a-fA-F0-9]{2}/ig, function (match) {
+        /*return string.replace(/%[a-fA-F0-9]{2}/ig, function (match) {
             return String.fromCharCode(parseInt(match.replace('%', ''), 16));
-        });
+        });*/
+        return string;
     };
     /**
      * Factory object for XMLHttpRequest

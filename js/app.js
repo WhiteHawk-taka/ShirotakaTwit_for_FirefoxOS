@@ -31,9 +31,19 @@ var mention_prof_img_url = [];
 var mention_favorited = [];
 var mention_photo_url = [[],[],[],[]];
 
+var search_screenName = [];
+var search_name_str = [];
+var search_tweetText = [];
+var search_id_str = [];
+var search_prof_img_url = [];
+var search_favorited = [];
+var search_photo_url = [[],[],[],[]];
+var search_retweeted_user = [];
+
 var getTweetNumber = "";
 var iconimagebigger = "";
 
+var search_word = "";
 
 window.onload = function () {
   //設定の初期化

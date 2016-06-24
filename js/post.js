@@ -19,7 +19,7 @@ var newTweetPost = function () {
     }
     tweetPost();
     tweet_media.push(data);
-  }, successHandler);
+  }, nonerror);
 };
 
 var setTweetMedia = function (i) {
@@ -93,7 +93,7 @@ var replyTweetPost = function (repId) {
     }
     tweetReplyPost(repId);
     tweet_media.push(data);
-  }, successHandler);
+  }, nonerror);
 };
 
 var tweetReplyPost = function (repId) {

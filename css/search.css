@@ -1,0 +1,16 @@
+li > p {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+#searchbox {
+    width: 70%;
+    height: 3rem;
+    float: left;
+}
+
+#searchsubmit {
+    width: 30%;
+    line-height: 1rem;
+    height: 3rem;
+}

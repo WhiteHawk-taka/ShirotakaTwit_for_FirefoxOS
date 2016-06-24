@@ -16,5 +16,9 @@ var failureGetUserDataHandler = function (data) {
   alert("ユーザー情報の取得に失敗しました");
 };
 
+var failureSearchHandler = function (data) {
+  alert("検索に失敗しました");
+};
+
 var nonerror = function (data) {
 };
