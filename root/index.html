@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>ShirotakaTwit</title>
+    <link rel="stylesheet" href="../css/lib/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/index_style.css">
+    <script src="../js/lib/jquery-3.1.0.min.js"></script>
+    <script src="../js/lib/bootstrap.min.js"></script>
+    <script src="../js/lib/jsOAuth-1.3.7a.js"></script>
+    <script src="../js/lib/key.js"></script>
+    <script src="../js/main.js"></script>
+
+</head>
+<body>
+    <header class="navbar pos-f-t navbar-static-top bd-navbar">
+        <div class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand">ShirotakaTwit</a>
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main" style="border-color: #f8f8f8;">
+                        ☰
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse" id="navbar-main">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">Profile</a></li>
+                        <li><a href="/">Settings</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <article class="">
+        <div class="tab-content">
+            <section class="tab-pane" id="postColumn">
+                <div class="container">
+                    <form action="">
+                        <div class="form-group">
+                            <textarea class="form-control" id="form-textarea" name="maintext" rows="8" cols="40"></textarea>
+                        </div>
+                    </form>
+                    <ul class="post-icons">
+                        <li class="col-xs-4"><button class="btn btn-default btn-form-nav"><img src="../img/app/ic_attach_file_48px.svg" class="form-attachment" alt="attachment"></button></li>
+                        <li class="col-xs-4 col-xs-offset-4"><button class="btn btn-default btn-form-nav">ツイート</button></li>
+                    </ul>
+                </div>
+            </section>
+            <section class="tab-pane" id="searchColumn">
+                <div class="container">検索</div>
+            </section>
+            <section class="tab-pane active" id="timeLineColumn">
+                <div class="container"><a href="#mentionColumn">タイムライン</a></div>
+            </section>
+            <section class="tab-pane" id="mentionColumn">
+                <div class="container">メンション</div>
+            </section>
+            <section class="tab-pane" id="dmColumn">
+                <div class="container">DM</div>
+            </section>
+        </div>
+    </article>
+    <footer class="footer" id="footer">
+        <ul class="nav nav-tabs navbar-fixed-bottom">
+            <li><a href="#postColumn" data-toggle="tab" class="columnref"><img src="../img/app/ic_textsms_48px.svg" alt="postform"></a></li>
+            <li><a href="#searchColumn" data-toggle="tab" class="columnref"><img src="../img/app/ic_search_48px.svg" alt="search"></a></li>
+            <li class="active"><a href="#timeLineColumn" data-toggle="tab" class="columnref"><img src="../img/app/ic_home_48px.svg" alt="timeLine"></a></li>
+            <li><a href="#mentionColumn" data-toggle="tab" class="columnref"><img src="../img/app/ic_notifications_48px.svg" alt="mention"></a></li>
+            <li><a href="#dmColumn" data-toggle="tab" class="columnref"><img src="../img/app/ic_mail_48px.svg" alt="dm"></a></li>
+            <li><a href="#reloadColumn" class="columnref"><img src="../img/app/ic_refresh_48px.svg" alt="reload"></a></li>
+        </ul>
+    </footer>
+</body>
+</html>

@@ -1,23 +1,23 @@
 {
     "name": "ShirotakaTwit",
     "description": "Comfortable Twitter client for FirefoxOS",
-    "launch_path": "/index.html",
+    "launch_path": "/root/index.html",
     "icons": {
-        "512": "/img/icons/icon_512.png",
-        "256": "/img/icons/icon_256.png",
-        "128": "/img/icons/icon_128.png",
-        "64": "/img/icons/icon_64.png"
+        "512": "/img/icon/icon_512.png",
+        "256": "/img/icon/icon_256.png",
+        "128": "/img/icon/icon_128.png",
+        "64": "/img/icon/icon_64.png"
     },
     "type": "privileged",
     "permissions": {
         "systemXHR": {
-            "description": "for OAuth"
+            "description": "for Twitter OAuth"
         }
     },
-    "developer": { 
-    "name": "Shirotaka_Pro", 
-    "url": "https://twitter.com/Shirotaka_Pro" 
-    }, 
+    "developer": {
+    "name": "Shirotaka_Pro",
+    "url": "https://twitter.com/Shirotaka_Pro"
+    },
     "default_locale": "ja",
-    "version": "1.8.2"
+    "version": "2.0.0"
 }

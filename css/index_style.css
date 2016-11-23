@@ -1,0 +1,33 @@
+.nav > li > a > img {
+    width: 100%;
+}
+
+.nav-tabs > li {
+    width: calc(100%/6);
+    min-width: 44px;
+}
+
+.form-group > img {
+    margin-top: 10px;
+}
+
+li > a.columnref {
+    padding: 8px;
+}
+
+ul {
+    list-style: none;
+}
+
+ul.post-icons {
+    margin: 0;
+    padding: 0;
+}
+
+.btn-form-nav {
+    height: 44px;
+}
+
+.form-attachment {
+    height: 100%;
+}

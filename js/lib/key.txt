@@ -1,0 +1,10 @@
+"use strict";
+var Key = Key || {};
+Key = {
+  getConsumerKey: function () {
+    return "";
+  },
+  getConsumerSecret: function () {
+    return "";
+  }
+};
